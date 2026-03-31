@@ -484,12 +484,16 @@
                     </div>
 
                     <!-- Firma final (oculta hasta el último párrafo) -->
-                    <div id="letter-signature" class="hidden mt-12 text-center">
-                        <div class="inline-block px-8 py-6 rounded-2xl border border-brand-500/20" style="background: linear-gradient(135deg, rgba(245,158,11,0.05), rgba(236,72,153,0.05));">
-                            <p class="text-xl md:text-2xl font-bold text-brand-400 drop-shadow-md font-serif italic mb-2">Te amo, hoy y siempre.</p>
-                            <p class="text-zinc-300 text-sm font-medium">Tu novio. 💖</p>
+                    <div id="letter-signature" class="hidden mt-10 text-center">
+                        <div class="inline-block w-full max-w-sm mx-auto px-8 py-7 rounded-2xl border border-brand-500/20" style="background: linear-gradient(135deg, rgba(245,158,11,0.07), rgba(236,72,153,0.07));">
+                            <p class="text-2xl font-bold text-brand-400 drop-shadow-md font-serif italic mb-3 leading-snug">Te amo, hoy y siempre.</p>
+                            <p class="text-zinc-400 text-sm font-medium">Tu novio. 💖</p>
                         </div>
-                        <button onclick="closeSecretModal()" class="mt-6 px-8 py-3 rounded-xl bg-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-700 font-bold text-sm transition-all">Cerrar carta ✕</button>
+                        <div class="mt-5">
+                            <button onclick="closeSecretModal()" class="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-zinc-800 text-zinc-300 hover:text-white hover:bg-zinc-700 font-bold text-sm transition-all border border-zinc-700 hover:border-zinc-600">
+                                <span>✕</span><span>Cerrar carta</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -602,6 +606,10 @@
                 <span class="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-xs shadow-sm border border-zinc-200/50 dark:border-zinc-700/50">💍</span> 
                 <span data-i18n="menu_promises">Promesas</span>
             </a>
+                <a href="#colores-yaire" class="menu-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/10 transition-all">
+                    <span class="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-xs shadow-sm border border-zinc-200/50 dark:border-zinc-700/50">🎨</span>
+                    <span data-i18n="menu_colors">Colores Favoritos</span>
+                </a>
             <a href="#memorial" class="menu-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/10 transition-all">
                 <span class="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-xs shadow-sm border border-zinc-200/50 dark:border-zinc-700/50">🕊️</span> 
                 <span data-i18n="menu_memorial">Para tu Ángel</span>
@@ -613,6 +621,10 @@
             <a href="#estadisticas" class="menu-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/10 transition-all">
                 <span class="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-xs shadow-sm border border-zinc-200/50 dark:border-zinc-700/50">📊</span> 
                 <span data-i18n="menu_stats">Estadísticas</span>
+            </a>
+            <a href="#top5yaire" class="menu-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/10 transition-all">
+                <span class="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-xs shadow-sm border border-zinc-200/50 dark:border-zinc-700/50">💬</span> 
+                <span>Top 5 Yaire</span>
             </a>
             
             <!-- Link Especial: Bóveda -->
@@ -685,7 +697,7 @@
                 <span data-i18n="hero_title1">Mi lugar favorito</span><br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-tulip-500" data-i18n="hero_title2">es contigo.</span>
             </h1>
-            <p class="max-w-3xl mx-auto text-lg md:text-xl text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-0 font-serif italic px-4" data-i18n="hero_subtitle">Ayer cumplimos nuestro segundo mes oficial, pero siento que te conozco de toda una vida. Eres la casualidad más hermosa, la dueña de mis pensamientos más profundos, el motivo de mis mejores sonrisas y la mujer con la que quiero construir, cuidar y compartir cada pequeño instante del resto de mis días.</p>
+            <p class="max-w-3xl mx-auto text-lg md:text-xl text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-0 font-serif italic px-4" data-i18n="hero_subtitle">Eres la casualidad más hermosa que me ha pasado, la dueña de mis pensamientos más profundos, el motivo de mis mejores sonrisas y la mujer con la que quiero construir, cuidar y compartir cada pequeño instante del resto de mis días. Esta página es nuestra, para siempre.</p>
             
             <!-- Botón de bajar arreglado y posicionado absolutamente -->
             <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
@@ -838,28 +850,125 @@
         </section>
 
         <!-- Section: Distance -->
-        <section id="distancia" class="py-24 border-t border-zinc-200 dark:border-zinc-800 reveal-scale scroll-mt-20">
-            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center" data-i18n="dist_title">Un Océano de Por Medio</h2>
-            <div class="max-w-4xl mx-auto px-4">
-                <div class="bg-white dark:bg-zinc-900 p-6 md:p-12 rounded-[3rem] shadow-xl border border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-                    <div class="text-center flex-1 w-full">
-                        <div class="w-20 h-20 md:w-24 md:h-24 mx-auto bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-3xl md:text-4xl mb-4 border-4 border-white dark:border-zinc-800 shadow-lg">🇩🇴</div>
-                        <h4 class="text-lg md:text-xl font-bold text-zinc-900 dark:text-white" data-i18n="dist_dr">República Dominicana</h4>
-                    </div>
-                    <div class="flex-1 flex flex-col items-center w-full">
-                        <span class="text-brand-500 font-extrabold text-xl md:text-2xl mb-2 whitespace-nowrap">~ 900 km</span>
-                        <div class="w-full flex items-center relative">
-                            <div class="h-1 w-full border-t-2 border-dashed border-zinc-300 dark:border-zinc-700"></div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 -top-4 text-2xl md:text-3xl animate-pulse">✈️</div>
+        <section id="distancia" class="py-24 border-t border-zinc-200 dark:border-zinc-800 reveal-scale scroll-mt-20 relative overflow-hidden">
+            <!-- Fondo oceánico animado -->
+            <div class="absolute inset-0 pointer-events-none overflow-hidden opacity-5 dark:opacity-10">
+                <div class="absolute bottom-0 left-0 right-0 h-48" style="background: linear-gradient(180deg, transparent, #3b82f6 100%);"></div>
+                <svg class="absolute bottom-0 left-0 w-full" style="animation: waveAnim1 8s ease-in-out infinite;" viewBox="0 0 1440 80" preserveAspectRatio="none">
+                    <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,20 1440,40 L1440,80 L0,80 Z" fill="#3b82f6"/>
+                </svg>
+                <svg class="absolute bottom-0 left-0 w-full" style="animation: waveAnim2 10s ease-in-out infinite;" viewBox="0 0 1440 80" preserveAspectRatio="none">
+                    <path d="M0,50 C240,10 480,70 720,40 C960,10 1200,70 1440,30 L1440,80 L0,80 Z" fill="#60a5fa" opacity="0.6"/>
+                </svg>
+            </div>
+
+            <div class="max-w-5xl mx-auto px-4 relative z-10">
+                <!-- Header -->
+                <div class="text-center mb-14">
+                    <h2 class="text-sm font-bold tracking-widest uppercase text-blue-500 mb-4">La Distancia</h2>
+                    <h3 class="text-3xl md:text-5xl font-extrabold mb-4" data-i18n="dist_title">Un Océano de Por Medio</h3>
+                    <p class="text-zinc-500 dark:text-zinc-400 text-lg max-w-xl mx-auto" data-i18n="dist_text">Nuestros corazones están en las mismas coordenadas. ~900 km es solo un número temporal.</p>
+                </div>
+
+                <!-- Mapa de distancia visual interactivo -->
+                <div class="bg-white dark:bg-zinc-900 rounded-[3rem] shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden mb-8">
+                    <!-- Barra superior con info -->
+                    <div class="grid grid-cols-3 border-b border-zinc-100 dark:border-zinc-800">
+                        <div class="p-4 md:p-6 text-center border-r border-zinc-100 dark:border-zinc-800">
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Origen</p>
+                            <p class="text-xl md:text-2xl font-extrabold text-zinc-900 dark:text-white">🇩🇴</p>
+                            <p class="font-bold text-sm text-zinc-700 dark:text-zinc-300 mt-1" data-i18n="dist_dr">Rep. Dominicana</p>
+                            <p class="text-xs text-zinc-400 font-mono mt-0.5">SDQ · GMT-4</p>
+                        </div>
+                        <div class="p-4 md:p-6 text-center flex flex-col items-center justify-center">
+                            <p class="text-brand-500 font-extrabold text-base md:text-xl">~ 900 km</p>
+                            <div class="flex items-center gap-1 mt-1">
+                                <span class="w-2 h-px bg-zinc-300 dark:bg-zinc-600"></span>
+                                <span class="text-lg">✈️</span>
+                                <span class="w-2 h-px bg-zinc-300 dark:bg-zinc-600"></span>
+                            </div>
+                            <p class="text-xs text-zinc-400 mt-1 font-medium">~2h de vuelo</p>
+                        </div>
+                        <div class="p-4 md:p-6 text-center border-l border-zinc-100 dark:border-zinc-800">
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Destino</p>
+                            <p class="text-xl md:text-2xl font-extrabold text-zinc-900 dark:text-white">🇻🇪</p>
+                            <p class="font-bold text-sm text-zinc-700 dark:text-zinc-300 mt-1" data-i18n="dist_ve">Venezuela</p>
+                            <p class="text-xs text-zinc-400 font-mono mt-0.5">CCS · GMT-4</p>
                         </div>
                     </div>
-                    <div class="text-center flex-1 w-full">
-                        <div class="w-20 h-20 md:w-24 md:h-24 mx-auto bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center text-3xl md:text-4xl mb-4 border-4 border-white dark:border-zinc-800 shadow-lg">🇻🇪</div>
-                        <h4 class="text-lg md:text-xl font-bold text-zinc-900 dark:text-white" data-i18n="dist_ve">Venezuela</h4>
+
+                    <!-- Animación del avión en ruta -->
+                    <div class="relative px-8 md:px-16 py-8 bg-gradient-to-r from-sky-50 via-blue-50 to-sky-50 dark:from-sky-950/30 dark:via-blue-950/20 dark:to-sky-950/30 overflow-hidden">
+                        <!-- Océano / nubes de fondo -->
+                        <div class="absolute inset-0 flex items-center pointer-events-none overflow-hidden">
+                            <div class="w-full h-px border-t-2 border-dashed border-blue-200 dark:border-blue-900/60 relative">
+                                <div class="absolute inset-0 overflow-hidden">
+                                    <!-- Avión animado sobre la ruta -->
+                                    <span id="dist-plane" class="absolute -top-3.5 text-2xl" style="left:0%; animation: planeRoute 6s cubic-bezier(0.4, 0, 0.6, 1) infinite; transform-origin: center;">✈️</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Banderas en extremos -->
+                        <div class="flex justify-between items-center relative z-10">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white dark:bg-zinc-800 shadow-lg flex items-center justify-center text-xl md:text-2xl border-2 border-blue-200 dark:border-zinc-700 flex-shrink-0">🇩🇴</div>
+                            <div class="flex-1"></div>
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white dark:bg-zinc-800 shadow-lg flex items-center justify-center text-xl md:text-2xl border-2 border-yellow-200 dark:border-zinc-700 flex-shrink-0">🇻🇪</div>
+                        </div>
+                        <!-- Nubes decorativas -->
+                        <div class="absolute top-2 left-1/4 text-white/50 dark:text-white/10 text-2xl pointer-events-none" style="animation: cloudDrift 12s linear infinite;">☁️</div>
+                        <div class="absolute bottom-2 left-2/3 text-white/40 dark:text-white/10 text-xl pointer-events-none" style="animation: cloudDrift 18s linear infinite 4s;">☁️</div>
+                    </div>
+
+                    <!-- Stats de distancia -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 border-t border-zinc-100 dark:border-zinc-800">
+                        <div class="p-4 md:p-5 text-center border-r border-zinc-100 dark:border-zinc-800">
+                            <p class="text-2xl md:text-3xl font-extrabold text-brand-500">900</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mt-1">Kilómetros</p>
+                        </div>
+                        <div class="p-4 md:p-5 text-center md:border-r border-zinc-100 dark:border-zinc-800">
+                            <p class="text-2xl md:text-3xl font-extrabold text-blue-500">~2h</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mt-1">Tiempo de vuelo</p>
+                        </div>
+                        <div class="p-4 md:p-5 text-center border-t md:border-t-0 border-r border-zinc-100 dark:border-zinc-800">
+                            <p class="text-2xl md:text-3xl font-extrabold text-tulip-500">0h</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mt-1">Diferencia horaria</p>
+                        </div>
+                        <div class="p-4 md:p-5 text-center border-t md:border-t-0 border-zinc-100 dark:border-zinc-800">
+                            <p class="text-2xl md:text-3xl font-extrabold text-emerald-500">∞</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mt-1">Amor que nos une</p>
+                        </div>
                     </div>
                 </div>
-                <p class="text-center text-zinc-600 dark:text-zinc-400 mt-8 text-base md:text-lg font-light italic px-4" data-i18n="dist_text">"La distancia actual es de ~900 kilómetros, pero nuestros corazones están en las mismas coordenadas. Es solo un número temporal... pronto, ese número se reducirá a cero."</p>
+
+                <!-- Tarjetas de sentimientos con la distancia -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="relative bg-white dark:bg-zinc-900 rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden group hover:-translate-y-1 transition-transform">
+                        <div class="absolute -right-3 -bottom-3 text-6xl opacity-5 pointer-events-none">🌊</div>
+                        <div class="text-3xl mb-3">💬</div>
+                        <h4 class="font-bold text-zinc-900 dark:text-white mb-2">Hablar 24/7</h4>
+                        <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">La distancia no nos quitó la voz. Cada mensaje tuyo llega a mí como si estuvieras al lado.</p>
+                    </div>
+                    <div class="relative bg-gradient-to-br from-brand-50 to-tulip-50 dark:from-brand-900/20 dark:to-tulip-900/20 rounded-3xl p-6 border border-brand-200/50 dark:border-brand-800/30 shadow-md overflow-hidden group hover:-translate-y-1 transition-transform">
+                        <div class="absolute -right-3 -bottom-3 text-6xl opacity-10 pointer-events-none">❤️</div>
+                        <div class="text-3xl mb-3">🕐</div>
+                        <h4 class="font-bold text-zinc-900 dark:text-white mb-2">Mismo Huso Horario</h4>
+                        <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Ambos GMT-4. Cuando tú amaneces, yo también. Eso hace todo más fácil de sobrellevar.</p>
+                    </div>
+                    <div class="relative bg-white dark:bg-zinc-900 rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden group hover:-translate-y-1 transition-transform">
+                        <div class="absolute -right-3 -bottom-3 text-6xl opacity-5 pointer-events-none">✈️</div>
+                        <div class="text-3xl mb-3">🎯</div>
+                        <h4 class="font-bold text-zinc-900 dark:text-white mb-2">Temporario</h4>
+                        <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">900 km no es nada comparado con lo que construimos. El contador regresivo ya empezó.</p>
+                    </div>
+                </div>
             </div>
+
+            <style>
+                @keyframes waveAnim1 { 0%,100%{transform:translateX(0)} 50%{transform:translateX(-30px)} }
+                @keyframes waveAnim2 { 0%,100%{transform:translateX(-20px)} 50%{transform:translateX(20px)} }
+                @keyframes planeRoute { 0%{left:0%;transform:translateX(0) scaleX(1);} 48%{left:calc(100% - 28px);transform:translateX(0) scaleX(1);} 50%{left:calc(100% - 28px);transform:translateX(0) scaleX(-1);} 98%{left:0%;transform:translateX(0) scaleX(-1);} 100%{left:0%;transform:translateX(0) scaleX(1);} }
+                @keyframes cloudDrift { 0%{transform:translateX(-60px);opacity:0;} 20%{opacity:1;} 80%{opacity:1;} 100%{transform:translateX(120vw);opacity:0;} }
+            </style>
         </section>
 
         <!-- Gastronomy -->
@@ -1060,33 +1169,221 @@
 
         <!-- Promesas -->
         <section id="promesas" class="py-24 border-t border-zinc-200 dark:border-zinc-800 reveal-scale scroll-mt-20">
-            <h2 class="text-3xl md:text-5xl font-extrabold mb-4 text-center text-zinc-900 dark:text-white" data-i18n="prep_title">Mis Promesas para Ti</h2>
-            <p class="text-center text-zinc-500 dark:text-zinc-400 mb-16 max-w-2xl mx-auto text-lg px-4" data-i18n="prep_subtitle">No son solo palabras vacías en una página web. Son decretos reales de cómo planeo amarte, respetarte y cuidarte todos los días de mi vida.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 px-4 md:px-0">
-                <div class="bg-white dark:bg-zinc-900 p-8 md:p-10 rounded-[2.5rem] shadow-lg border border-zinc-200 dark:border-zinc-800 hover:shadow-2xl transition-all duration-300 group">
-                    <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/20 text-blue-500 text-3xl flex items-center justify-center rounded-2xl mb-8 group-hover:scale-110 transition-transform">☂️</div>
-                    <h3 class="text-2xl font-bold mb-4 text-zinc-900 dark:text-white" data-i18n="step1_title">Ser Tu Refugio Seguro</h3>
-                    <p class="text-zinc-600 dark:text-zinc-400 font-light leading-relaxed" data-i18n="step1_desc">Prometo ser ese lugar donde siempre puedas descansar. En los días donde el mundo parezca pesado, te ofrezco un espacio libre de juicios donde solo haya abrazos, té caliente y oídos dispuestos a escucharte quejarte de todo. Prometo cuidar tu corazón con la misma delicadeza con la que tú has sanado el mío.</p>
+            <div class="text-center mb-16 px-4">
+                <h2 class="text-sm font-bold tracking-widest uppercase text-tulip-500 mb-4">Compromisos de Vida</h2>
+                <h3 class="text-3xl md:text-5xl font-extrabold mb-4 text-zinc-900 dark:text-white" data-i18n="prep_title">Mis Promesas para Ti</h3>
+                <p class="text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto text-lg font-light" data-i18n="prep_subtitle">No son palabras vacías. Son decretos sellados con amor, de cómo planeo amarte, respetarte y cuidarte todos los días de mi vida.</p>
+                <p class="text-xs text-zinc-400 dark:text-zinc-600 mt-3 italic">Toca cada promesa para ver más ✨</p>
+            </div>
+
+            <!-- Grid de flip cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 md:px-0" style="perspective: 1000px;">
+                
+                <!-- Promesa 1 -->
+                <div class="promise-card-wrap cursor-pointer" style="height:clamp(190px,40vw,280px);perspective:1000px;" onclick="flipCard(this)">
+                    <div class="promise-card relative w-full h-full transition-transform duration-700" style="transform-style:preserve-3d;">
+                        <!-- Frente -->
+                        <div class="promise-front absolute inset-0 rounded-[2rem] flex flex-col items-center justify-center gap-4 p-8 text-center overflow-hidden" style="backface-visibility:hidden; background: linear-gradient(135deg, #2563eb, #3b82f6); border: 2px solid #60a5fa;">
+                            <div class="card-icon w-16 h-16 bg-white/20 text-white text-3xl flex items-center justify-center rounded-2xl shadow-lg" style="animation: promisePulse 3s ease-in-out infinite;">☂️</div>
+                            <div>
+                                <div class="text-xs font-bold uppercase tracking-widest text-blue-200 mb-2">Promesa N°1</div>
+                                <h3 class="text-2xl font-extrabold text-white" data-i18n="step1_title">Ser Tu Refugio Seguro</h3>
+                            </div>
+                            <div class="card-hint absolute bottom-3 right-4 text-blue-200 text-xs font-bold flex items-center gap-1">Toca para leer <span>→</span></div>
+                        </div>
+                        <!-- Reverso -->
+                        <div class="promise-back absolute inset-0 rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden" style="backface-visibility:hidden; transform:rotateY(180deg); background: linear-gradient(135deg, #1d4ed8, #3b82f6);">
+                            <div class="absolute -top-4 -right-4 text-8xl opacity-10 pointer-events-none">☂️</div>
+                            <div>
+                                <div class="text-xs font-bold uppercase tracking-widest text-blue-200 mb-3">☂️ Promesa N°1</div>
+                                <p class="text-white/95 font-medium leading-relaxed text-sm md:text-base" data-i18n="step1_desc">Prometo ser ese lugar donde siempre puedas descansar. En los días donde el mundo parezca pesado, te ofrezco un espacio libre de juicios donde solo haya abrazos, té caliente y oídos dispuestos a escucharte. Prometo cuidar tu corazón con la misma delicadeza con la que tú has sanado el mío.</p>
+                            </div>
+                            <div class="text-right text-blue-200 text-xs font-bold">Toca para volver ←</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-white dark:bg-zinc-900 p-8 md:p-10 rounded-[2.5rem] shadow-lg border border-zinc-200 dark:border-zinc-800 hover:shadow-2xl transition-all duration-300 group">
-                    <div class="w-16 h-16 bg-amber-50 dark:bg-amber-900/20 text-amber-500 text-3xl flex items-center justify-center rounded-2xl mb-8 group-hover:scale-110 transition-transform">🎭</div>
-                    <h3 class="text-2xl font-bold mb-4 text-zinc-900 dark:text-white" data-i18n="step2_title">Proteger Tus Sonrisas</h3>
-                    <p class="text-zinc-600 dark:text-zinc-400 font-light leading-relaxed" data-i18n="step2_desc">Me comprometo solemnemente a hacer el ridículo, contar los chistes más malos que existan, o bailar de la forma más extraña posible, si eso garantiza que esa hermosa sonrisa tuya vuelva a aparecer. Prometo que nuestras vidas estarán llenas de carcajadas espontáneas y de bromas internas.</p>
+
+                <!-- Promesa 2 -->
+                <div class="promise-card-wrap cursor-pointer" style="height:clamp(190px,40vw,280px);perspective:1000px;" onclick="flipCard(this)">
+                    <div class="promise-card relative w-full h-full transition-transform duration-700" style="transform-style:preserve-3d;">
+                        <div class="promise-front absolute inset-0 rounded-[2rem] flex flex-col items-center justify-center gap-4 p-8 text-center overflow-hidden" style="backface-visibility:hidden; background: linear-gradient(135deg, #d97706, #f59e0b); border: 2px solid #fbbf24;">
+                            <div class="card-icon w-16 h-16 bg-white/20 text-white text-3xl flex items-center justify-center rounded-2xl shadow-lg" style="animation: promisePulse 3s ease-in-out infinite 0.5s;">🎭</div>
+                            <div>
+                                <div class="text-xs font-bold uppercase tracking-widest text-amber-200 mb-2">Promesa N°2</div>
+                                <h3 class="text-2xl font-extrabold text-white" data-i18n="step2_title">Proteger Tus Sonrisas</h3>
+                            </div>
+                            <div class="card-hint absolute bottom-3 right-4 text-amber-200 text-xs font-bold flex items-center gap-1">Toca para leer <span>→</span></div>
+                        </div>
+                        <div class="promise-back absolute inset-0 rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden" style="backface-visibility:hidden; transform:rotateY(180deg); background: linear-gradient(135deg, #d97706, #f59e0b);">
+                            <div class="absolute -top-4 -right-4 text-8xl opacity-10 pointer-events-none">🎭</div>
+                            <div>
+                                <div class="text-xs font-bold uppercase tracking-widest text-amber-100 mb-3">🎭 Promesa N°2</div>
+                                <p class="text-white/95 font-medium leading-relaxed text-sm md:text-base" data-i18n="step2_desc">Me comprometo solemnemente a hacer el ridículo, contar los chistes más malos que existan, o bailar de la forma más extraña posible, si eso garantiza que esa hermosa sonrisa tuya vuelva a aparecer. Prometo que nuestras vidas estarán llenas de carcajadas espontáneas y de bromas internas.</p>
+                            </div>
+                            <div class="text-right text-amber-100 text-xs font-bold">Toca para volver ←</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-white dark:bg-zinc-900 p-8 md:p-10 rounded-[2.5rem] shadow-lg border border-zinc-200 dark:border-zinc-800 hover:shadow-2xl transition-all duration-300 group">
-                    <div class="w-16 h-16 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 text-3xl flex items-center justify-center rounded-2xl mb-8 group-hover:scale-110 transition-transform">🌱</div>
-                    <h3 class="text-2xl font-bold mb-4 text-zinc-900 dark:text-white" data-i18n="step3_title">Crecimiento y Equipo</h3>
-                    <p class="text-zinc-600 dark:text-zinc-400 font-light leading-relaxed" data-i18n="step3_desc">Prometo nunca cortar tus alas, sino ser el viento que las impulse. Seré tu fan número uno en la primera fila de todos tus éxitos. Ya sea estudiando, trabajando, o construyendo el imperio de Tiana, prometo estar a tu lado trabajando codo a codo como un equipo invencible.</p>
+
+                <!-- Promesa 3 -->
+                <div class="promise-card-wrap cursor-pointer" style="height:clamp(190px,40vw,280px);perspective:1000px;" onclick="flipCard(this)">
+                    <div class="promise-card relative w-full h-full transition-transform duration-700" style="transform-style:preserve-3d;">
+                        <div class="promise-front absolute inset-0 rounded-[2rem] flex flex-col items-center justify-center gap-4 p-8 text-center overflow-hidden" style="backface-visibility:hidden; background: linear-gradient(135deg, #059669, #10b981); border: 2px solid #34d399;">
+                            <div class="card-icon w-16 h-16 bg-white/20 text-white text-3xl flex items-center justify-center rounded-2xl shadow-lg" style="animation: promisePulse 3s ease-in-out infinite 1s;">🌱</div>
+                            <div>
+                                <div class="text-xs font-bold uppercase tracking-widest text-emerald-200 mb-2">Promesa N°3</div>
+                                <h3 class="text-2xl font-extrabold text-white" data-i18n="step3_title">Crecimiento y Equipo</h3>
+                            </div>
+                            <div class="card-hint absolute bottom-3 right-4 text-emerald-200 text-xs font-bold flex items-center gap-1">Toca para leer <span>→</span></div>
+                        </div>
+                        <div class="promise-back absolute inset-0 rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden" style="backface-visibility:hidden; transform:rotateY(180deg); background: linear-gradient(135deg, #059669, #10b981);">
+                            <div class="absolute -top-4 -right-4 text-8xl opacity-10 pointer-events-none">🌱</div>
+                            <div>
+                                <div class="text-xs font-bold uppercase tracking-widest text-emerald-100 mb-3">🌱 Promesa N°3</div>
+                                <p class="text-white/95 font-medium leading-relaxed text-sm md:text-base" data-i18n="step3_desc">Prometo nunca cortar tus alas, sino ser el viento que las impulse. Seré tu fan número uno en la primera fila de todos tus éxitos. Ya sea estudiando, trabajando, o construyendo el imperio de Tiana, prometo estar a tu lado trabajando codo a codo como un equipo invencible.</p>
+                            </div>
+                            <div class="text-right text-emerald-100 text-xs font-bold">Toca para volver ←</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-white dark:bg-zinc-900 p-8 md:p-10 rounded-[2.5rem] shadow-lg border border-zinc-200 dark:border-zinc-800 hover:shadow-2xl transition-all duration-300 group">
-                    <div class="w-16 h-16 bg-rose-50 dark:bg-rose-900/20 text-rose-500 text-3xl flex items-center justify-center rounded-2xl mb-8 group-hover:scale-110 transition-transform">💍</div>
-                    <h3 class="text-2xl font-bold mb-4 text-zinc-900 dark:text-white" data-i18n="step4_title">Amarte Como Elección Diaria</h3>
-                    <p class="text-zinc-600 dark:text-zinc-400 font-light leading-relaxed" data-i18n="step4_desc">Prometo amarte no solo en tus mejores días, sino también cuando estés despeinada, en pijamas y estresada. Prometo que el amor no será solo un sentimiento, sino una acción constante. Te elijo hoy, te elegí ayer, y prometo elegirte cada mañana cuando me despierte. Eres mi hogar.</p>
+
+                <!-- Promesa 4 -->
+                <div class="promise-card-wrap cursor-pointer" style="height:clamp(190px,40vw,280px);perspective:1000px;" onclick="flipCard(this)">
+                    <div class="promise-card relative w-full h-full transition-transform duration-700" style="transform-style:preserve-3d;">
+                        <div class="promise-front absolute inset-0 rounded-[2rem] flex flex-col items-center justify-center gap-4 p-8 text-center overflow-hidden" style="backface-visibility:hidden; background: linear-gradient(135deg, #be123c, #e11d48); border: 2px solid #fb7185;">
+                            <div class="card-icon w-16 h-16 bg-white/20 text-white text-3xl flex items-center justify-center rounded-2xl shadow-lg" style="animation: promisePulse 3s ease-in-out infinite 1.5s;">💍</div>
+                            <div>
+                                <div class="text-xs font-bold uppercase tracking-widest text-rose-200 mb-2">Promesa N°4</div>
+                                <h3 class="text-2xl font-extrabold text-white" data-i18n="step4_title">Amarte Como Elección Diaria</h3>
+                            </div>
+                            <div class="card-hint absolute bottom-3 right-4 text-rose-200 text-xs font-bold flex items-center gap-1">Toca para leer <span>→</span></div>
+                        </div>
+                        <div class="promise-back absolute inset-0 rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden" style="backface-visibility:hidden; transform:rotateY(180deg); background: linear-gradient(135deg, #be123c, #e11d48);">
+                            <div class="absolute -top-4 -right-4 text-8xl opacity-10 pointer-events-none">💍</div>
+                            <div>
+                                <div class="text-xs font-bold uppercase tracking-widest text-rose-100 mb-3">💍 Promesa N°4</div>
+                                <p class="text-white/95 font-medium leading-relaxed text-sm md:text-base" data-i18n="step4_desc">Prometo amarte no solo en tus mejores días, sino también cuando estés despeinada, en pijamas y estresada. Prometo que el amor no será solo un sentimiento, sino una acción constante. Te elijo hoy, te elegí ayer, y prometo elegirte cada mañana cuando me despierte. Eres mi hogar.</p>
+                            </div>
+                            <div class="text-right text-rose-100 text-xs font-bold">Toca para volver ←</div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Sello final de promesas -->
+            <div class="mt-12 max-w-lg mx-auto px-4">
+                <div class="relative rounded-[2rem] overflow-hidden text-center p-8 md:p-10 bg-gradient-to-br from-brand-500 to-tulip-500 shadow-2xl shadow-brand-500/20">
+                    <div class="absolute -top-6 -left-6 text-8xl opacity-10 animate-spin-slow">💍</div>
+                    <div class="absolute -bottom-6 -right-6 text-8xl opacity-10 animate-spin-slow" style="animation-direction:reverse;">💖</div>
+                    <div class="relative z-10">
+                        <div class="text-4xl mb-4">📜</div>
+                        <p class="text-white font-bold text-lg md:text-xl leading-relaxed font-serif italic">"Estas promesas no tienen fecha de vencimiento. Son para toda la vida, en cada versión de ti y de mí."</p>
+                        <p class="text-white/70 text-sm mt-4 font-medium">— Charles, con todo mi amor</p>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                .promise-card-wrap .promise-front,
+                .promise-card-wrap .promise-back { padding: 1.25rem; }
+                /* Flip effect for promise cards */
+                .promise-card-wrap .promise-card {
+                    transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+                    transform-style: preserve-3d;
+                }
+                .promise-card-wrap.flipped .promise-card {
+                    transform: rotateY(180deg);
+                }
+                .promise-card-wrap .promise-front,
+                .promise-card-wrap .promise-back {
+                    backface-visibility: hidden;
+                }
+                .promise-card-wrap .promise-back {
+                    transform: rotateY(180deg);
+                }
+                @media (min-width: 640px) {
+                    .promise-card-wrap .promise-front,
+                    .promise-card-wrap .promise-back { padding: 2rem; }
+                }
+                .promise-card-wrap .promise-front .card-icon { width:2.75rem; height:2.75rem; font-size:1.5rem; }
+                @media (min-width: 640px) {
+                    .promise-card-wrap .promise-front .card-icon { width:4rem; height:4rem; font-size:1.875rem; }
+                }
+                .promise-card-wrap .promise-front h3 { font-size: clamp(0.95rem, 3.5vw, 1.5rem); line-height:1.2; }
+                .promise-card-wrap .promise-back p { font-size: clamp(0.7rem, 2.5vw, 0.875rem); }
+                .promise-card-wrap .card-hint { font-size: 0.625rem; }
+                @media (min-width: 640px) { .promise-card-wrap .card-hint { font-size: 0.75rem; } }
+            </style>
         </section>
 
         <!-- Memorial -->
+            <!-- NUEVA SECCIÓN: COLORES FAVORITOS DE YAIRE -->
+            <section id="colores-yaire" class="py-24 border-t border-zinc-200 dark:border-zinc-800 reveal-scale scroll-mt-20">
+                <div class="max-w-4xl mx-auto px-4">
+                    <div class="text-center mb-14">
+                        <span class="inline-block px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/15 via-rose-500/15 to-violet-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-widest mb-5">Colores Favoritos</span>
+                        <h2 class="text-3xl md:text-5xl font-extrabold mb-4 text-zinc-900 dark:text-white">La Paleta de Yaire</h2>
+                        <p class="text-zinc-500 dark:text-zinc-400 text-lg max-w-2xl mx-auto font-light">Estos son los colores que más te representan y que llenan de vida cada rincón de nuestra historia. Toca cada color para descubrir un detalle especial.</p>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        <!-- Verde -->
+                        <div class="color-card group cursor-pointer rounded-3xl shadow-xl border-2 border-emerald-400 bg-gradient-to-br from-emerald-200 via-emerald-100 to-white dark:from-emerald-900/40 dark:via-emerald-800/30 dark:to-zinc-900 p-8 flex flex-col items-center transition-transform hover:-translate-y-2 relative overflow-hidden" onclick="toggleColorDetail(this)">
+                            <div class="w-16 h-16 rounded-full bg-emerald-500 flex items-center justify-center text-4xl mb-4 shadow-lg border-4 border-white/60 dark:border-emerald-900">💚</div>
+                            <h3 class="text-xl font-bold text-emerald-700 dark:text-emerald-300 mb-2">Verde</h3>
+                            <p class="text-zinc-600 dark:text-zinc-300 text-sm text-center">Esperanza, naturaleza y tu paz interior. El color de tu calma y de tu energía más pura.</p>
+                            <div class="color-detail absolute inset-0 bg-emerald-500 text-white flex flex-col items-center justify-center text-center px-6 py-8 rounded-3xl opacity-0 pointer-events-none transition-all duration-500">
+                                <span class="text-5xl mb-3 animate-heartbeat-fast">🌱</span>
+                                <span class="font-bold text-lg">El verde es tu refugio. Me recuerda a tu capacidad de sanar y a la frescura de tu risa.</span>
+                            </div>
+                        </div>
+                        <!-- Rojo -->
+                        <div class="color-card group cursor-pointer rounded-3xl shadow-xl border-2 border-rose-400 bg-gradient-to-br from-rose-200 via-rose-100 to-white dark:from-rose-900/40 dark:via-rose-800/30 dark:to-zinc-900 p-8 flex flex-col items-center transition-transform hover:-translate-y-2 relative overflow-hidden" onclick="toggleColorDetail(this)">
+                            <div class="w-16 h-16 rounded-full bg-rose-500 flex items-center justify-center text-4xl mb-4 shadow-lg border-4 border-white/60 dark:border-rose-900">❤️</div>
+                            <h3 class="text-xl font-bold text-rose-700 dark:text-rose-300 mb-2">Rojo</h3>
+                            <p class="text-zinc-600 dark:text-zinc-300 text-sm text-center">Pasión, amor y fuerza. El color de tus besos, de tu carácter y de tu corazón valiente.</p>
+                            <div class="color-detail absolute inset-0 bg-rose-500 text-white flex flex-col items-center justify-center text-center px-6 py-8 rounded-3xl opacity-0 pointer-events-none transition-all duration-500">
+                                <span class="text-5xl mb-3 animate-heartbeat-fast">🔥</span>
+                                <span class="font-bold text-lg">El rojo eres tú cuando luchas por lo que amas. Es la intensidad de tu amor y tu determinación.</span>
+                            </div>
+                        </div>
+                        <!-- Rosa -->
+                        <div class="color-card group cursor-pointer rounded-3xl shadow-xl border-2 border-pink-400 bg-gradient-to-br from-pink-200 via-pink-100 to-white dark:from-pink-900/40 dark:via-pink-800/30 dark:to-zinc-900 p-8 flex flex-col items-center transition-transform hover:-translate-y-2 relative overflow-hidden" onclick="toggleColorDetail(this)">
+                            <div class="w-16 h-16 rounded-full bg-pink-400 flex items-center justify-center text-4xl mb-4 shadow-lg border-4 border-white/60 dark:border-pink-900">🌸</div>
+                            <h3 class="text-xl font-bold text-pink-700 dark:text-pink-200 mb-2">Rosa</h3>
+                            <p class="text-zinc-600 dark:text-zinc-300 text-sm text-center">Ternura, dulzura y alegría. El color de tus mensajes, de tus flores favoritas y de tu lado más romántico.</p>
+                            <div class="color-detail absolute inset-0 bg-pink-400 text-white flex flex-col items-center justify-center text-center px-6 py-8 rounded-3xl opacity-0 pointer-events-none transition-all duration-500">
+                                <span class="text-5xl mb-3 animate-heartbeat-fast">🌷</span>
+                                <span class="font-bold text-lg">El rosa es tu esencia. Es la calidez de tus palabras y la magia de tu ternura.</span>
+                            </div>
+                        </div>
+                        <!-- Morado -->
+                        <div class="color-card group cursor-pointer rounded-3xl shadow-xl border-2 border-violet-400 bg-gradient-to-br from-violet-200 via-violet-100 to-white dark:from-violet-900/40 dark:via-violet-800/30 dark:to-zinc-900 p-8 flex flex-col items-center transition-transform hover:-translate-y-2 relative overflow-hidden" onclick="toggleColorDetail(this)">
+                            <div class="w-16 h-16 rounded-full bg-violet-500 flex items-center justify-center text-4xl mb-4 shadow-lg border-4 border-white/60 dark:border-violet-900">💜</div>
+                            <h3 class="text-xl font-bold text-violet-700 dark:text-violet-200 mb-2">Morado</h3>
+                            <p class="text-zinc-600 dark:text-zinc-300 text-sm text-center">Misterio, creatividad y sueños. El color de tu imaginación y de los momentos más mágicos.</p>
+                            <div class="color-detail absolute inset-0 bg-violet-500 text-white flex flex-col items-center justify-center text-center px-6 py-8 rounded-3xl opacity-0 pointer-events-none transition-all duration-500">
+                                <span class="text-5xl mb-3 animate-heartbeat-fast">🦄</span>
+                                <span class="font-bold text-lg">El morado es tu chispa creativa. Es la magia de tus sueños y tu lado más único.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                // Animación de mostrar/ocultar detalle de color
+                function toggleColorDetail(card) {
+                    const detail = card.querySelector('.color-detail');
+                    if (detail.classList.contains('opacity-0')) {
+                        // Oculta cualquier otro detalle abierto
+                        document.querySelectorAll('.color-card .color-detail').forEach(el => {
+                            el.classList.add('opacity-0', 'pointer-events-none');
+                        });
+                        detail.classList.remove('opacity-0', 'pointer-events-none');
+                    } else {
+                        detail.classList.add('opacity-0', 'pointer-events-none');
+                    }
+                }
+                </script>
+            </section>
         <section id="memorial" class="py-24 border-t border-zinc-200 dark:border-zinc-800 reveal-right scroll-mt-20 px-4 md:px-0">
             <div class="animacion-respiro respiro-blanco max-w-3xl mx-auto bg-white dark:bg-zinc-900 p-8 md:p-14 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-700 text-center relative overflow-hidden">
                 <div class="absolute -top-4 right-10 text-6xl opacity-5 animate-pulse-slow">✨</div>
@@ -1095,36 +1392,131 @@
                 <h2 class="text-sm font-bold tracking-widest uppercase text-zinc-400 dark:text-zinc-500 mb-4" data-i18n="memorial_label">Un Ángel en el Cielo</h2>
                 <h3 class="text-2xl md:text-3xl font-bold mb-6 text-zinc-800 dark:text-zinc-100" data-i18n="memorial_title">Para tu pequeño sobrino</h3>
                 <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed font-light mb-6 text-base md:text-lg" data-i18n="memorial_text1">Sé que su partida dejó una herida profunda y un vacío inmenso en tu corazón. El dolor de perder a alguien tan pequeño, tan frágil y tan lleno de luz pura es verdaderamente indescriptible y abrumador.</p>
-                <p class="text-zinc-800 dark:text-zinc-200 leading-relaxed font-medium italic text-base md:text-lg" data-i18n="memorial_text2">Pero quiero que, a pesar del dolor, siempre recuerdes esta certeza absoluta: él tuvo la dicha inmensa de tener a <strong class="text-brand-500">la mejor tía de todo el universo</strong>. El amor incondicional, las risas contagiosas y cada hermoso momento que le regalaste se volvieron eternos. Él ahora es un angelito que te cuida desde arriba, y yo te prometo estar aquí abajo, sosteniendo tu mano firmemente, siempre que necesites apoyo para seguir adelante.</p>
+                <p class="text-zinc-800 dark:text-zinc-200 leading-relaxed font-medium italic text-base md:text-lg" data-i18n="memorial_text2">Pero quiero que, a pesar del dolor, siempre recuerdes esta certeza absoluta: él tuvo la dicha inmensa de tener a <strong class="text-brand-500">la mejor tía de todo el universo</strong>. Aunque no pudieron conocerse, su lazo existe más allá del tiempo y la distancia. Él ahora es un angelito que te cuida desde arriba, y yo te prometo estar aquí abajo, sosteniendo tu mano firmemente, siempre que necesites apoyo para seguir adelante.</p>
             </div>
         </section>
 
         <!-- Hype -->
-        <section id="hype" class="py-24 border-t border-zinc-200 dark:border-zinc-800 text-center reveal-left scroll-mt-20">
+        <section id="hype" class="py-24 border-t border-zinc-200 dark:border-zinc-800 reveal-left scroll-mt-20">
             <div class="max-w-5xl mx-auto px-4">
-                <div class="text-center mb-16">
+                <!-- Header -->
+                <div class="text-center mb-14">
                     <span class="text-5xl md:text-6xl mb-6 block">🇻🇪 ✈️ 🇩🇴</span>
                     <h2 class="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 pb-2 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-tulip-500" data-i18n="hype_title">Ojalá este Hype se haga REAL.</h2>
-                    <p class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 font-light max-w-2xl mx-auto" data-i18n="hype_text">Todavía no es un hecho, pero la sola idea de que algún día ese avión aterrice en Venezuela me tiene soñando despierto. Ya tengo pensada la ruta, los lugares, la comida, y lo más importante: el momento exacto en el que por fin te pueda dar ese abrazo en persona. ¡Mantengo la esperanza intacta!</p>
+                    <p class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 font-light max-w-2xl mx-auto" data-i18n="hype_text">Todavía no es un hecho, pero la sola idea de que algún día ese avión aterrice en Venezuela me tiene soñando despierto. Ya tengo pensada la ruta, los lugares, la comida, y lo más importante: el momento en que por fin te pueda dar ese abrazo en persona.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white dark:bg-zinc-900 p-8 rounded-3xl shadow-sm border border-zinc-200 dark:border-zinc-800 text-center hover:-translate-y-2 transition-transform">
-                        <div class="text-5xl mb-4">🫂</div>
-                        <h4 class="text-xl font-bold mb-2 text-zinc-800 dark:text-white" data-i18n="hype_list1_title">El Abrazo de Aeropuerto</h4>
-                        <p class="text-sm text-zinc-500 dark:text-zinc-400" data-i18n="hype_list1_desc">Ese primer momento donde por fin podré comprobar si eres tan abrazable como imagino (seguro que sí). Cero soltarte por al menos 5 minutos.</p>
+
+                <!-- Boarding Pass animado -->
+                <div class="max-w-2xl mx-auto mb-12">
+                    <div class="relative bg-white dark:bg-zinc-900 rounded-[2rem] shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden" id="boarding-pass">
+                        <!-- Banda superior de color -->
+                        <div class="h-3 bg-gradient-to-r from-brand-500 via-tulip-500 to-brand-500 bg-[length:200%]" style="animation: gradientShift 3s ease infinite;"></div>
+                        
+                        <div class="p-6 md:p-8">
+                            <!-- Header del boarding pass -->
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Aerolínea del Amor</p>
+                                    <p class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-tulip-500">28E Airways</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Boarding Pass</p>
+                                    <p class="text-sm font-mono font-bold text-zinc-700 dark:text-zinc-300">28E-2026</p>
+                                </div>
+                            </div>
+
+                            <!-- Ruta -->
+                            <div class="flex items-center justify-between mb-6 bg-zinc-50 dark:bg-zinc-800/60 rounded-2xl p-4 md:p-5">
+                                <div class="text-center">
+                                    <p class="text-3xl md:text-4xl font-extrabold text-zinc-900 dark:text-white">SDQ</p>
+                                    <p class="text-xs font-bold text-zinc-500 uppercase tracking-wide mt-1">Sto. Domingo</p>
+                                    <p class="text-lg mt-1">🇩🇴</p>
+                                </div>
+                                <div class="flex-1 mx-4 flex flex-col items-center gap-1">
+                                    <p class="text-brand-500 font-bold text-sm">~900 km</p>
+                                    <div class="w-full flex items-center gap-1">
+                                        <div class="flex-1 h-px bg-zinc-300 dark:bg-zinc-600"></div>
+                                        <span class="text-xl" style="animation: hypeFlap 0.8s ease-in-out infinite alternate;">✈️</span>
+                                        <div class="flex-1 h-px bg-zinc-300 dark:bg-zinc-600"></div>
+                                    </div>
+                                    <p class="text-zinc-400 text-xs font-medium">~2h de vuelo</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-3xl md:text-4xl font-extrabold text-zinc-900 dark:text-white">CCS</p>
+                                    <p class="text-xs font-bold text-zinc-500 uppercase tracking-wide mt-1">Caracas</p>
+                                    <p class="text-lg mt-1">🇻🇪</p>
+                                </div>
+                            </div>
+
+                            <!-- Info del pasajero -->
+                            <div class="grid grid-cols-3 gap-4 mb-6">
+                                <div>
+                                    <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Pasajera</p>
+                                    <p class="font-bold text-zinc-800 dark:text-zinc-200 text-sm">Yaire 🌷</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Clase</p>
+                                    <p class="font-bold text-brand-500 text-sm">Amor Total</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Asiento</p>
+                                    <p class="font-bold text-zinc-800 dark:text-zinc-200 text-sm">A1 💖</p>
+                                </div>
+                            </div>
+
+                            <!-- Línea de corte -->
+                            <div class="flex items-center gap-2 my-5">
+                                <div class="flex-1 border-t border-dashed border-zinc-200 dark:border-zinc-700"></div>
+                                <div class="w-5 h-5 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex-shrink-0"></div>
+                                <div class="w-5 h-5 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex-shrink-0"></div>
+                                <div class="flex-1 border-t border-dashed border-zinc-200 dark:border-zinc-700"></div>
+                            </div>
+
+                            <!-- Estado del vuelo -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse flex-shrink-0"></span>
+                                    <p class="text-sm font-bold text-amber-600 dark:text-amber-400">En espera · Fecha TBD</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Estado</p>
+                                    <p class="text-sm font-extrabold text-brand-500">PRONTO™</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Banda inferior -->
+                        <div class="h-2 bg-gradient-to-r from-tulip-500 via-brand-500 to-tulip-500 bg-[length:200%]" style="animation: gradientShift 3s ease infinite reverse;"></div>
                     </div>
-                    <div class="bg-white dark:bg-zinc-900 p-8 rounded-3xl shadow-sm border border-zinc-200 dark:border-zinc-800 text-center hover:-translate-y-2 transition-transform">
-                        <div class="text-5xl mb-4">🥟</div>
-                        <h4 class="text-xl font-bold mb-2 text-zinc-800 dark:text-white" data-i18n="hype_list2_title">Tour Gastronómico</h4>
-                        <p class="text-sm text-zinc-500 dark:text-zinc-400" data-i18n="hype_list2_desc">Te llevaré a comer las mejores arepas, empanadas y tequeños que existen. Y por supuesto, cocinarte tu merecido Mangú.</p>
+                </div>
+
+                <!-- Itinerario del viaje soñado -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div class="bg-white dark:bg-zinc-900 p-7 rounded-3xl shadow-sm border border-zinc-200 dark:border-zinc-800 hover:-translate-y-2 transition-transform relative overflow-hidden group">
+                        <div class="absolute -right-2 -bottom-2 text-7xl opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">🫂</div>
+                        <div class="w-12 h-12 bg-rose-50 dark:bg-rose-900/20 text-rose-500 text-2xl rounded-2xl flex items-center justify-center mb-4">🫂</div>
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-rose-400 mb-2">Parada N°1</p>
+                        <h4 class="text-lg font-extrabold mb-2 text-zinc-800 dark:text-white" data-i18n="hype_list1_title">El Abrazo de Aeropuerto</h4>
+                        <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed" data-i18n="hype_list1_desc">Ese primer momento donde por fin podré comprobar si eres tan abrazable como imagino (seguro que sí). Cero soltarte por al menos 5 minutos.</p>
                     </div>
-                    <div class="bg-white dark:bg-zinc-900 p-8 rounded-3xl shadow-sm border border-zinc-200 dark:border-zinc-800 text-center hover:-translate-y-2 transition-transform">
-                        <div class="text-5xl mb-4">📸</div>
-                        <h4 class="text-xl font-bold mb-2 text-zinc-800 dark:text-white" data-i18n="hype_list3_title">Crear Memorias Reales</h4>
-                        <p class="text-sm text-zinc-500 dark:text-zinc-400" data-i18n="hype_list3_desc">Cambiar las capturas de pantalla de videollamadas por fotos de verdad. Llenar la galería de recuerdos, risas y aventuras físicas.</p>
+                    <div class="bg-gradient-to-br from-brand-50 to-amber-50 dark:from-brand-900/20 dark:to-amber-900/10 p-7 rounded-3xl shadow-md border border-brand-200/50 dark:border-brand-800/30 hover:-translate-y-2 transition-transform relative overflow-hidden group transform scale-105">
+                        <div class="absolute -right-2 -bottom-2 text-7xl opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">🥟</div>
+                        <div class="w-12 h-12 bg-brand-500 text-white text-2xl rounded-2xl flex items-center justify-center mb-4 shadow-md">🥟</div>
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-brand-500 mb-2">Parada N°2</p>
+                        <h4 class="text-lg font-extrabold mb-2 text-zinc-800 dark:text-white" data-i18n="hype_list2_title">Tour Gastronómico</h4>
+                        <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed" data-i18n="hype_list2_desc">Te llevaré a comer las mejores arepas, empanadas y tequeños que existen. Y por supuesto, cocinarte tu merecido Mangú.</p>
+                    </div>
+                    <div class="bg-white dark:bg-zinc-900 p-7 rounded-3xl shadow-sm border border-zinc-200 dark:border-zinc-800 hover:-translate-y-2 transition-transform relative overflow-hidden group">
+                        <div class="absolute -right-2 -bottom-2 text-7xl opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">📸</div>
+                        <div class="w-12 h-12 bg-violet-50 dark:bg-violet-900/20 text-violet-500 text-2xl rounded-2xl flex items-center justify-center mb-4">📸</div>
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-violet-400 mb-2">Parada N°3</p>
+                        <h4 class="text-lg font-extrabold mb-2 text-zinc-800 dark:text-white" data-i18n="hype_list3_title">Crear Memorias Reales</h4>
+                        <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed" data-i18n="hype_list3_desc">Cambiar las capturas de pantalla de videollamadas por fotos de verdad. Llenar la galería de recuerdos, risas y aventuras físicas.</p>
                     </div>
                 </div>
             </div>
+            <style>
+                @keyframes hypeFlap { 0%{transform:translateY(0) rotate(-5deg);} 100%{transform:translateY(-4px) rotate(5deg);} }
+            </style>
         </section>
 
         <!-- Stats Dashboard -->
@@ -1187,6 +1579,184 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: TOP 5 YAIRE -->
+        <section id="top5yaire" class="py-24 border-t border-zinc-200 dark:border-zinc-800 reveal-scale scroll-mt-20">
+            <div class="max-w-5xl mx-auto px-4">
+                <!-- Header -->
+                <div class="text-center mb-14">
+                    <span class="inline-block px-4 py-1.5 rounded-full bg-gradient-to-r from-tulip-500/15 to-brand-500/15 border border-tulip-500/30 text-tulip-600 dark:text-tulip-400 text-xs font-bold uppercase tracking-widest mb-5">Análisis del Chat</span>
+                    <h2 class="text-3xl md:text-5xl font-extrabold mb-4 text-zinc-900 dark:text-white">El Vocabulario de Yaire</h2>
+                    <p class="text-zinc-500 dark:text-zinc-400 text-lg max-w-2xl mx-auto font-light">Pasé nuestras conversaciones por un análisis exhaustivo y estas son las palabras y frases que más repites. No me sorprende para nada lo que encontré.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- TOP 5 PALABRAS -->
+                    <div class="bg-white dark:bg-zinc-900 rounded-[2.5rem] shadow-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden self-start">
+                        <div class="bg-gradient-to-r from-tulip-500 to-pink-400 p-6 flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl shadow-inner">🏆</div>
+                            <div>
+                                <h3 class="text-xl font-extrabold text-white">Top 5 Palabras</h3>
+                                <p class="text-white/70 text-xs font-medium mt-0.5">Las más usadas por Yaire en nuestro chat</p>
+                            </div>
+                        </div>
+                        <div class="p-6 flex flex-col gap-4">
+                            
+                            <!-- Word 1 -->
+                            <div class="flex items-center gap-4 group">
+                                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 text-white font-extrabold text-sm flex items-center justify-center shadow-md flex-shrink-0">1</div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center mb-1.5">
+                                        <span class="font-extrabold text-zinc-900 dark:text-white text-base">"Amor" 💖</span>
+                                        <span class="text-xs font-bold text-tulip-500 bg-tulip-50 dark:bg-tulip-900/20 px-2 py-0.5 rounded-full">★ Estrella</span>
+                                    </div>
+                                    <div class="w-full bg-zinc-100 dark:bg-zinc-800 h-2.5 rounded-full overflow-hidden">
+                                        <div class="h-full rounded-full bg-gradient-to-r from-tulip-500 to-pink-400 word-bar" style="--wb:100%; width:0%; transition: width 1.8s cubic-bezier(0.4,0,0.2,1);"></div>
+                                    </div>
+                                    <p class="text-xs text-zinc-400 mt-1 font-medium">Cómo te llama a ti y cómo cierra sus oraciones.</p>
+                                </div>
+                            </div>
+
+                            <!-- Word 2 -->
+                            <div class="flex items-center gap-4 group">
+                                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-zinc-300 to-zinc-400 text-white font-extrabold text-sm flex items-center justify-center shadow-md flex-shrink-0">2</div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center mb-1.5">
+                                        <span class="font-extrabold text-zinc-900 dark:text-white text-base">"JAJAJA" 😂</span>
+                                        <span class="text-xs font-bold text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-2 py-0.5 rounded-full">Constante</span>
+                                    </div>
+                                    <div class="w-full bg-zinc-100 dark:bg-zinc-800 h-2.5 rounded-full overflow-hidden">
+                                        <div class="h-full rounded-full bg-gradient-to-r from-amber-400 to-yellow-400 word-bar" style="--wb:88%; width:0%; transition: width 1.8s cubic-bezier(0.4,0,0.2,1) 0.1s;"></div>
+                                    </div>
+                                    <p class="text-xs text-zinc-400 mt-1 font-medium">En mayúsculas y con variaciones tipo "JAKAJJAJA".</p>
+                                </div>
+                            </div>
+
+                            <!-- Word 3 -->
+                            <div class="flex items-center gap-4 group">
+                                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-600 to-amber-700 text-white font-extrabold text-sm flex items-center justify-center shadow-md flex-shrink-0">3</div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center mb-1.5">
+                                        <span class="font-extrabold text-zinc-900 dark:text-white text-base">"Lindo" 🥰</span>
+                                        <span class="text-xs font-bold text-rose-500 bg-rose-50 dark:bg-rose-900/20 px-2 py-0.5 rounded-full">Favorita</span>
+                                    </div>
+                                    <div class="w-full bg-zinc-100 dark:bg-zinc-800 h-2.5 rounded-full overflow-hidden">
+                                        <div class="h-full rounded-full bg-gradient-to-r from-rose-400 to-pink-400 word-bar" style="--wb:74%; width:0%; transition: width 1.8s cubic-bezier(0.4,0,0.2,1) 0.2s;"></div>
+                                    </div>
+                                    <p class="text-xs text-zinc-400 mt-1 font-medium">"Mi hombre lindo" y para reaccionar a tus detalles.</p>
+                                </div>
+                            </div>
+
+                            <!-- Word 4 -->
+                            <div class="flex items-center gap-4 group">
+                                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 text-white font-extrabold text-sm flex items-center justify-center shadow-md flex-shrink-0">4</div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center mb-1.5">
+                                        <span class="font-extrabold text-zinc-900 dark:text-white text-base">"Verdad" 💎</span>
+                                        <span class="text-xs font-bold text-blue-500 bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded-full">Honesta</span>
+                                    </div>
+                                    <div class="w-full bg-zinc-100 dark:bg-zinc-800 h-2.5 rounded-full overflow-hidden">
+                                        <div class="h-full rounded-full bg-gradient-to-r from-blue-400 to-sky-400 word-bar" style="--wb:60%; width:0%; transition: width 1.8s cubic-bezier(0.4,0,0.2,1) 0.3s;"></div>
+                                    </div>
+                                    <p class="text-xs text-zinc-400 mt-1 font-medium">"En verdad", "a decir verdad" — su transparencia.</p>
+                                </div>
+                            </div>
+
+                            <!-- Word 5 -->
+                            <div class="flex items-center gap-4 group">
+                                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 text-white font-extrabold text-sm flex items-center justify-center shadow-md flex-shrink-0">5</div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center mb-1.5">
+                                        <span class="font-extrabold text-zinc-900 dark:text-white text-base">"Rico" 😋</span>
+                                        <span class="text-xs font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded-full">Versátil</span>
+                                    </div>
+                                    <div class="w-full bg-zinc-100 dark:bg-zinc-800 h-2.5 rounded-full overflow-hidden">
+                                        <div class="h-full rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 word-bar" style="--wb:48%; width:0%; transition: width 1.8s cubic-bezier(0.4,0,0.2,1) 0.4s;"></div>
+                                    </div>
+                                    <p class="text-xs text-zinc-400 mt-1 font-medium">Del café y helados hasta el coqueteo: "Qué ricooo".</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- TOP 5 FRASES -->
+                    <div class="bg-white dark:bg-zinc-900 rounded-[2.5rem] shadow-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden self-start">
+                        <div class="bg-gradient-to-r from-brand-500 to-amber-400 p-6 flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl shadow-inner">💬</div>
+                            <div>
+                                <h3 class="text-xl font-extrabold text-white">Top 5 Frases</h3>
+                                <p class="text-white/70 text-xs font-medium mt-0.5">Lo que más repite Yaire en el chat</p>
+                            </div>
+                        </div>
+                        <div class="p-6 flex flex-col gap-3">
+
+                            <!-- Frase 1 -->
+                            <div class="phrase-card rounded-2xl border-2 border-transparent p-4 cursor-pointer transition-all duration-300 hover:border-zinc-200 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800/60 group" onclick="togglePhrase(this)">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-tulip-500 to-pink-500 text-white font-extrabold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 shadow-md">1</div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="font-extrabold text-zinc-900 dark:text-white text-base leading-snug">"Te amoooo / Te amo mucho mi amor" 💕</p>
+                                        <p class="phrase-detail text-xs text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed overflow-hidden" style="max-height:0; transition: max-height 0.4s ease, opacity 0.4s ease; opacity:0;">Su declaración diaria. No pierde oportunidad para recordarte lo mucho que te ama, casi siempre alargando las vocales para darle más emoción.</p>
+                                    </div>
+                                    <span class="text-zinc-300 dark:text-zinc-600 text-lg flex-shrink-0 group-hover:text-zinc-500 dark:group-hover:text-zinc-300 transition-colors phrase-arrow">+</span>
+                                </div>
+                            </div>
+
+                            <!-- Frase 2 -->
+                            <div class="phrase-card rounded-2xl border-2 border-transparent p-4 cursor-pointer transition-all duration-300 hover:border-zinc-200 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800/60 group" onclick="togglePhrase(this)">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-500 to-amber-400 text-white font-extrabold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 shadow-md">2</div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="font-extrabold text-zinc-900 dark:text-white text-base leading-snug">"Mi amor" 🌷</p>
+                                        <p class="phrase-detail text-xs text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed overflow-hidden" style="max-height:0; transition: max-height 0.4s ease, opacity 0.4s ease; opacity:0;">Su muletilla más tierna. La usa como vocativo para iniciar conversaciones, responderte o simplemente para darte su atención.</p>
+                                    </div>
+                                    <span class="text-zinc-300 dark:text-zinc-600 text-lg flex-shrink-0 group-hover:text-zinc-500 dark:group-hover:text-zinc-300 transition-colors phrase-arrow">+</span>
+                                </div>
+                            </div>
+
+                            <!-- Frase 3 -->
+                            <div class="phrase-card rounded-2xl border-2 border-transparent p-4 cursor-pointer transition-all duration-300 hover:border-zinc-200 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800/60 group" onclick="togglePhrase(this)">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 text-white font-extrabold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 shadow-md">3</div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="font-extrabold text-zinc-900 dark:text-white text-base leading-snug">"Entiendo amor / Entiendo mi amor" 🫶</p>
+                                        <p class="phrase-detail text-xs text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed overflow-hidden" style="max-height:0; transition: max-height 0.4s ease, opacity 0.4s ease; opacity:0;">Su frase insignia de empatía. Cada vez que le explicas algo o le cuentas un problema, responde así para hacerte saber que te escucha y comprende.</p>
+                                    </div>
+                                    <span class="text-zinc-300 dark:text-zinc-600 text-lg flex-shrink-0 group-hover:text-zinc-500 dark:group-hover:text-zinc-300 transition-colors phrase-arrow">+</span>
+                                </div>
+                            </div>
+
+                            <!-- Frase 4 -->
+                            <div class="phrase-card rounded-2xl border-2 border-transparent p-4 cursor-pointer transition-all duration-300 hover:border-zinc-200 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800/60 group" onclick="togglePhrase(this)">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-rose-400 to-pink-500 text-white font-extrabold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 shadow-md">4</div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="font-extrabold text-zinc-900 dark:text-white text-base leading-snug">"Tan lindooo" 🥺</p>
+                                        <p class="phrase-detail text-xs text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed overflow-hidden" style="max-height:0; transition: max-height 0.4s ease, opacity 0.4s ease; opacity:0;">Su reacción automática e inmediata cada vez que eres romántico, le mandas algo tierno o tienes un detalle bonito con ella.</p>
+                                    </div>
+                                    <span class="text-zinc-300 dark:text-zinc-600 text-lg flex-shrink-0 group-hover:text-zinc-500 dark:group-hover:text-zinc-300 transition-colors phrase-arrow">+</span>
+                                </div>
+                            </div>
+
+                            <!-- Frase 5 -->
+                            <div class="phrase-card rounded-2xl border-2 border-transparent p-4 cursor-pointer transition-all duration-300 hover:border-zinc-200 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800/60 group" onclick="togglePhrase(this)">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 text-white font-extrabold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 shadow-md">5</div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="font-extrabold text-zinc-900 dark:text-white text-base leading-snug">"Claro que sí" ✅</p>
+                                        <p class="phrase-detail text-xs text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed overflow-hidden" style="max-height:0; transition: max-height 0.4s ease, opacity 0.4s ease; opacity:0;">Su manera entusiasta de afirmar. La usa para aceptar tus planes, confirmar lo que siente por ti o simplemente darte seguridad.</p>
+                                    </div>
+                                    <span class="text-zinc-300 dark:text-zinc-600 text-lg flex-shrink-0 group-hover:text-zinc-500 dark:group-hover:text-zinc-300 transition-colors phrase-arrow">+</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </section>
 
@@ -1342,10 +1912,11 @@
             es: {
                 flag: "ES", code: "ES", nav_subtitle: "Para Yaire",
                 menu_nav: "Navegación", menu_home: "Inicio", menu_story: "Historia & Tiempo", menu_name: "El Poder de tu Nombre", menu_tulips: "Tus Flores", menu_quiz: "El Misterio", menu_dist: "La Distancia", menu_food: "El Pacto", menu_universe: "Su Universo", menu_gallery: "Galería de Arte", menu_games: "Minijuegos", menu_promises: "Promesas", menu_memorial: "Para tu Ángel", menu_hype: "El Hype", menu_stats: "Estadísticas", menu_secret: "Bóveda Secreta", menu_settings: "Ajustes de Sistema", menu_theme: "Tema Visual", menu_lang: "Idioma",
+                    menu_colors: "Colores Favoritos",
                 
                 loading: "Cargando nuestro universo...", nav_logo: "28E", hero_badge: "¡Felices 2 Meses! (Y contando)",
                 hero_title1: "Mi lugar favorito", hero_title2: "es contigo.",
-                hero_subtitle: "Ayer cumplimos nuestro segundo mes oficial, pero siento que te conozco de toda una vida. Eres la casualidad más hermosa, la dueña de mis pensamientos más profundos, el motivo de mis mejores sonrisas y la mujer con la que quiero construir, cuidar y compartir cada pequeño instante del resto de mis días.",
+                hero_subtitle: "Eres la casualidad más hermosa que me ha pasado, la dueña de mis pensamientos más profundos, el motivo de mis mejores sonrisas y la mujer con la que quiero construir, cuidar y compartir cada pequeño instante del resto de mis días. Esta página es nuestra, para siempre.",
                 
                 origin_label: "Nuestra Historia", origin_title: "De los píxeles a la realidad.",
                 origin_text1: "¿Quién iba a decir que detrás de unas pantallas, en el mundo virtual de <strong>Hevvo</strong>, iba a encontrar al amor de mi vida? Nos mudamos a <strong>Habbo ID</strong> para seguir nuestra historia, y sin darnos cuenta, lo que empezó como un juego se convirtió en el sentimiento más real, maduro y profundo que he experimentado.",
@@ -1423,7 +1994,7 @@
                 
                 memorial_label: "Un Ángel en el Cielo", memorial_title: "Para tu pequeño sobrino",
                 memorial_text1: "Sé que su partida dejó una herida profunda y un vacío inmenso en tu corazón. El dolor de perder a alguien tan pequeño, tan frágil y tan lleno de luz pura es verdaderamente indescriptible y abrumador.",
-                memorial_text2: "Pero quiero que, a pesar del dolor, siempre recuerdes esta certeza absoluta: él tuvo la dicha inmensa de tener a <strong class='text-brand-500'>la mejor tía de todo el universo</strong>. El amor incondicional, las risas contagiosas y cada hermoso momento que le regalaste se volvieron eternos. Él ahora es un angelito que te cuida desde arriba, y yo te prometo estar aquí abajo, sosteniendo tu mano firmemente, siempre que necesites apoyo para seguir adelante.",
+                memorial_text2: "Pero quiero que, a pesar del dolor, siempre recuerdes esta certeza absoluta: él tuvo la dicha inmensa de tener a <strong class='text-brand-500'>la mejor tía de todo el universo</strong>. Aunque no pudieron conocerse, su lazo existe más allá del tiempo y la distancia. Él ahora es un angelito que te cuida desde arriba, y yo te prometo estar aquí abajo, sosteniendo tu mano firmemente, siempre que necesites apoyo para seguir adelante.",
                 
                 hype_title: "Ojalá este Hype se haga REAL.", hype_text: "Todavía no es un hecho, pero la sola idea de que algún día ese avión aterrice en Venezuela me tiene soñando despierto. Ya tengo pensada la ruta, los lugares, la comida, y lo más importante: el momento exacto en el que por fin te pueda dar ese abrazo en persona. ¡Mantengo la esperanza intacta!",
                 hype_list1_title: "El Abrazo de Aeropuerto", hype_list1_desc: "Ese primer momento donde por fin podré comprobar si eres tan abrazable como imagino (seguro que sí). Cero soltarte por al menos 5 minutos.",
@@ -1454,9 +2025,10 @@
             },
             en: {
                 flag: "EN", code: "EN", nav_subtitle: "For Yaire", menu_nav: "Navigation", menu_home: "Home", menu_story: "Story & Time", menu_name: "The Power of Your Name", menu_tulips: "Your Flowers", menu_quiz: "The Mystery", menu_dist: "The Distance", menu_food: "The Pact", menu_universe: "Her Universe", menu_gallery: "Art Gallery", menu_games: "Minigames", menu_promises: "Promises", menu_memorial: "For Your Angel", menu_hype: "The Hype", menu_stats: "Statistics", menu_secret: "Secret Vault", menu_settings: "System Settings", menu_theme: "Visual Theme", menu_lang: "Language",
+                    menu_colors: "Favorite Colors",
                 loading: "Loading our universe...", nav_logo: "28E", hero_badge: "Happy 2 Months! (And counting)",
                 hero_title1: "My favorite place", hero_title2: "is with you.",
-                hero_subtitle: "Yesterday we celebrated our official second month, but I feel like I have known you my whole life. You are the most beautiful coincidence, the owner of my deepest thoughts, the reason for my best smiles, and the woman with whom I want to build, care for, and share every small moment of the rest of my days.",
+                hero_subtitle: "You are the most beautiful coincidence that has ever happened to me, the owner of my deepest thoughts, the reason for my best smiles, and the woman with whom I want to build, care for, and share every small moment of the rest of my days. This page is ours, forever.",
                 origin_label: "Our Story", origin_title: "From pixels to reality.",
                 origin_text1: "Who would have thought that behind screens, in the virtual world of <strong>Hevvo</strong>, I would find the love of my life? We moved to <strong>Habbo ID</strong> to continue our story, and without realizing it, what began as a game became the most real, mature, and profound feeling I have ever experienced.",
                 origin_text_key: "\"None of this would have been possible without your friend Key. I owe her eternal gratitude for being the bridge that crossed our paths and giving me the immense opportunity to be the lucky boyfriend of the most incredible girl in the world.\"",
@@ -1547,9 +2119,10 @@
             },
             fr: {
                 flag: "FR", code: "FR", nav_subtitle: "Pour Yaire", menu_nav: "Navigation", menu_home: "Accueil", menu_story: "Histoire & Temps", menu_name: "Le Pouvoir de ton Nom", menu_tulips: "Tes Fleurs", menu_quiz: "Le Mystère", menu_dist: "La Distance", menu_food: "Le Pacte", menu_universe: "Son Univers", menu_gallery: "Galerie d'Art", menu_games: "Mini-jeux", menu_promises: "Promesses", menu_memorial: "Pour ton Ange", menu_hype: "Le Hype", menu_stats: "Statistiques", menu_secret: "Coffre Secret", menu_settings: "Paramètres Système", menu_theme: "Thème Visuel", menu_lang: "Langue",
+                    menu_colors: "Couleurs Préférées",
                 loading: "Chargement de notre univers...", nav_logo: "28E", hero_badge: "Joyeux 2 Mois ! (Et ça continue)",
                 hero_title1: "Mon endroit préféré", hero_title2: "est avec toi.",
-                hero_subtitle: "Hier nous avons célébré notre deuxième mois officiel, mais j'ai l'impression de te connaître depuis toute une vie. Tu es le plus beau hasard, la maîtresse de mes pensées les plus profondes, la raison de mes plus beaux sourires, et la femme avec qui je veux construire, chérir et partager chaque petit instant du reste de mes jours.",
+                hero_subtitle: "Tu es le plus beau hasard qui me soit arrivé, la maîtresse de mes pensées les plus profondes, la raison de mes plus beaux sourires, et la femme avec qui je veux construire, chérir et partager chaque petit instant du reste de mes jours. Cette page est la nôtre, pour toujours.",
                 origin_label: "Notre Histoire", origin_title: "Des pixels à la réalité.",
                 origin_text1: "Qui aurait pensé que derrière des écrans, dans le monde virtuel de <strong>Hevvo</strong>, j'allais trouver l'amour de ma vie ? Nous avons migré vers <strong>Habbo ID</strong> pour continuer notre histoire et, sans nous en rendre compte, ce qui avait commencé comme un jeu est devenu le sentiment le plus réel, le plus mature et le plus profond que j'aie jamais vécu.",
                 origin_text_key: "\"Rien de tout cela n'aurait été possible sans ton amie Key. Je lui dois une gratitude éternelle d'avoir été le pont qui a croisé nos chemins et de m'avoir donné l'immense opportunité d'être le petit ami chanceux de la fille la plus incroyable du monde.\"",
@@ -1640,9 +2213,10 @@
             },
             pt: {
                 flag: "PT", code: "PT", nav_subtitle: "Para Yaire", menu_nav: "Navegação", menu_home: "Início", menu_story: "História & Tempo", menu_name: "O Poder do Seu Nome", menu_tulips: "Suas Flores", menu_quiz: "O Mistério", menu_dist: "A Distância", menu_food: "O Pacto", menu_universe: "Seu Universo", menu_gallery: "Galeria de Arte", menu_games: "Minijogos", menu_promises: "Promessas", menu_memorial: "Para o Seu Anjo", menu_hype: "O Hype", menu_stats: "Estatísticas", menu_secret: "Cofre Secreto", menu_settings: "Configurações do Sistema", menu_theme: "Tema Visual", menu_lang: "Idioma",
+                    menu_colors: "Cores Favoritas",
                 loading: "Carregando nosso universo...", nav_logo: "28E", hero_badge: "Felizes 2 Meses! (E contando)",
                 hero_title1: "Meu lugar favorito", hero_title2: "é com você.",
-                hero_subtitle: "Ontem completamos nosso segundo mês oficial, mas sinto que te conheço há uma vida inteira. Você é o acaso mais lindo, a dona dos meus pensamentos mais profundos, o motivo dos meus melhores sorrisos e a mulher com quem quero construir, cuidar e compartilhar cada pequeno instante do resto dos meus dias.",
+                hero_subtitle: "Você é o acaso mais lindo que já me aconteceu, a dona dos meus pensamentos mais profundos, o motivo dos meus melhores sorrisos e a mulher com quem quero construir, cuidar e compartilhar cada pequeno instante do resto dos meus dias. Esta página é nossa, para sempre.",
                 origin_label: "Nossa História", origin_title: "Dos pixels à realidade.",
                 origin_text1: "Quem diria que por trás das telas, no mundo virtual do <strong>Hevvo</strong>, eu encontraria o amor da minha vida? Migramos para o <strong>Habbo ID</strong> para continuar nossa história e, sem perceber, o que começou como um jogo se transformou no sentimento mais real, maduro e profundo que já vivi.",
                 origin_text_key: "\"Nada disso teria sido possível sem a sua amiga Key. Devo a ela gratidão eterna por ter sido a ponte que cruzou nossos caminhos e me dado a imensa oportunidade de ser o namorado afortunado da garota mais incrível do mundo.\"",
@@ -1804,6 +2378,7 @@
         // ══════════ INICIO PRINCIPAL ══════════
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Carga Animada
+            spawnLoaderParticles();
             let progress = 0;
             const percentText = document.getElementById('loader-percent');
             const progressBar = document.getElementById('loader-progress');
@@ -1816,6 +2391,14 @@
                     setTimeout(() => {
                         document.getElementById('loader').classList.add('loader-hidden');
                         initScrollSpy();
+            // Observer for word bars in top5 section
+            const top5Section = document.getElementById('top5yaire');
+            if (top5Section) {
+                const barObs = new IntersectionObserver((entries) => {
+                    entries.forEach(e => { if (e.isIntersecting) { animateWordBars(); barObs.disconnect(); } });
+                }, { threshold: 0.3 });
+                barObs.observe(top5Section);
+            }
                     }, 400);
                 }
                 if (percentText) percentText.innerText = progress + '%';
@@ -2314,6 +2897,52 @@
         function letterNav(dir) {
             currentPara = Math.max(0, Math.min(letterParagraphs.length - 1, currentPara + dir));
             renderLetterPara();
+        }
+
+        // ══════════ FLIP CARDS - PROMESAS ══════════
+        function flipCard(wrap) {
+            wrap.classList.toggle('flipped');
+        }
+
+        // ══════════ PHRASE TOGGLE - TOP5 ══════════
+        function togglePhrase(card) {
+            const detail = card.querySelector('.phrase-detail');
+            const arrow = card.querySelector('.phrase-arrow');
+            const isOpen = detail.style.maxHeight !== '0px' && detail.style.maxHeight !== '';
+            // Close all
+            document.querySelectorAll('.phrase-detail').forEach(d => { d.style.maxHeight = '0px'; d.style.opacity = '0'; });
+            document.querySelectorAll('.phrase-arrow').forEach(a => { a.textContent = '+'; });
+            if (!isOpen) {
+                detail.style.maxHeight = '200px';
+                detail.style.opacity = '1';
+                if (arrow) arrow.textContent = '−';
+            }
+        }
+
+        // ══════════ WORD BAR ANIMATION ══════════
+        function animateWordBars() {
+            document.querySelectorAll('.word-bar').forEach(bar => {
+                const target = bar.style.getPropertyValue('--wb');
+                bar.style.width = target;
+            });
+        }
+
+        // ══════════ LOADER PARTICLES ══════════
+        function spawnLoaderParticles() {
+            const c = document.getElementById('loader-particles');
+            if (!c) return;
+            const emojis = ['🌷', '💖', '✨', '🌸', '💕', '🌺'];
+            for (let i = 0; i < 18; i++) {
+                const p = document.createElement('span');
+                p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                const x = Math.random() * 100;
+                const dx = (Math.random() - 0.5) * 80;
+                const pr = Math.random() * 360;
+                const dur = 4 + Math.random() * 5;
+                const delay = Math.random() * 6;
+                p.style.cssText = `position:absolute;left:${x}%;bottom:-5%;font-size:${12+Math.random()*14}px;opacity:0;animation:loaderParticleFly ${dur}s ${delay}s ease-in-out infinite;--px:${dx}px;--pr:${pr}deg;pointer-events:none;`;
+                c.appendChild(p);
+            }
         }
 
         // ══════════ JUEGOS Y QUIZ ══════════
