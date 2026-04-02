@@ -1657,7 +1657,7 @@
                     </div>
                     <div class="flex flex-col items-end gap-0.5 flex-shrink-0">
                       <span id="mixer-result-emoji" class="text-2xl"></span>
-                      <button id="mixer-copy-hex" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors" onclick="mixerCopyResult()">Copiar hex</button>
+                      <button id="mixer-copy-hex" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors" onclick="mixerCopyResult()" data-i18n="copy_hex">Copiar hex</button>
                     </div>
                   </div>
                 </div>
@@ -1813,7 +1813,7 @@
                 var icon = chip ? chip.querySelector('.chip-icon') : null;
                 if(icon){ icon.textContent='✓'; setTimeout(function(){ icon.textContent='📋'; }, 1600); }
                 var t = document.getElementById('paleta-toast2');
-                t.textContent = '✓ '+_currentModalHex+' copiado';
+                var dict = (typeof dictionary !== 'undefined' && dictionary[currentLang]) ? dictionary[currentLang] : {}; t.textContent = '✓ '+_currentModalHex+' '+(dict.hex_copied || 'copiado');
                 t.classList.add('show');
                 setTimeout(function(){ t.classList.remove('show'); }, 2000);
               });
@@ -1890,7 +1890,7 @@
             window.pcCopyHex = function(hex){
               navigator.clipboard.writeText(hex).then(function(){
                 var t = document.getElementById('paleta-toast2');
-                t.textContent='✓ '+hex+' copiado'; t.classList.add('show');
+                var dict = (typeof dictionary !== 'undefined' && dictionary[currentLang]) ? dictionary[currentLang] : {}; t.textContent='✓ '+hex+' '+(dict.hex_copied || 'copiado'); t.classList.add('show');
                 setTimeout(function(){ t.classList.remove('show'); }, 2200);
               });
             };
@@ -2087,7 +2087,7 @@
               if(!mixerResultHex) return;
               navigator.clipboard.writeText(mixerResultHex).then(function(){
                 var btn=document.getElementById('mixer-copy-hex');
-                if(btn){ btn.textContent='✓ Copiado!'; setTimeout(function(){ btn.textContent=mixerResultHex; },1500); }
+                if(btn){ var dict2 = (typeof dictionary !== 'undefined' && dictionary[currentLang]) ? dictionary[currentLang] : {}; btn.textContent='✓ '+(dict2.hex_copied || 'copiado')+'!'; setTimeout(function(){ btn.textContent=mixerResultHex; },1500); }
               });
             };
 
@@ -2623,13 +2623,9 @@
                     </div>
 
                     <!-- Botón CTA -->
-                    <button onclick="openSecretModal()" class="group relative px-10 py-5 rounded-2xl font-extrabold text-lg overflow-hidden shadow-2xl shadow-brand-500/20 transition-all duration-300 hover:scale-105 active:scale-95" data-i18n="secret_btn">
+                    <button onclick="openSecretModal()" class="group relative px-10 py-5 rounded-2xl font-extrabold text-lg overflow-hidden shadow-2xl shadow-brand-500/20 transition-all duration-300 hover:scale-105 active:scale-95">
                         <div class="absolute inset-0 bg-gradient-to-r from-brand-500 via-tulip-500 to-brand-500 bg-[length:200%] animate-[gradientShift_3s_ease_infinite]"></div>
-                        <span class="relative text-white flex items-center gap-3">
-                            <span>💌</span>
-                            <span data-i18n="secret_btn">Abrir Bóveda Secreta</span>
-                            <span class="group-hover:translate-x-1 transition-transform">→</span>
-                        </span>
+                        <span class="relative text-white" data-i18n="secret_btn">Abrir Bóveda Secreta</span>
                     </button>
                 </div>
             </div>
@@ -2836,6 +2832,7 @@
                 modal_morado_psych:"El morado es el color más difícil de reproducir en la naturaleza, lo que lo convierte en el más <strong>asociado con lo único e irrepetible</strong>. Estimula la parte del cerebro vinculada a la imaginación.",
                 modal_morado_icon1:"Misterio", modal_morado_icon2:"Magia", modal_morado_icon3:"Sueños",
                 modal_morado_note:"\"El morado en ti es ese universo interior que pocos llegan a ver del todo. Una profundidad que me atrae y me maravilla cada vez que me dejas asomar a ella.\"",
+                hex_copied: "copiado", copy_hex: "Copiar hex",
                 secret_letter_p5: "Prometo cuidarte, respetarte, hacerte reír hasta que te duela el estómago y ser el hombre que mereces. Esto es más que una simple página web; es un testamento de mi amor por ti. Gracias por elegirme, Yaire."
             },
             en: {
@@ -3009,6 +3006,7 @@
                 modal_morado_psych:"Purple is the hardest color to reproduce in nature, making it the most <strong>associated with the unique and irreplaceable</strong>. It stimulates the part of the brain linked to imagination.",
                 modal_morado_icon1:"Mystery", modal_morado_icon2:"Magic", modal_morado_icon3:"Dreams",
                 modal_morado_note:"\"Purple in you is that inner universe that few ever fully see. A depth that draws me in and amazes me every time you let me catch a glimpse.\"",
+                hex_copied: "copied", copy_hex: "Copy hex",
                 secret_letter_p5: "I promise to take care of you, respect you, make you laugh until your stomach hurts, and be the man you deserve. This is more than a simple web page; it is a testament of my love for you. Thank you for choosing me, Yaire."
             },
             fr: {
@@ -3182,6 +3180,7 @@
                 modal_morado_psych:"Le violet est la couleur la plus difficile à reproduire dans la nature, ce qui en fait la plus <strong>associée à l'unique et à l'irremplaçable</strong>. Il stimule la partie du cerveau liée à l'imagination.",
                 modal_morado_icon1:"Mystère", modal_morado_icon2:"Magie", modal_morado_icon3:"Rêves",
                 modal_morado_note:"\"Le violet en toi est cet univers intérieur que peu de gens voient pleinement. Une profondeur qui m'attire et m'émerveille chaque fois que tu me laisses y jeter un coup d'œil.\"",
+                hex_copied: "copié", copy_hex: "Copier hex",
                 secret_letter_p5: "Je promets de prendre soin de toi, de te respecter, de te faire rire jusqu'à ce que tu aies mal au ventre et d'être l'homme que tu mérites. Ceci est plus qu'une simple page web ; c'est un témoignage de mon amour pour toi. Merci de m'avoir choisi, Yaire."
             },
             pt: {
@@ -3355,6 +3354,7 @@
                 modal_morado_psych:"O roxo é a cor mais difícil de reproduzir na natureza, tornando-o o mais <strong>associado ao único e insubstituível</strong>. Estimula a parte do cérebro ligada à imaginação.",
                 modal_morado_icon1:"Mistério", modal_morado_icon2:"Magia", modal_morado_icon3:"Sonhos",
                 modal_morado_note:"\"O roxo em você é esse universo interior que poucos chegam a ver por completo. Uma profundidade que me atrai e me maravilha toda vez que você me deixa vislumbrá-la.\"",
+                hex_copied: "copiado", copy_hex: "Copiar hex",
                 secret_letter_p5: "Prometo cuidar de você, respeitá-la, fazer você rir até doer o estômago e ser o homem que você merece. Isso é mais do que uma simples página web; é um testamento do meu amor por você. Obrigado por me escolher, Yaire."
             }
         };
@@ -3577,11 +3577,7 @@
             document.querySelectorAll('[data-i18n]').forEach(el => { 
                 const k = el.getAttribute('data-i18n'); 
                 if (dict[k]) {
-                    if(el.children.length > 0 && el.lastElementChild && el.lastElementChild.tagName === 'SPAN') {
-                        el.lastElementChild.innerHTML = dict[k];
-                    } else {
-                        el.innerHTML = dict[k]; 
-                    }
+                    el.innerHTML = dict[k]; 
                 }
             });
             
