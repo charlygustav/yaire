@@ -1886,10 +1886,18 @@
                 <span data-i18n="menu_gallery">Galería de Arte</span>
             </a>
             <a href="#minijuegos"
-                class="menu-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/10 transition-all">
+                class="menu-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/10 transition-all relative">
                 <span
                     class="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-xs shadow-sm border border-zinc-200/50 dark:border-zinc-700/50">🎮</span>
                 <span data-i18n="menu_games">Minijuegos</span>
+                <span id="menu-games-lock-badge"
+                    class="ml-auto flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-zinc-800 dark:bg-zinc-700 text-[9px] font-bold text-zinc-400 border border-zinc-700 dark:border-zinc-600">
+                    <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                    </svg>
+                    <span id="menu-games-lock-days">28 Abr</span>
+                </span>
             </a>
             <a href="#promesas"
                 class="menu-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/10 transition-all">
@@ -1932,6 +1940,23 @@
                 <span
                     class="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-xs shadow-sm border border-zinc-200/50 dark:border-zinc-700/50">💬</span>
                 <span>Top 5 Yaire</span>
+            </a>
+            <a href="#tu-cancion" id="menu-song-link"
+                class="menu-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/10 transition-all relative">
+                <span
+                    class="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-xs shadow-sm border border-zinc-200/50 dark:border-zinc-700/50"
+                    id="menu-song-icon">❓</span>
+                <span id="menu-song-label" data-i18n="menu_song" style="filter: blur(5px); user-select: none;">Tu
+                    Canción</span>
+                <!-- Lock badge (hidden after unlock) -->
+                <span id="menu-song-lock-badge"
+                    class="ml-auto flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-zinc-800 dark:bg-zinc-700 text-[9px] font-bold text-zinc-400 border border-zinc-700 dark:border-zinc-600">
+                    <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                    </svg>
+                    <span id="menu-song-lock-days">28 Abr</span>
+                </span>
             </a>
 
             <!-- Link Especial: Bóveda -->
@@ -2600,24 +2625,61 @@
 
             <!-- Music Section -->
             <div class="flex flex-col gap-6 relative z-10">
-                <!-- Playlist Banner -->
-                <div
-                    class="bg-zinc-900 p-6 md:p-8 rounded-[2rem] shadow-xl border border-zinc-800 hover:-translate-y-1 transition-transform duration-300 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-                    <div class="absolute -left-6 -bottom-6 text-8xl opacity-5 pointer-events-none transform -rotate-12">
-                        🎵</div>
-                    <div class="relative z-10 flex-1 text-center md:text-left">
-                        <h2 class="text-sm font-bold tracking-widest uppercase text-green-400 mb-2"
-                            data-i18n="playlist_label">Nuestra Conexión</h2>
-                        <h3 class="text-2xl md:text-3xl font-bold mb-3 text-white" data-i18n="playlist_title">La
-                            Playlist que me hiciste</h3>
-                        <p class="text-zinc-400 text-sm md:text-base" data-i18n="playlist_text">El mejor regalo. Cada
-                            canción es un pedacito de nosotros.</p>
+                <!-- Playlist Banner Carousel -->
+                <div class="relative group w-full">
+                    <div id="universe-carousel" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2"
+                        style="scrollbar-width: none; -ms-overflow-style: none;">
+                        <style>
+                            #universe-carousel::-webkit-scrollbar {
+                                display: none;
+                            }
+                        </style>
+
+                        <!-- Slide 1: La Playlist -->
+                        <div
+                            class="w-full flex-shrink-0 snap-center bg-zinc-900 p-6 md:p-8 rounded-[2rem] shadow-xl border border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+                            <div
+                                class="absolute -left-6 -bottom-6 text-8xl opacity-5 pointer-events-none transform -rotate-12">
+                                🎵</div>
+                            <div class="relative z-10 flex-1 text-center md:text-left">
+                                <h2 class="text-sm font-bold tracking-widest uppercase text-green-400 mb-2"
+                                    data-i18n="playlist_label">Nuestra Conexión</h2>
+                                <h3 class="text-2xl md:text-3xl font-bold mb-3 text-white" data-i18n="playlist_title">La
+                                    Playlist que me hiciste</h3>
+                                <p class="text-zinc-400 text-sm md:text-base" data-i18n="playlist_text">El mejor regalo.
+                                    Cada canción es un pedacito de nosotros.</p>
+                            </div>
+                            <div class="relative z-20 w-full md:w-[350px] lg:w-[400px] flex-shrink-0">
+                                <iframe style="border-radius:12px"
+                                    src="https://open.spotify.com/embed/playlist/34Txo6D9vCnRjezQwo2nh5?utm_source=generator&theme=0"
+                                    width="100%" height="152" frameborder="0" allowfullscreen=""
+                                    loading="lazy"></iframe>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2: La Canción (Locked Placeholder) -->
+                        <div id="univ-song-slide"
+                            class="w-full flex-shrink-0 snap-center bg-zinc-900/50 p-6 md:p-8 rounded-[2rem] shadow-xl border border-zinc-800/50 flex flex-col items-center justify-center gap-3 relative overflow-hidden"
+                            style="margin-left: 1rem; min-height: 250px;">
+                            <div class="text-4xl opacity-80 animate-pulse mb-1">🔒</div>
+                            <h3 class="text-xl font-bold text-zinc-400 tracking-widest uppercase text-center"
+                                data-i18n="univ_lock_title">Contenido Clasificado</h3>
+                            <p class="text-zinc-600 text-sm font-medium text-center mb-2"
+                                data-i18n="univ_lock_subtitle">Esta sorpresa se desbloquea el 28 de Abril.</p>
+                            <a href="#tu-cancion"
+                                class="px-5 py-2 rounded-xl text-xs font-bold text-zinc-400 bg-zinc-800 hover:bg-zinc-700 hover:text-white transition-all border border-zinc-700 active:scale-95 shadow-lg"
+                                data-i18n="univ_lock_btn">Saber más</a>
+                        </div>
+
                     </div>
-                    <div class="relative z-20 w-full md:w-[350px] lg:w-[400px] flex-shrink-0">
-                        <iframe style="border-radius:12px"
-                            src="https://open.spotify.com/embed/playlist/34Txo6D9vCnRjezQwo2nh5?utm_source=generator&amp;theme=0"
-                            width="100%" height="152" frameborder="0" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
+
+                    <!-- Controls -->
+                    <button id="univ-btn-prev"
+                        class="absolute -left-4 top-1/2 -translate-y-1/2 bg-zinc-800 text-white w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg shadow-black/50 border border-zinc-700 z-30"
+                        onclick="document.getElementById('universe-carousel').scrollBy({left: -400, behavior: 'smooth'})">❮</button>
+                    <button id="univ-btn-next"
+                        class="absolute -right-4 top-1/2 -translate-y-1/2 bg-zinc-800 text-white w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg shadow-black/50 border border-zinc-700 z-30"
+                        onclick="document.getElementById('universe-carousel').scrollBy({left: 400, behavior: 'smooth'})">❯</button>
                 </div>
 
                 <!-- Songs 3-col Grid -->
@@ -2729,7 +2791,7 @@
                 <h3 class="text-3xl md:text-5xl font-bold" data-i18n="games_title">Minijuegos para Yaire</h3>
             </div>
             <div id="games-hub"
-                class="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-8 max-w-4xl mx-auto relative z-10 transition-all duration-500 transform">
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-8 max-w-5xl mx-auto relative z-10 transition-all duration-500 transform">
                 <!-- Arcade Card 1 -->
                 <div onclick="openArcadeGame('game1')"
                     class="group relative bg-white dark:bg-zinc-900 rounded-3xl p-8 border border-brand-200 dark:border-brand-800/50 shadow-lg hover:shadow-2xl transition-all duration-400 cursor-pointer overflow-hidden transform hover:-translate-y-3">
@@ -2775,6 +2837,45 @@
                             los obstáculos.</p>
                         <span
                             class="inline-block px-6 py-2.5 bg-tulip-500 text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-md group-hover:shadow-tulip-500/50 group-hover:bg-tulip-400 transition-all"
+                            data-i18n="game_play_btn">Jugar Ahora</span>
+                    </div>
+                </div>
+
+                <!-- Arcade Card 3 (Cartas Ocultas - Bloqueado por Fecha) -->
+                <div id="game3-arcade-card" onclick="openArcadeGame('game3')"
+                    class="group relative bg-white dark:bg-zinc-900 rounded-3xl p-8 border border-purple-200 dark:border-purple-800/50 shadow-lg transition-all duration-1000 overflow-hidden transform opacity-50 grayscale"
+                    style="pointer-events: none;">
+
+                    <div id="game3-lock-overlay"
+                        class="absolute inset-0 bg-zinc-100/40 dark:bg-zinc-900/60 backdrop-blur-[6px] z-20 flex flex-col items-center justify-center transition-opacity duration-1000">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-zinc-800/80 border border-zinc-700/50 flex items-center justify-center mb-3 shadow-xl">
+                            <span class="text-xl">🔒</span>
+                        </div>
+                        <h4 class="text-zinc-900 dark:text-white font-black text-sm uppercase tracking-widest mb-1"
+                            data-i18n="game3_locked">Contenido Clasificado</h4>
+                        <p class="text-zinc-700 dark:text-zinc-300 text-xs text-center px-4 mb-4 font-medium"
+                            data-i18n="game3_locked_desc">Esta sorpresa se desbloquea el 28 de Abril.</p>
+                    </div>
+
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div
+                        class="absolute -right-10 -bottom-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl pointer-events-none group-hover:bg-purple-500/40 transition-colors duration-500">
+                    </div>
+
+                    <div class="relative z-10 flex flex-col items-center text-center">
+                        <div
+                            class="w-24 h-24 bg-purple-50 dark:bg-purple-900/30 rounded-[2rem] flex items-center justify-center text-5xl mb-6 shadow-sm border border-purple-100 dark:border-purple-800">
+                            🃏</div>
+                        <h4 class="text-2xl md:text-3xl font-black text-zinc-900 dark:text-white mb-3"
+                            data-i18n="game3_title">Cartas Ocultas</h4>
+                        <p class="text-zinc-600 dark:text-zinc-400 text-sm mb-8 leading-relaxed font-medium"
+                            data-i18n="game3_desc">Juego de Memoria. Encuentra las parejas antes de quedarte sin tiempo
+                            o movimientos.</p>
+                        <span
+                            class="inline-block px-6 py-2.5 bg-purple-500 text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-md group-hover:shadow-purple-500/50 group-hover:bg-purple-400 transition-all"
                             data-i18n="game_play_btn">Jugar Ahora</span>
                     </div>
                 </div>
@@ -2904,8 +3005,68 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Game 3: Memory Match Wrapper -->
+                    <div id="game3-wrapper"
+                        class="bg-white dark:bg-zinc-900 rounded-[3rem] p-6 md:p-10 relative overflow-hidden border border-purple-200 dark:border-purple-800/50 shadow-2xl w-full flex-col justify-between hidden">
+                        <div>
+                            <h4 class="text-3xl font-black text-center mb-2 text-zinc-900 dark:text-white"
+                                data-i18n="game3_title">Cartas Ocultas</h4>
+                            <p class="text-center text-zinc-500 dark:text-zinc-400 mb-8 text-sm font-medium"
+                                data-i18n="game3_desc">Juego de Memoria. Encuentra las parejas antes de quedarte sin
+                                tiempo o movimientos.</p>
+
+                            <div id="game3-container"
+                                class="bg-zinc-50/80 dark:bg-zinc-800/50 p-4 md:p-8 rounded-[2rem] shadow-inner border border-zinc-200/50 dark:border-zinc-700/50 w-full overflow-hidden flex flex-col justify-center relative backdrop-blur-sm">
+                                <div class="flex justify-between items-center mb-2 w-full px-2">
+                                    <div class="text-left flex items-center gap-3">
+                                        <span
+                                            class="text-[10px] md:text-xs font-bold text-purple-500 uppercase tracking-widest">Movimientos</span>
+                                        <span class="text-2xl md:text-3xl font-black text-zinc-800 dark:text-white"
+                                            id="game3-moves">0</span>
+                                    </div>
+                                    <div
+                                        class="text-right flex items-center gap-2 bg-zinc-200 dark:bg-zinc-700/80 px-4 py-2 rounded-xl border border-zinc-300 dark:border-zinc-600 shadow-sm">
+                                        <span
+                                            class="text-[9px] md:text-[10px] font-bold text-zinc-500 uppercase tracking-widest text-red-500 flex items-center gap-1">
+                                            <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            Tiempo
+                                        </span>
+                                        <span class="text-sm md:text-base font-extrabold text-red-500"
+                                            id="game3-time">60s</span>
+                                    </div>
+                                </div>
+
+                                <div id="memory-board"
+                                    class="grid grid-cols-4 gap-2 md:gap-4 max-w-sm mx-auto w-full my-6 bg-transparent"
+                                    style="perspective: 1000px;">
+                                    <!-- Cards injected here via JS -->
+                                </div>
+
+                                <!-- Game 3 Overlay -->
+                                <div id="game3-overlay"
+                                    class="absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center z-20 transition-all duration-300 hidden opacity-0 rounded-2xl">
+                                    <div id="game3-overlay-inner"
+                                        class="bg-white dark:bg-zinc-900 py-6 px-8 rounded-[2rem] text-center transform scale-90 opacity-0 transition-all duration-300 border border-zinc-200 dark:border-zinc-800 shadow-2xl w-[90%] max-w-sm overflow-hidden isolate">
+                                        <div class="text-4xl md:text-5xl mb-3" id="game3-overlay-icon">🃏</div>
+                                        <p id="game3-overlay-text"
+                                            class="text-zinc-900 dark:text-white font-black text-xl md:text-2xl mb-2"
+                                            data-i18n="game3_start_title">¡Concéntrate!</p>
+                                        <p id="game3-overlay-sub"
+                                            class="text-zinc-500 text-xs md:text-sm font-medium mb-5"
+                                            data-i18n="game3_start_sub">Encuentra todas las parejas en 60s.</p>
+                                        <button id="game3-overlay-btn" onclick="startMemoryGame()"
+                                            class="bg-purple-500 text-white font-bold py-2.5 px-6 rounded-xl hover:bg-purple-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/40 active:scale-95 active:translate-y-0 text-sm md:text-base w-full"
+                                            data-i18n="game_start2">¡Empezar!</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </section>
 
         <!-- Promesas -->
@@ -6581,6 +6742,885 @@
             </div>
         </section>
 
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- SECCIÓN: Tu Canción — Tulipanes Pa' Yaire              -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <style>
+            /* ══ Song Section Animations ══ */
+            @keyframes song-note-float {
+                0% {
+                    transform: translateY(0) rotate(0deg) scale(1);
+                    opacity: 0.7;
+                }
+
+                50% {
+                    transform: translateY(-80px) rotate(15deg) scale(1.15);
+                    opacity: 0.4;
+                }
+
+                100% {
+                    transform: translateY(-160px) rotate(-10deg) scale(0.8);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes song-eq-bar {
+
+                0%,
+                100% {
+                    height: 8px;
+                }
+
+                25% {
+                    height: var(--eq-h1, 28px);
+                }
+
+                50% {
+                    height: var(--eq-h2, 16px);
+                }
+
+                75% {
+                    height: var(--eq-h3, 32px);
+                }
+            }
+
+            @keyframes song-pulse-ring {
+                0% {
+                    transform: scale(0.95);
+                    opacity: 0.6;
+                }
+
+                50% {
+                    transform: scale(1.05);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: scale(0.95);
+                    opacity: 0.6;
+                }
+            }
+
+            @keyframes song-vinyl-spin {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes song-lyric-glow {
+
+                0%,
+                100% {
+                    text-shadow: 0 0 8px rgba(236, 72, 153, 0.3);
+                }
+
+                50% {
+                    text-shadow: 0 0 20px rgba(236, 72, 153, 0.6), 0 0 40px rgba(245, 158, 11, 0.2);
+                }
+            }
+
+            @keyframes song-waveform {
+                0% {
+                    d: path('M0,25 Q15,5 30,25 T60,25 T90,25 T120,25 T150,25 T180,25 T210,25 T240,25 T270,25 T300,25');
+                }
+
+                50% {
+                    d: path('M0,25 Q15,8 30,20 T60,30 T90,15 T120,28 T150,10 T180,25 T210,18 T240,30 T270,12 T300,25');
+                }
+
+                100% {
+                    d: path('M0,25 Q15,5 30,25 T60,25 T90,25 T120,25 T150,25 T180,25 T210,25 T240,25 T270,25 T300,25');
+                }
+            }
+
+            .song-note-particle {
+                position: absolute;
+                animation: song-note-float linear infinite;
+                pointer-events: none;
+                user-select: none;
+                font-size: 1.2rem;
+            }
+
+            .song-eq-bar {
+                width: 4px;
+                border-radius: 2px;
+                animation: song-eq-bar ease-in-out infinite;
+                will-change: height;
+            }
+
+            .song-vinyl {
+                animation: song-vinyl-spin 4s linear infinite;
+            }
+
+            .song-vinyl.paused {
+                animation-play-state: paused;
+            }
+
+            .song-lyric-section {
+                cursor: pointer;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .song-lyric-section:hover {
+                transform: translateX(4px);
+            }
+
+            .song-lyric-section.active {
+                border-color: rgba(236, 72, 153, 0.5) !important;
+                background: rgba(236, 72, 153, 0.05) !important;
+            }
+
+            .dark .song-lyric-section.active {
+                background: rgba(236, 72, 153, 0.1) !important;
+            }
+
+            .song-lyric-body {
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.3s ease;
+                padding-top: 0;
+            }
+
+            .song-lyric-section.active .song-lyric-body {
+                max-height: 500px;
+                opacity: 1;
+                padding-top: 1rem;
+            }
+
+            .song-lyric-arrow {
+                transition: transform 0.3s ease;
+            }
+
+            .song-lyric-section.active .song-lyric-arrow {
+                transform: rotate(90deg);
+            }
+
+            .song-player-glow {
+                position: relative;
+            }
+
+            .song-player-glow::before {
+                content: '';
+                position: absolute;
+                inset: -3px;
+                border-radius: 1.5rem;
+                background: linear-gradient(135deg, #f59e0b, #ec4899, #8b5cf6, #f59e0b);
+                background-size: 300% 300%;
+                animation: gradientShift 4s ease infinite;
+                z-index: -1;
+                opacity: 0.7;
+                filter: blur(8px);
+            }
+
+            .song-detail-card {
+                transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+            }
+
+            .song-detail-card:hover {
+                transform: translateY(-8px) scale(1.02);
+            }
+
+            /* ══ Song Lock / Countdown ══ */
+            @keyframes lock-pulse {
+
+                0%,
+                100% {
+                    transform: scale(1);
+                    filter: drop-shadow(0 0 12px rgba(236, 72, 153, 0.4));
+                }
+
+                50% {
+                    transform: scale(1.08);
+                    filter: drop-shadow(0 0 24px rgba(236, 72, 153, 0.7));
+                }
+            }
+
+            @keyframes lock-shimmer {
+                0% {
+                    background-position: -200% center;
+                }
+
+                100% {
+                    background-position: 200% center;
+                }
+            }
+
+            @keyframes countdown-tick {
+                0% {
+                    transform: scale(1);
+                }
+
+                50% {
+                    transform: scale(1.06);
+                }
+
+                100% {
+                    transform: scale(1);
+                }
+            }
+
+            @keyframes lock-reveal {
+                0% {
+                    opacity: 1;
+                    backdrop-filter: blur(20px);
+                }
+
+                100% {
+                    opacity: 0;
+                    backdrop-filter: blur(0px);
+                    pointer-events: none;
+                }
+            }
+
+            #song-lock-overlay {
+                transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            #song-lock-overlay.unlocked {
+                animation: lock-reveal 1.5s ease forwards;
+            }
+
+            .song-content-locked {
+                filter: blur(12px) saturate(0.5);
+                pointer-events: none;
+                user-select: none;
+                transition: filter 1s ease;
+            }
+
+            .song-content-locked.unlocked {
+                filter: blur(0px) saturate(1);
+                pointer-events: auto;
+                user-select: auto;
+            }
+
+            .countdown-digit {
+                font-variant-numeric: tabular-nums;
+                min-width: 3.5rem;
+            }
+
+            .countdown-digit.tick {
+                animation: countdown-tick 0.3s ease;
+            }
+        </style>
+
+        <section id="tu-cancion"
+            class="py-24 border-t border-zinc-200 dark:border-zinc-800 reveal-scale scroll-mt-20 relative overflow-hidden">
+
+            <!-- ═══ LOCK OVERLAY — Countdown to April 28 ═══ -->
+            <div id="song-lock-overlay" class="absolute inset-0 z-50 flex items-center justify-center"
+                style="background: rgba(0,0,0,0.65); backdrop-filter: blur(20px) saturate(0.6);">
+                <div class="text-center px-6 max-w-lg">
+                    <!-- Lock Icon -->
+                    <div class="mb-6" style="animation: lock-pulse 2.5s ease-in-out infinite;">
+                        <div
+                            class="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-br from-tulip-500/20 to-purple-500/20 border border-tulip-500/30 flex items-center justify-center backdrop-blur-sm">
+                            <svg class="w-9 h-9 text-tulip-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Teaser Title -->
+                    <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-tulip-400 mb-3"
+                        data-i18n="lock_badge">🔒 Contenido Bloqueado</p>
+                    <h3 class="text-2xl md:text-3xl font-extrabold text-white mb-2"
+                        style="background: linear-gradient(90deg, #f59e0b, #ec4899, #8b5cf6, #f59e0b); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: lock-shimmer 3s linear infinite;"
+                        data-i18n="lock_title">Algo especial viene en camino...</h3>
+                    <p class="text-zinc-400 text-sm mb-8 leading-relaxed" data-i18n="lock_subtitle">Esta sorpresa se
+                        desbloquea cuando cumplamos <strong class="text-tulip-400">3 meses juntos</strong>. Paciencia,
+                        mi amor. 🌷</p>
+
+                    <!-- Countdown Timer -->
+                    <div class="flex justify-center gap-3 md:gap-4 mb-8">
+                        <div
+                            class="countdown-digit bg-zinc-900/80 border border-zinc-700/50 rounded-2xl px-3 py-4 md:px-5 md:py-5 text-center backdrop-blur-sm">
+                            <span id="lock-days"
+                                class="text-3xl md:text-4xl font-black text-white block leading-none">--</span>
+                            <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500 mt-1 block"
+                                data-i18n="lock_days">Días</span>
+                        </div>
+                        <div
+                            class="countdown-digit bg-zinc-900/80 border border-zinc-700/50 rounded-2xl px-3 py-4 md:px-5 md:py-5 text-center backdrop-blur-sm">
+                            <span id="lock-hours"
+                                class="text-3xl md:text-4xl font-black text-white block leading-none">--</span>
+                            <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500 mt-1 block"
+                                data-i18n="lock_hours">Horas</span>
+                        </div>
+                        <div
+                            class="countdown-digit bg-zinc-900/80 border border-zinc-700/50 rounded-2xl px-3 py-4 md:px-5 md:py-5 text-center backdrop-blur-sm">
+                            <span id="lock-mins"
+                                class="text-3xl md:text-4xl font-black text-white block leading-none">--</span>
+                            <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500 mt-1 block"
+                                data-i18n="lock_mins">Min</span>
+                        </div>
+                        <div
+                            class="countdown-digit bg-zinc-900/80 border border-zinc-700/50 rounded-2xl px-3 py-4 md:px-5 md:py-5 text-center backdrop-blur-sm">
+                            <span id="lock-secs"
+                                class="text-3xl md:text-4xl font-black text-tulip-400 block leading-none">--</span>
+                            <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-500 mt-1 block"
+                                data-i18n="lock_secs">Seg</span>
+                        </div>
+                    </div>
+
+                    <!-- Date Label -->
+                    <div
+                        class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-zinc-800/60 border border-zinc-700/40 text-zinc-400 text-xs font-medium backdrop-blur-sm">
+                        <span>📅</span>
+                        <span data-i18n="lock_date">28 de Abril, 2026 — 3 Meses Juntos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ Atmospheric Background ═══ -->
+            <div class="absolute inset-0 pointer-events-none overflow-hidden">
+                <div
+                    class="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-gradient-to-br from-purple-600/10 via-tulip-500/8 to-brand-500/5 blur-[120px]">
+                </div>
+                <div
+                    class="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-tl from-brand-500/8 to-transparent blur-[100px]">
+                </div>
+                <!-- Floating music notes -->
+                <span class="song-note-particle left-[10%] top-[70%]"
+                    style="animation-duration:5s; animation-delay:0s;">♪</span>
+                <span class="song-note-particle left-[25%] top-[80%]"
+                    style="animation-duration:6s; animation-delay:1s;">♫</span>
+                <span class="song-note-particle left-[50%] top-[75%]"
+                    style="animation-duration:7s; animation-delay:2s;">🎵</span>
+                <span class="song-note-particle left-[70%] top-[85%]"
+                    style="animation-duration:5.5s; animation-delay:0.5s;">♪</span>
+                <span class="song-note-particle left-[85%] top-[70%]"
+                    style="animation-duration:6.5s; animation-delay:1.5s;">🎶</span>
+                <span class="song-note-particle left-[15%] top-[90%]"
+                    style="animation-duration:8s; animation-delay:3s;">♫</span>
+                <span class="song-note-particle left-[60%] top-[80%]"
+                    style="animation-duration:5s; animation-delay:2.5s;">🌷</span>
+                <span class="song-note-particle left-[40%] top-[85%]"
+                    style="animation-duration:7s; animation-delay:4s;">♪</span>
+            </div>
+
+            <div id="song-content-wrapper" class="max-w-5xl mx-auto px-4 relative z-10 song-content-locked">
+
+                <!-- ═══ Section Header ═══ -->
+                <div class="text-center mb-16">
+                    <span
+                        class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-purple-500/15 via-tulip-500/15 to-brand-500/15 border border-purple-500/30 text-purple-600 dark:text-purple-400 text-xs font-bold uppercase tracking-widest mb-6"
+                        data-i18n="song_badge">🎤 Producción Original</span>
+                    <h2 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight">
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-tulip-500 to-purple-500"
+                            data-i18n="song_title">Tulipanes Pa' Yaire</span>
+                    </h2>
+                    <p class="text-lg md:text-xl text-zinc-500 dark:text-zinc-400 font-light max-w-2xl mx-auto"
+                        data-i18n="song_subtitle">No cualquiera tiene una canción hecha exclusivamente para ella. Este
+                        es el soundtrack oficial de nosotros, y tú eres la protagonista absoluta.</p>
+
+                    <!-- Animated Equalizer -->
+                    <div class="flex items-end justify-center gap-1 mt-8 h-10">
+                        <div class="song-eq-bar bg-gradient-to-t from-brand-500 to-tulip-500"
+                            style="--eq-h1:28px;--eq-h2:14px;--eq-h3:32px; animation-duration:0.8s;"></div>
+                        <div class="song-eq-bar bg-gradient-to-t from-tulip-500 to-purple-500"
+                            style="--eq-h1:20px;--eq-h2:30px;--eq-h3:16px; animation-duration:0.6s; animation-delay:0.1s;">
+                        </div>
+                        <div class="song-eq-bar bg-gradient-to-t from-brand-500 to-tulip-500"
+                            style="--eq-h1:32px;--eq-h2:12px;--eq-h3:24px; animation-duration:0.9s; animation-delay:0.2s;">
+                        </div>
+                        <div class="song-eq-bar bg-gradient-to-t from-purple-500 to-brand-500"
+                            style="--eq-h1:16px;--eq-h2:28px;--eq-h3:20px; animation-duration:0.7s; animation-delay:0.05s;">
+                        </div>
+                        <div class="song-eq-bar bg-gradient-to-t from-tulip-500 to-purple-500"
+                            style="--eq-h1:24px;--eq-h2:18px;--eq-h3:30px; animation-duration:1s; animation-delay:0.15s;">
+                        </div>
+                        <div class="song-eq-bar bg-gradient-to-t from-brand-500 to-tulip-500"
+                            style="--eq-h1:30px;--eq-h2:10px;--eq-h3:22px; animation-duration:0.65s; animation-delay:0.25s;">
+                        </div>
+                        <div class="song-eq-bar bg-gradient-to-t from-purple-500 to-tulip-500"
+                            style="--eq-h1:14px;--eq-h2:26px;--eq-h3:18px; animation-duration:0.85s; animation-delay:0.3s;">
+                        </div>
+                        <div class="song-eq-bar bg-gradient-to-t from-tulip-500 to-brand-500"
+                            style="--eq-h1:22px;--eq-h2:32px;--eq-h3:12px; animation-duration:0.75s; animation-delay:0.1s;">
+                        </div>
+                        <div class="song-eq-bar bg-gradient-to-t from-brand-500 to-purple-500"
+                            style="--eq-h1:26px;--eq-h2:14px;--eq-h3:28px; animation-duration:0.55s; animation-delay:0.2s;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ YouTube Player Embed ═══ -->
+                <div class="max-w-3xl mx-auto mb-16">
+                    <div class="song-player-glow rounded-3xl">
+                        <div class="bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl border border-zinc-800">
+                            <!-- Player Top Bar -->
+                            <div class="flex items-center justify-between px-5 py-3 border-b border-zinc-800">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex gap-1.5">
+                                        <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                                        <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                                    </div>
+                                    <span class="text-zinc-500 text-xs font-mono">Tulipanes Pa' Yaire — Official</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <!-- Tiny vinyl animation -->
+                                    <div
+                                        class="song-vinyl w-5 h-5 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-900 border-2 border-zinc-600 flex items-center justify-center">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-tulip-500"></div>
+                                    </div>
+                                    <span class="text-tulip-400 text-xs font-bold"
+                                        data-i18n="song_now_playing">Reproduciendo</span>
+                                </div>
+                            </div>
+                            <!-- YouTube Iframe -->
+                            <div class="relative w-full" style="padding-bottom: 56.25%;">
+                                <iframe class="absolute inset-0 w-full h-full"
+                                    src="https://www.youtube.com/embed/krfIh_nm2pA?rel=0&modestbranding=1"
+                                    title="Tulipanes Pa' Yaire" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                            <!-- Player Bottom Bar -->
+                            <div class="px-5 py-4 flex items-center justify-between">
+                                <div>
+                                    <p class="text-white font-extrabold text-sm">Tulipanes Pa' Yaire</p>
+                                    <p class="text-zinc-500 text-xs" data-i18n="song_genre">Jersey Club · Cinematic
+                                        Thriller</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-tulip-500 text-lg animate-pulse">🌷</span>
+                                    <a href="https://www.youtube.com/watch?v=krfIh_nm2pA" target="_blank" rel="noopener"
+                                        class="px-4 py-1.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white text-xs font-bold hover:scale-105 transition-transform inline-flex items-center gap-1.5 shadow-lg shadow-red-500/20">
+                                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z" />
+                                        </svg>
+                                        YouTube
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ Behind The Song — Story ═══ -->
+                <div class="mb-16">
+                    <div class="text-center mb-10">
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-zinc-800 dark:text-white mb-3"
+                            data-i18n="song_story_title">La Historia Detrás del Track</h3>
+                        <p class="text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto" data-i18n="song_story_text">No fue
+                            solo abrir un programa y poner notas al azar. Cada beat, cada línea, cada crescendo tiene un
+                            significado real y un pedazo de lo que siento por ti.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <!-- Card 1: Concept -->
+                        <div
+                            class="song-detail-card bg-white dark:bg-zinc-900 p-7 rounded-3xl shadow-lg border border-zinc-200 dark:border-zinc-800 relative overflow-hidden group">
+                            <div
+                                class="absolute -right-3 -bottom-3 text-7xl opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
+                                🎬</div>
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-700 text-white text-xl rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-purple-500/20">
+                                🎬</div>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-purple-500 mb-2"
+                                data-i18n="song_card1_label">El Concepto</p>
+                            <h4 class="text-lg font-extrabold text-zinc-800 dark:text-white mb-2"
+                                data-i18n="song_card1_title">De Película de Terror a Pista de Baile</h4>
+                            <p class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed"
+                                data-i18n="song_card1_desc">La canción empieza como un thriller cinematográfico:
+                                violines tensos, suspenso real. Es justo cómo me sentía acercándome a ti con un ramo de
+                                tulipanes. Pero el miedo se transforma en el beat más intenso cuando la pista revienta.
+                            </p>
+                        </div>
+
+                        <!-- Card 2: Jersey Club -->
+                        <div
+                            class="song-detail-card bg-gradient-to-br from-tulip-50 to-brand-50 dark:from-zinc-800 dark:to-zinc-900 p-7 rounded-3xl shadow-lg border border-tulip-200/50 dark:border-tulip-700/40 relative overflow-hidden group transform scale-105">
+                            <div
+                                class="absolute -right-3 -bottom-3 text-7xl opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
+                                💥</div>
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-tulip-500 to-brand-500 text-white text-xl rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-tulip-500/30">
+                                💥</div>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-tulip-500 mb-2"
+                                data-i18n="song_card2_label">El Género</p>
+                            <h4 class="text-lg font-extrabold text-zinc-800 dark:text-white mb-2"
+                                data-i18n="song_card2_title">Jersey Club + Thriller Violins</h4>
+                            <p class="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed"
+                                data-i18n="song_card2_desc">¿Por qué Jersey Club? Porque es rápido, intenso, con un
+                                bounce que te obliga a moverte. Exactamente como mi corazón cuando pienso en ti. Los
+                                808s retumbando son literalmente mis latidos por ti amplificados al máximo.</p>
+                        </div>
+
+                        <!-- Card 3: Dedication -->
+                        <div
+                            class="song-detail-card bg-white dark:bg-zinc-900 p-7 rounded-3xl shadow-lg border border-zinc-200 dark:border-zinc-800 relative overflow-hidden group">
+                            <div
+                                class="absolute -right-3 -bottom-3 text-7xl opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
+                                🌷</div>
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-brand-500 to-amber-500 text-white text-xl rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-brand-500/20">
+                                🌷</div>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-brand-500 mb-2"
+                                data-i18n="song_card3_label">La Dedicatoria</p>
+                            <h4 class="text-lg font-extrabold text-zinc-800 dark:text-white mb-2"
+                                data-i18n="song_card3_title">Cada Nota Es Para Ti</h4>
+                            <p class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed"
+                                data-i18n="song_card3_desc">"Tulipanes rosas pa' Yaire" no es solo el título. Es un
+                                mantra. Es la declaración más fuerte y rítmica que puedo hacer: mientras exista un beat,
+                                existirán tulipanes rosa para ti. Punto.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ Interactive Lyrics Viewer ═══ -->
+                <div class="max-w-3xl mx-auto mb-16">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-zinc-800 dark:text-white mb-2"
+                            data-i18n="song_lyrics_title">La Letra Completa</h3>
+                        <p class="text-sm text-zinc-400" data-i18n="song_lyrics_hint">Toca cada sección para revelar las
+                            letras</p>
+                    </div>
+
+                    <div class="space-y-3" id="song-lyrics-container">
+                        <!-- Intro -->
+                        <div class="song-lyric-section rounded-2xl border-2 border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 group"
+                            onclick="toggleSongLyric(this)">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span
+                                        class="w-8 h-8 rounded-xl bg-gradient-to-br from-zinc-600 to-zinc-800 text-white font-bold text-[10px] flex items-center justify-center shadow-md">🎬</span>
+                                    <div>
+                                        <p class="font-extrabold text-zinc-900 dark:text-white text-sm">Intro</p>
+                                        <p class="text-[10px] text-zinc-400 font-medium" data-i18n="song_intro_tag">
+                                            Cinematic Thriller Violins</p>
+                                    </div>
+                                </div>
+                                <span class="song-lyric-arrow text-zinc-400 text-sm">▶</span>
+                            </div>
+                            <div class="song-lyric-body">
+                                <p
+                                    class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed italic whitespace-pre-line font-medium">
+                                    (Suspenso)
+                                    Paso a paso, el tiempo pesa.
+                                    Las manos frías, la mente da vueltas.
+                                    Tengo un ramo en la mano.
+                                    Siento que estoy en una película de terror,
+                                    pero el final es de amor.</p>
+                            </div>
+                        </div>
+
+                        <!-- Pre-Chorus 1 -->
+                        <div class="song-lyric-section rounded-2xl border-2 border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 group"
+                            onclick="toggleSongLyric(this)">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span
+                                        class="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 text-white font-bold text-[10px] flex items-center justify-center shadow-md">🎻</span>
+                                    <div>
+                                        <p class="font-extrabold text-zinc-900 dark:text-white text-sm">Pre-Chorus</p>
+                                        <p class="text-[10px] text-zinc-400 font-medium" data-i18n="song_prechorus_tag">
+                                            Strings Rising + 808 Sub</p>
+                                    </div>
+                                </div>
+                                <span class="song-lyric-arrow text-zinc-400 text-sm">▶</span>
+                            </div>
+                            <div class="song-lyric-body">
+                                <p
+                                    class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed italic whitespace-pre-line font-medium">
+                                    Te veo de lejos, Yaire.
+                                    El pulso me sube al cuello, Yaire.
+                                    Me acerco y el mundo se frena.
+                                    Te entrego las flores...
+                                    Y la escena <strong class="text-tulip-500">revienta</strong>.</p>
+                            </div>
+                        </div>
+
+                        <!-- Chorus 1 -->
+                        <div class="song-lyric-section rounded-2xl border-2 border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 group"
+                            onclick="toggleSongLyric(this)">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span
+                                        class="w-8 h-8 rounded-xl bg-gradient-to-br from-tulip-500 to-brand-500 text-white font-bold text-[10px] flex items-center justify-center shadow-md">🔥</span>
+                                    <div>
+                                        <p class="font-extrabold text-zinc-900 dark:text-white text-sm">Chorus</p>
+                                        <p class="text-[10px] text-zinc-400 font-medium" data-i18n="song_chorus_tag">
+                                            Jersey Club Beat Drop</p>
+                                    </div>
+                                </div>
+                                <span class="song-lyric-arrow text-zinc-400 text-sm">▶</span>
+                            </div>
+                            <div class="song-lyric-body">
+                                <p
+                                    class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed italic whitespace-pre-line font-medium">
+                                    <strong class="text-tulip-500">Tulipanes rosas pa' Yaire.</strong>
+                                    (¡Pa' Yaire, pa' Yaire!)
+                                    Rompiendo la pista, que no falte el aire.
+                                    Tulipanes rosas pa' Yaire.
+                                    El bajo retumba, no hay quién nos pare.
+                                    Tulipanes, rosas, ritmo, Yaire.
+                                    (¡Sube, sube, sube!)
+                                    Tulipanes rosas pa' Yaire.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Verse -->
+                        <div class="song-lyric-section rounded-2xl border-2 border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 group"
+                            onclick="toggleSongLyric(this)">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span
+                                        class="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-bold text-[10px] flex items-center justify-center shadow-md">🎤</span>
+                                    <div>
+                                        <p class="font-extrabold text-zinc-900 dark:text-white text-sm">Verse</p>
+                                        <p class="text-[10px] text-zinc-400 font-medium" data-i18n="song_verse_tag">Fast
+                                            Flow · Rhythmic Bounce</p>
+                                    </div>
+                                </div>
+                                <span class="song-lyric-arrow text-zinc-400 text-sm">▶</span>
+                            </div>
+                            <div class="song-lyric-body">
+                                <p
+                                    class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed italic whitespace-pre-line font-medium">
+                                    Tensión de película, corte de escena.
+                                    Tú hueles a flor pero bailas sin pena.
+                                    El miedo que daba acercarme se fue,
+                                    ahora sudo la gota bailando a la vez.
+                                    Mami, ese porte, me tienes demente.
+                                    Pasé de los nervios a algo caliente.
+                                    Los pétalos rosas volando en el club.
+                                    <strong class="text-brand-500">La única jefa en el centro eres tú.</strong>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Bridge -->
+                        <div class="song-lyric-section rounded-2xl border-2 border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 group"
+                            onclick="toggleSongLyric(this)">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span
+                                        class="w-8 h-8 rounded-xl bg-gradient-to-br from-rose-500 to-red-600 text-white font-bold text-[10px] flex items-center justify-center shadow-md">💋</span>
+                                    <div>
+                                        <p class="font-extrabold text-zinc-900 dark:text-white text-sm">Bridge</p>
+                                        <p class="text-[10px] text-zinc-400 font-medium" data-i18n="song_bridge_tag">
+                                            Thriller Staccato Violins</p>
+                                    </div>
+                                </div>
+                                <span class="song-lyric-arrow text-zinc-400 text-sm">▶</span>
+                            </div>
+                            <div class="song-lyric-body">
+                                <p
+                                    class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed italic whitespace-pre-line font-medium">
+                                    (Shh, espera...)
+                                    Violines sonando, la sangre quemando.
+                                    Me miras de frente, me estás provocando.
+                                    Un beso intenso que cambia el color.
+                                    <strong class="text-tulip-500">Del gris del suspenso a puro calor.</strong>
+                                    [Beat building: 1, 2, 1 2 3 4!]
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Outro -->
+                        <div class="song-lyric-section rounded-2xl border-2 border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 group"
+                            onclick="toggleSongLyric(this)">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span
+                                        class="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-500 to-amber-500 text-white font-bold text-[10px] flex items-center justify-center shadow-md">🌅</span>
+                                    <div>
+                                        <p class="font-extrabold text-zinc-900 dark:text-white text-sm">Outro</p>
+                                        <p class="text-[10px] text-zinc-400 font-medium" data-i18n="song_outro_tag">Fade
+                                            Out · 808s + Slow Strings</p>
+                                    </div>
+                                </div>
+                                <span class="song-lyric-arrow text-zinc-400 text-sm">▶</span>
+                            </div>
+                            <div class="song-lyric-body">
+                                <p
+                                    class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed italic whitespace-pre-line font-medium">
+                                    Yaire...
+                                    Tus flores, tu ritmo.
+                                    (Tulipanes rosas...)
+                                    De película.
+                                    (Jersey, dímelo)
+                                    <strong class="text-brand-500">Para ti, Yaire.</strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expand All Button -->
+                    <div class="text-center mt-6">
+                        <button onclick="toggleAllSongLyrics()" id="song-expand-all-btn"
+                            class="px-6 py-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors border border-zinc-200 dark:border-zinc-700"
+                            data-i18n="song_expand_all">Expandir Toda la Letra</button>
+                    </div>
+                </div>
+
+                <!-- ═══ Closing Dedication ═══ -->
+                <div class="max-w-2xl mx-auto text-center">
+                    <div
+                        class="animacion-respiro respiro-blanco bg-white dark:bg-zinc-900 p-8 md:p-12 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-700 shadow-xl relative overflow-hidden">
+                        <div class="absolute -top-4 right-8 text-6xl opacity-5 animate-pulse-slow">🎵</div>
+                        <div class="absolute bottom-8 -left-4 text-6xl opacity-5 animate-pulse-slow">🌷</div>
+                        <div class="text-4xl mb-4">🎧</div>
+                        <p class="text-lg md:text-xl font-bold text-zinc-800 dark:text-zinc-200 mb-4 leading-relaxed"
+                            data-i18n="song_quote">"Cada beat de esta canción es un latido mío que lleva tu nombre.
+                            Mientras la escuchas, recuerda: hay un loco en Venezuela que te compuso un tema entero solo
+                            porque existes."</p>
+                        <p class="text-sm text-zinc-400 font-bold" data-i18n="song_quote_author">— Charles, tu productor
+                            personal 🎹</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Song Lyrics Toggle Script + Countdown Lock -->
+            <script>
+                function toggleSongLyric(el) {
+                    el.classList.toggle('active');
+                }
+                function toggleAllSongLyrics() {
+                    const container = document.getElementById('song-lyrics-container');
+                    const sections = container.querySelectorAll('.song-lyric-section');
+                    const btn = document.getElementById('song-expand-all-btn');
+                    const allOpen = [...sections].every(s => s.classList.contains('active'));
+                    sections.forEach(s => {
+                        if (allOpen) s.classList.remove('active');
+                        else s.classList.add('active');
+                    });
+                    const d = window.dictionary && window.dictionary[window.currentLang || 'es'] || {};
+                    btn.textContent = allOpen ? (d.song_expand_all || 'Expandir Toda la Letra') : (d.song_collapse_all || 'Colapsar Letra');
+                }
+
+                // ═══ COUNTDOWN LOCK SYSTEM ═══
+                (function initSongLock() {
+                    const UNLOCK_DATE = new Date('2026-04-28T00:00:00-04:00'); // April 28, 2026 midnight EST
+                    const overlay = document.getElementById('song-lock-overlay');
+                    const content = document.getElementById('song-content-wrapper');
+                    const daysEl = document.getElementById('lock-days');
+                    const hoursEl = document.getElementById('lock-hours');
+                    const minsEl = document.getElementById('lock-mins');
+                    const secsEl = document.getElementById('lock-secs');
+                    const menuBadge = document.getElementById('menu-song-lock-badge');
+                    const menuDaysEl = document.getElementById('menu-song-lock-days');
+                    const menuIcon = document.getElementById('menu-song-icon');
+                    const menuLabel = document.getElementById('menu-song-label');
+
+                    const menuGamesBadge = document.getElementById('menu-games-lock-badge');
+                    const menuGamesDaysEl = document.getElementById('menu-games-lock-days');
+
+                    // Universe Carousel Elements
+                    const univSlide = document.getElementById('univ-song-slide');
+                    const univPrev = document.getElementById('univ-btn-prev');
+                    const univNext = document.getElementById('univ-btn-next');
+                    const univPlayer = document.getElementById('univ-song-player-container');
+
+                    function unlock() {
+                        if (overlay) {
+                            overlay.classList.add('unlocked');
+                            setTimeout(() => overlay.style.display = 'none', 1600);
+                        }
+                        if (content) content.classList.add('unlocked');
+                        // Unlock the menu
+                        if (menuBadge) menuBadge.style.display = 'none';
+                        if (menuGamesBadge) menuGamesBadge.style.display = 'none';
+                        if (menuIcon) menuIcon.textContent = '🎶';
+                        if (menuLabel) { menuLabel.style.filter = 'none'; menuLabel.style.userSelect = 'auto'; }
+
+                        // Unlock Universe Carousel Card
+                        if (univSlide) {
+                            // Decode and inject entire slide HTML to prevent source code leak
+                            if (!univSlide.innerHTML.includes('iframe')) {
+                                const payload = "PGRpdiBjbGFzcz0iYWJzb2x1dGUgLWxlZnQtNiAtYm90dG9tLTYgdGV4dC04eGwgb3BhY2l0eS01IHBvaW50ZXItZXZlbnRzLW5vbmUgdHJhbnNmb3JtIC1yb3RhdGUtMTIiPvCfjrU8L2Rpdj48ZGl2IGNsYXNzPSJyZWxhdGl2ZSB6LTEwIGZsZXgtMSB0ZXh0LWNlbnRlciBtZDp0ZXh0LWxlZnQiPjxoMiBjbGFzcz0idGV4dC1zbSBmb250LWJvbGQgdHJhY2tpbmctd2lkZXN0IHVwcGVyY2FzZSB0ZXh0LXR1bGlwLTQwMCBtYi0yIj7wn46JIFNvcnByZXNhIE9idGVuaWRhPC9oMj48aDMgY2xhc3M9InRleHQtMnhsIG1kOnRleHQtM3hsIGZvbnQtYm9sZCBtYi0zIHRleHQtd2hpdGUiPlR1bGlwYW5lcyBJbmTDs21pdGEgUGEnIFlhaXJlPC9oMz48cCBjbGFzcz0idGV4dC16aW5jLTQwMCB0ZXh0LXNtIG1kOnRleHQtYmFzZSBtYi00Ij5OdWVzdHJhIHByb3BpYSBtZWxvZMOtYS4gRXNjw7pjaGFsYSBhcXXDrSBvIHZlIGEgbGEgYsOzdmVkYSBpbm1lcnNpdmEgcGFyYSB0b2RhIGxhIGV4cGVyaWVuY2lhLjwvcD48YSBocmVmPSIjdHUtY2FuY2lvbiIgY2xhc3M9ImlubGluZS1mbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBnYXAtMiBweC01IHB5LTIuNSByb3VuZGVkLXhsIHRleHQtd2hpdGUgZm9udC1ib2xkIGJnLWdyYWRpZW50LXRvLXIgZnJvbS1icmFuZC02MDAgdG8tdHVsaXAtNTAwIGhvdmVyOm9wYWNpdHktOTAgc2hhZG93LWxnIGhvdmVyOnNjYWxlLTEwNSBhY3RpdmU6c2NhbGUtOTUgdHJhbnNpdGlvbi1hbGwgdGV4dC1zbSI+SXIgYSBsYSBTZWNjacOzbiBFc3BlY2lhbDwvYT48L2Rpdj48ZGl2IGNsYXNzPSJyZWxhdGl2ZSB6LTIwIHctZnVsbCBtZDp3LVszNTBweF0gbGc6dy1bNDAwcHhdIGZsZXgtc2hyaW5rLTAiPjxpZnJhbWUgc3R5bGU9ImJvcmRlci1yYWRpdXM6MTJweCIgc3JjPSJodHRwczovL3d3dy55b3V0dWJlLmNvbS9lbWJlZC9rcmZJaF9ubTJwQT9zaT10c3BLanAxUE9kdkhVWVZJIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxNTIiIGZyYW1lYm9yZGVyPSIwIiBhbGxvd2Z1bGxzY3JlZW49IiI+PC9pZnJhbWU+PC9kaXY+";
+                                univSlide.innerHTML = decodeURIComponent(escape(atob(payload)));
+                                // Change class from locked placeholder to the active styling
+                                univSlide.className = "w-full flex-shrink-0 snap-center bg-zinc-900 p-6 md:p-8 rounded-[2rem] shadow-xl border border-tulip-500/30 flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden transition-all duration-700";
+                                univSlide.style.minHeight = 'auto';
+                            }
+                        }
+
+                        // Unlock Game 3 Memory Match
+                        const game3Card = document.getElementById('game3-arcade-card');
+                        const game3Overlay = document.getElementById('game3-lock-overlay');
+                        if (game3Card) {
+                            game3Card.classList.remove('opacity-50', 'grayscale', 'duration-1000');
+                            game3Card.classList.add('cursor-pointer', 'hover:shadow-2xl', 'hover:-translate-y-3', 'duration-400');
+                            game3Card.style.pointerEvents = 'auto';
+                        }
+                        if (game3Overlay) {
+                            game3Overlay.classList.add('opacity-0');
+                            setTimeout(() => game3Overlay.classList.add('hidden'), 1000);
+                        }
+                    }
+
+                    function pad(n) { return String(n).padStart(2, '0'); }
+
+                    function updateCountdown() {
+                        const now = new Date();
+                        const diff = UNLOCK_DATE - now;
+
+                        if (diff <= 0) {
+                            unlock();
+                            return;
+                        }
+
+                        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+                        const prevSecs = secsEl.textContent;
+                        daysEl.textContent = pad(days);
+                        hoursEl.textContent = pad(hours);
+                        minsEl.textContent = pad(mins);
+                        secsEl.textContent = pad(secs);
+
+                        // Update menu badge with remaining days
+                        const badgeText = days + 'd ' + pad(hours) + 'h';
+                        if (menuDaysEl) {
+                            menuDaysEl.textContent = badgeText;
+                        }
+                        if (menuGamesDaysEl) {
+                            menuGamesDaysEl.textContent = badgeText;
+                        }
+
+                        // Tick animation on seconds change
+                        if (pad(secs) !== prevSecs) {
+                            secsEl.parentElement.classList.remove('tick');
+                            void secsEl.parentElement.offsetWidth; // force reflow
+                            secsEl.parentElement.classList.add('tick');
+                        }
+
+                        requestAnimationFrame(() => setTimeout(updateCountdown, 1000));
+                    }
+
+                    // Check if already past unlock date
+                    if (new Date() >= UNLOCK_DATE) {
+                        if (overlay) overlay.style.display = 'none';
+                        if (content) {
+                            content.classList.remove('song-content-locked');
+                        }
+                        if (menuBadge) menuBadge.style.display = 'none';
+                        if (menuIcon) menuIcon.textContent = '🎶';
+                        if (menuLabel) { menuLabel.style.filter = 'none'; menuLabel.style.userSelect = 'auto'; }
+                    } else {
+                        updateCountdown();
+                    }
+                })();
+            </script>
+        </section>
+
         <!-- Secret Vault -->
         <section id="secreto"
             class="py-24 border-t border-zinc-200 dark:border-zinc-800 reveal-scale scroll-mt-20 relative overflow-hidden">
@@ -6856,6 +7896,10 @@
                 game_back_btn: "Volver a Selección", game_play_btn: "Jugar Ahora",
                 game1_start_title: "¡Prepárate!", game1_start_sub: "Da clics rápidos. Tienes 10s.",
                 game2_start_title: "¡A volar!", game2_start_sub: "Esquiva troncos y atrapa flores.",
+                game3_title: "Cartas Ocultas", game3_desc: "Juego de Memoria. Encuentra las parejas antes de quedarte sin tiempo o movimientos.",
+                game3_locked: "Contenido Clasificado", game3_locked_desc: "Esta sorpresa se desbloquea el 28 de Abril.", game3_locked_btn: "Saber más",
+                game3_start_title: "¡Concéntrate!", game3_start_sub: "Encuentra todas las parejas.",
+                game3_over_title_win: "¡Memoria perfecta!", game3_over_title_lose: "Inténtalo de nuevo.",
                 game1_over_title: "¡Se acabó el tiempo!", game1_over_sub: "Lograste cosechar <span class=\"text-brand-500 font-bold text-base bg-brand-50 dark:bg-brand-900/10 px-2 py-0.5 rounded-md mx-1\">{score}</span> girasoles de amor.<br>¡Increíble! Tus dedos volaron. ⚡❤️",
                 game2_over_title_win: "¡Récord histórico alcanzado!", game2_over_title_lose: "Mala suerte, vuelve a intentarlo.",
                 game_end: "¡Se acabó el tiempo! Lograste cosechar {score} girasoles de amor.",
@@ -7055,7 +8099,36 @@
                 heal_s5_label: "Paso 5 de 5", heal_s5_title: "🫂 El Abrazo", heal_s5_sub: "Lo roto ahora brilla con oro. Somos más fuertes que antes.",
                 heal_final_title: "Sanados y Más Fuertes", heal_final_text: "Cada grieta reparada es una prueba de que elegimos quedarnos. De que el amor no es solo sentir bonito, sino también reconstruir juntos. Tú y yo, siempre.",
                 heal_final_quote: '"Lo roto reparado con oro es más bello que lo que nunca se rompió."',
-                heal_stat_ack: "Reconocidos", heal_stat_pact: "Pactos", heal_stat_healed: "Sanado", heal_restart: "↻ Empezar de nuevo"
+                heal_stat_ack: "Reconocidos", heal_stat_pact: "Pactos", heal_stat_healed: "Sanado", heal_restart: "↻ Empezar de nuevo",
+                // Song Section — Tu Canción
+                menu_song: "Tu Canción",
+                song_badge: "🎤 Producción Original", song_title: "Tulipanes Pa' Yaire",
+                song_subtitle: "No cualquiera tiene una canción hecha exclusivamente para ella. Este es el soundtrack oficial de nosotros, y tú eres la protagonista absoluta.",
+                song_now_playing: "Reproduciendo", song_genre: "Jersey Club · Cinematic Thriller",
+                song_story_title: "La Historia Detrás del Track",
+                song_story_text: "No fue solo abrir un programa y poner notas al azar. Cada beat, cada línea, cada crescendo tiene un significado real y un pedazo de lo que siento por ti.",
+                song_card1_label: "El Concepto", song_card1_title: "De Película de Terror a Pista de Baile",
+                song_card1_desc: "La canción empieza como un thriller cinematográfico: violines tensos, suspenso real. Es justo cómo me sentía acercándome a ti con un ramo de tulipanes. Pero el miedo se transforma en el beat más intenso cuando la pista revienta.",
+                song_card2_label: "El Género", song_card2_title: "Jersey Club + Thriller Violins",
+                song_card2_desc: "¿Por qué Jersey Club? Porque es rápido, intenso, con un bounce que te obliga a moverte. Exactamente como mi corazón cuando pienso en ti. Los 808s retumbando son literalmente mis latidos por ti amplificados al máximo.",
+                song_card3_label: "La Dedicatoria", song_card3_title: "Cada Nota Es Para Ti",
+                song_card3_desc: "\"Tulipanes rosas pa' Yaire\" no es solo el título. Es un mantra. Es la declaración más fuerte y rítmica que puedo hacer: mientras exista un beat, existirán tulipanes rosa para ti. Punto.",
+                song_lyrics_title: "La Letra Completa", song_lyrics_hint: "Toca cada sección para revelar las letras",
+                song_intro_tag: "Cinematic Thriller Violins", song_prechorus_tag: "Strings Rising + 808 Sub",
+                song_chorus_tag: "Jersey Club Beat Drop", song_verse_tag: "Fast Flow · Rhythmic Bounce",
+                song_bridge_tag: "Thriller Staccato Violins", song_outro_tag: "Fade Out · 808s + Slow Strings",
+                song_expand_all: "Expandir Toda la Letra", song_collapse_all: "Colapsar Letra",
+                song_quote: "\"Cada beat de esta canción es un latido mío que lleva tu nombre. Mientras la escuchas, recuerda: hay un loco en Venezuela que te compuso un tema entero solo porque existes.\"",
+                song_quote_author: "— Charles, tu productor personal 🎹",
+                // Lock / Countdown
+                lock_badge: "🔒 Contenido Bloqueado",
+                lock_title: "Algo especial viene en camino...",
+                lock_subtitle: "Esta sorpresa se desbloquea cuando cumplamos <strong class='text-tulip-400'>3 meses juntos</strong>. Paciencia, mi amor. 🌷",
+                lock_days: "Días", lock_hours: "Horas", lock_mins: "Min", lock_secs: "Seg",
+                lock_date: "28 de Abril, 2026 — 3 Meses Juntos",
+                univ_lock_title: "Contenido Clasificado",
+                univ_lock_subtitle: "Esta sorpresa se desbloquea el 28 de Abril.",
+                univ_lock_btn: "Saber más"
             },
             en: {
                 flag: "EN", code: "EN", nav_subtitle: "For Yaire", menu_nav: "Navigation", menu_home: "Home", menu_story: "Story & Time", menu_name: "The Power of Your Name", menu_tulips: "Your Flowers", menu_quiz: "The Mystery", menu_dist: "The Distance", menu_food: "The Pact", menu_universe: "Her Universe", menu_gallery: "Art Gallery", menu_games: "Minigames", menu_promises: "Promises", menu_memorial: "For Your Angel", menu_hype: "The Hype", menu_stats: "Statistics", menu_secret: "Secret Vault", menu_settings: "System Settings", menu_theme: "Visual Theme", menu_lang: "Language",
@@ -7118,6 +8191,10 @@
                 game_back_btn: "Back to Selection", game_play_btn: "Play Now",
                 game1_start_title: "Get Ready!", game1_start_sub: "Click fast. You have 10s.",
                 game2_start_title: "Time to fly!", game2_start_sub: "Dodge logs and catch flowers.",
+                game3_title: "Hidden Cards", game3_desc: "Memory Match Game. Find all pairs before running out of time or moves.",
+                game3_locked: "Classified Content", game3_locked_desc: "This surprise unlocks on April 28th.", game3_locked_btn: "Learn more",
+                game3_start_title: "Focus!", game3_start_sub: "Find all the pairs.",
+                game3_over_title_win: "Perfect memory!", game3_over_title_lose: "Try again.",
                 game1_over_title: "Time's up!", game1_over_sub: "You managed to harvest <span class=\"text-brand-500 font-bold text-base bg-brand-50 dark:bg-brand-900/10 px-2 py-0.5 rounded-md mx-1\">{score}</span> love sunflowers.<br>Incredible! Your fingers flew. ⚡❤️",
                 game2_over_title_win: "All-time record reached!", game2_over_title_lose: "Bad luck, try again.",
                 game_end: "Time's up! You managed to harvest {score} love sunflowers.",
@@ -7299,7 +8376,36 @@
                 heal_s5_label: "Step 5 of 5", heal_s5_title: "🫂 The Embrace", heal_s5_sub: "What was broken now shines with gold. We are stronger than before.",
                 heal_final_title: "Healed and Stronger", heal_final_text: "Every repaired crack is proof that we chose to stay. That love isn't just feeling beautiful, but also rebuilding together. You and me, always.",
                 heal_final_quote: '"What is broken and repaired with gold is more beautiful than what was never broken."',
-                heal_stat_ack: "Acknowledged", heal_stat_pact: "Pacts", heal_stat_healed: "Healed", heal_restart: "↻ Start over"
+                heal_stat_ack: "Acknowledged", heal_stat_pact: "Pacts", heal_stat_healed: "Healed", heal_restart: "↻ Start over",
+                // Song Section
+                menu_song: "Your Song",
+                song_badge: "🎤 Original Production", song_title: "Tulipanes Pa' Yaire",
+                song_subtitle: "Not everyone has a song made exclusively for them. This is our official soundtrack, and you are the absolute star.",
+                song_now_playing: "Now Playing", song_genre: "Jersey Club · Cinematic Thriller",
+                song_story_title: "The Story Behind The Track",
+                song_story_text: "It wasn't just opening a program and throwing random notes together. Every beat, every line, every crescendo has a real meaning and a piece of what I feel for you.",
+                song_card1_label: "The Concept", song_card1_title: "From Horror Movie to Dance Floor",
+                song_card1_desc: "The song starts like a cinematic thriller: tense violins, real suspense. That's exactly how I felt approaching you with a bouquet of tulips. But the fear transforms into the most intense beat when the track explodes.",
+                song_card2_label: "The Genre", song_card2_title: "Jersey Club + Thriller Violins",
+                song_card2_desc: "Why Jersey Club? Because it's fast, intense, with a bounce that forces you to move. Exactly like my heart when I think of you. The 808s rumbling are literally my heartbeats for you amplified to the max.",
+                song_card3_label: "The Dedication", song_card3_title: "Every Note Is For You",
+                song_card3_desc: "\"Tulipanes rosas pa' Yaire\" is not just the title. It's a mantra. It's the strongest and most rhythmic declaration I can make: as long as a beat exists, there will be pink tulips for you. Period.",
+                song_lyrics_title: "Full Lyrics", song_lyrics_hint: "Tap each section to reveal the lyrics",
+                song_intro_tag: "Cinematic Thriller Violins", song_prechorus_tag: "Strings Rising + 808 Sub",
+                song_chorus_tag: "Jersey Club Beat Drop", song_verse_tag: "Fast Flow · Rhythmic Bounce",
+                song_bridge_tag: "Thriller Staccato Violins", song_outro_tag: "Fade Out · 808s + Slow Strings",
+                song_expand_all: "Expand Full Lyrics", song_collapse_all: "Collapse Lyrics",
+                song_quote: "\"Every beat of this song is a heartbeat of mine that carries your name. As you listen, remember: there's a crazy guy in Venezuela who composed an entire track just because you exist.\"",
+                song_quote_author: "— Charles, your personal producer 🎹",
+                // Lock / Countdown
+                lock_badge: "🔒 Locked Content",
+                lock_title: "Something special is on its way...",
+                lock_subtitle: "This surprise unlocks when we reach <strong class='text-tulip-400'>3 months together</strong>. Patience, my love. 🌷",
+                lock_days: "Days", lock_hours: "Hours", lock_mins: "Min", lock_secs: "Sec",
+                lock_date: "April 28, 2026 — 3 Months Together",
+                univ_lock_title: "Classified Content",
+                univ_lock_subtitle: "This surprise unlocks on April 28th.",
+                univ_lock_btn: "Learn more"
             },
             fr: {
                 flag: "FR", code: "FR", nav_subtitle: "Pour Yaire", menu_nav: "Navigation", menu_home: "Accueil", menu_story: "Histoire & Temps", menu_name: "Le Pouvoir de ton Nom", menu_tulips: "Tes Fleurs", menu_quiz: "Le Mystère", menu_dist: "La Distance", menu_food: "Le Pacte", menu_universe: "Son Univers", menu_gallery: "Galerie d'Art", menu_games: "Mini-jeux", menu_promises: "Promesses", menu_memorial: "Pour ton Ange", menu_hype: "Le Hype", menu_stats: "Statistiques", menu_secret: "Coffre Secret", menu_settings: "Paramètres Système", menu_theme: "Thème Visuel", menu_lang: "Langue",
@@ -7362,6 +8468,10 @@
                 game_back_btn: "Retour à la Sélection", game_play_btn: "Jouer",
                 game1_start_title: "Prépare-toi !", game1_start_sub: "Clique vite. Tu as 10s.",
                 game2_start_title: "C'est parti !", game2_start_sub: "Évite les troncs et attrape des fleurs.",
+                game3_title: "Cartes Cachées", game3_desc: "Jeu de Mémoire. Trouve les paires avant de manquer de temps ou de mouvements.",
+                game3_locked: "Contenu Classifié", game3_locked_desc: "Cette surprise se débloque le 28 Avril.", game3_locked_btn: "En savoir plus",
+                game3_start_title: "Concentre-toi !", game3_start_sub: "Trouve toutes les paires.",
+                game3_over_title_win: "Mémoire parfaite !", game3_over_title_lose: "Réessaie.",
                 game1_over_title: "C'est fini !", game1_over_sub: "Tu as récolté <span class=\"text-brand-500 font-bold text-base bg-brand-50 dark:bg-brand-900/10 px-2 py-0.5 rounded-md mx-1\">{score}</span> tournesols d'amour.<br>Incroyable ! Tes doigts ont volé. ⚡❤️",
                 game2_over_title_win: "Record historique atteint !", game2_over_title_lose: "Pas de chance, réessaie.",
                 game_end: "Temps écoulé ! Tu as réussi à récolter {score} tournesols d'amour.",
@@ -7543,7 +8653,36 @@
                 heal_s5_label: "Étape 5 sur 5", heal_s5_title: "🫂 L'Étreinte", heal_s5_sub: "Ce qui était cassé brille maintenant d'or. Nous sommes plus forts qu'avant.",
                 heal_final_title: "Guéris et Plus Forts", heal_final_text: "Chaque fissure réparée est une preuve que nous avons choisi de rester. Que l'amour n'est pas seulement ressentir du beau, mais aussi reconstruire ensemble. Toi et moi, toujours.",
                 heal_final_quote: '"Ce qui est cassé et réparé avec de l\'or est plus beau que ce qui ne s\'est jamais cassé."',
-                heal_stat_ack: "Reconnus", heal_stat_pact: "Pactes", heal_stat_healed: "Guéri", heal_restart: "↻ Recommencer"
+                heal_stat_ack: "Reconnus", heal_stat_pact: "Pactes", heal_stat_healed: "Guéri", heal_restart: "↻ Recommencer",
+                // Song Section
+                menu_song: "Ta Chanson",
+                song_badge: "🎤 Production Originale", song_title: "Tulipanes Pa' Yaire",
+                song_subtitle: "Tout le monde n'a pas une chanson faite exclusivement pour elle. C'est la bande-son officielle de nous, et tu en es la protagoniste absolue.",
+                song_now_playing: "En lecture", song_genre: "Jersey Club · Cinematic Thriller",
+                song_story_title: "L'Histoire Derrière le Track",
+                song_story_text: "Ce n'était pas juste ouvrir un logiciel et mettre des notes au hasard. Chaque beat, chaque ligne, chaque crescendo a une signification réelle et un morceau de ce que je ressens pour toi.",
+                song_card1_label: "Le Concept", song_card1_title: "Du Film d'Horreur à la Piste de Danse",
+                song_card1_desc: "La chanson commence comme un thriller cinématographique : violons tendus, suspense réel. C'est exactement ce que je ressentais en m'approchant de toi avec un bouquet de tulipes. Mais la peur se transforme en le beat le plus intense quand la piste explose.",
+                song_card2_label: "Le Genre", song_card2_title: "Jersey Club + Violons Thriller",
+                song_card2_desc: "Pourquoi le Jersey Club ? Parce que c'est rapide, intense, avec un bounce qui t'oblige à bouger. Exactement comme mon cœur quand je pense à toi. Les 808s qui résonnent sont littéralement mes battements de cœur pour toi amplifiés au maximum.",
+                song_card3_label: "La Dédicace", song_card3_title: "Chaque Note Est Pour Toi",
+                song_card3_desc: "\"Tulipanes rosas pa' Yaire\" n'est pas juste le titre. C'est un mantra. C'est la déclaration la plus forte et la plus rythmique que je puisse faire : tant qu'un beat existera, il y aura des tulipes roses pour toi. Point final.",
+                song_lyrics_title: "Les Paroles Complètes", song_lyrics_hint: "Touche chaque section pour révéler les paroles",
+                song_intro_tag: "Violons Thriller Cinématographiques", song_prechorus_tag: "Cordes Montantes + 808 Sub",
+                song_chorus_tag: "Drop Jersey Club", song_verse_tag: "Flow Rapide · Bounce Rythmique",
+                song_bridge_tag: "Violons Staccato Thriller", song_outro_tag: "Fade Out · 808s + Cordes Lentes",
+                song_expand_all: "Déplier Toutes les Paroles", song_collapse_all: "Réduire les Paroles",
+                song_quote: "\"Chaque beat de cette chanson est un battement de mon cœur qui porte ton nom. En l'écoutant, rappelle-toi : il y a un fou au Venezuela qui t'a composé un morceau entier juste parce que tu existes.\"",
+                song_quote_author: "— Charles, ton producteur personnel 🎹",
+                // Lock / Countdown
+                lock_badge: "🔒 Contenu Verrouillé",
+                lock_title: "Quelque chose de spécial arrive...",
+                lock_subtitle: "Cette surprise se débloque quand nous atteindrons <strong class='text-tulip-400'>3 mois ensemble</strong>. Patience, mon amour. 🌷",
+                lock_days: "Jours", lock_hours: "Heures", lock_mins: "Min", lock_secs: "Sec",
+                lock_date: "28 Avril, 2026 — 3 Mois Ensemble",
+                univ_lock_title: "Contenu Classifié",
+                univ_lock_subtitle: "Cette surprise se débloque le 28 Avril.",
+                univ_lock_btn: "En savoir plus"
             },
             pt: {
                 flag: "PT", code: "PT", nav_subtitle: "Para Yaire", menu_nav: "Navegação", menu_home: "Início", menu_story: "História & Tempo", menu_name: "O Poder do Seu Nome", menu_tulips: "Suas Flores", menu_quiz: "O Mistério", menu_dist: "A Distância", menu_food: "O Pacto", menu_universe: "Seu Universo", menu_gallery: "Galeria de Arte", menu_games: "Minijogos", menu_promises: "Promessas", menu_memorial: "Para o Seu Anjo", menu_hype: "O Hype", menu_stats: "Estatísticas", menu_secret: "Cofre Secreto", menu_settings: "Configurações do Sistema", menu_theme: "Tema Visual", menu_lang: "Idioma",
@@ -7606,6 +8745,10 @@
                 game_back_btn: "Voltar à Seleção", game_play_btn: "Jogar Agora",
                 game1_start_title: "Prepare-se!", game1_start_sub: "Clique rápido. Você tem 10s.",
                 game2_start_title: "Vamos voar!", game2_start_sub: "Desvie dos troncos e pegue flores.",
+                game3_title: "Cartas Ocultas", game3_desc: "Jogo da Memória. Encontre os pares antes que o tempo ou as jogadas acabem.",
+                game3_locked: "Conteúdo Confidencial", game3_locked_desc: "Esta surpresa será desbloqueada em 28 de Abril.", game3_locked_btn: "Saber mais",
+                game3_start_title: "Concentre-se!", game3_start_sub: "Encontre todos os pares.",
+                game3_over_title_win: "Memória perfeita!", game3_over_title_lose: "Tente novamente.",
                 game1_over_title: "Acabou o tempo!", game1_over_sub: "Você conseguiu colher <span class=\"text-brand-500 font-bold text-base bg-brand-50 dark:bg-brand-900/10 px-2 py-0.5 rounded-md mx-1\">{score}</span> girassóis de amor.<br>Incrível! Seus dedos voaram. ⚡❤️",
                 game2_over_title_win: "Recorde histórico alcançado!", game2_over_title_lose: "Que pena! Tente novamente.",
                 game_end: "Acabou o tempo! Você conseguiu colher {score} girassóis de amor.",
@@ -7787,7 +8930,36 @@
                 heal_s5_label: "Passo 5 de 5", heal_s5_title: "🫂 O Abraço", heal_s5_sub: "O que estava quebrado agora brilha com ouro. Somos mais fortes do que antes.",
                 heal_final_title: "Curados e Mais Fortes", heal_final_text: "Cada rachadura reparada é uma prova de que escolhemos ficar. De que o amor não é só sentir bonito, mas também reconstruir juntos. Você e eu, sempre.",
                 heal_final_quote: '"O que é quebrado e reparado com ouro é mais belo do que o que nunca se quebrou."',
-                heal_stat_ack: "Reconhecidos", heal_stat_pact: "Pactos", heal_stat_healed: "Curado", heal_restart: "↻ Recomeçar"
+                heal_stat_ack: "Reconhecidos", heal_stat_pact: "Pactos", heal_stat_healed: "Curado", heal_restart: "↻ Recomeçar",
+                // Song Section
+                menu_song: "Sua Música",
+                song_badge: "🎤 Produção Original", song_title: "Tulipanes Pa' Yaire",
+                song_subtitle: "Nem todo mundo tem uma música feita exclusivamente pra ela. Essa é a trilha sonora oficial de nós, e você é a protagonista absoluta.",
+                song_now_playing: "Reproduzindo", song_genre: "Jersey Club · Cinematic Thriller",
+                song_story_title: "A História por Trás da Track",
+                song_story_text: "Não foi só abrir um programa e colocar notas aleatórias. Cada beat, cada linha, cada crescendo tem um significado real e um pedaço do que sinto por você.",
+                song_card1_label: "O Conceito", song_card1_title: "De Filme de Terror a Pista de Dança",
+                song_card1_desc: "A música começa como um thriller cinematográfico: violinos tensos, suspense real. É exatamente como eu me sentia me aproximando de você com um buquê de tulipas. Mas o medo se transforma no beat mais intenso quando a pista explode.",
+                song_card2_label: "O Gênero", song_card2_title: "Jersey Club + Violinos Thriller",
+                song_card2_desc: "Por que Jersey Club? Porque é rápido, intenso, com um bounce que te obriga a se mover. Exatamente como meu coração quando penso em você. Os 808s retumbando são literalmente minhas batidas por você amplificadas ao máximo.",
+                song_card3_label: "A Dedicatória", song_card3_title: "Cada Nota É Para Você",
+                song_card3_desc: "\"Tulipanes rosas pa' Yaire\" não é só o título. É um mantra. É a declaração mais forte e rítmica que posso fazer: enquanto existir um beat, existirão tulipas rosas para você. Ponto final.",
+                song_lyrics_title: "A Letra Completa", song_lyrics_hint: "Toque cada seção para revelar as letras",
+                song_intro_tag: "Violinos Thriller Cinematográficos", song_prechorus_tag: "Cordas Subindo + 808 Sub",
+                song_chorus_tag: "Drop Jersey Club", song_verse_tag: "Flow Rápido · Bounce Rítmico",
+                song_bridge_tag: "Violinos Staccato Thriller", song_outro_tag: "Fade Out · 808s + Cordas Lentas",
+                song_expand_all: "Expandir Toda a Letra", song_collapse_all: "Recolher Letra",
+                song_quote: "\"Cada beat dessa música é uma batida minha que carrega seu nome. Enquanto escuta, lembre-se: tem um louco na Venezuela que compôs uma faixa inteira só porque você existe.\"",
+                song_quote_author: "— Charles, seu produtor pessoal 🎹",
+                // Lock / Countdown
+                lock_badge: "🔒 Conteúdo Bloqueado",
+                lock_title: "Algo especial está a caminho...",
+                lock_subtitle: "Essa surpresa se desbloqueia quando completarmos <strong class='text-tulip-400'>3 meses juntos</strong>. Paciência, meu amor. 🌷",
+                lock_days: "Dias", lock_hours: "Horas", lock_mins: "Min", lock_secs: "Seg",
+                lock_date: "28 de Abril, 2026 — 3 Meses Juntos",
+                univ_lock_title: "Conteúdo Classificado",
+                univ_lock_subtitle: "Esta surpresa será desbloqueada em 28 de Abril.",
+                univ_lock_btn: "Saber mais"
             }
         };
 
@@ -8110,7 +9282,7 @@
             document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-fade').forEach(el => revealObs.observe(el));
 
             // Scroll spy del menú — usa la sección más centrada en pantalla
-            const sectionIds = ['hero', 'historia', 'nombre', 'tulipanes', 'quiz-girasol', 'distancia', 'comida', 'universo', 'galeria', 'minijuegos', 'promesas', 'sanacion', 'colores-yaire', 'memorial', 'hype', 'estadisticas', 'top5yaire', 'secreto'];
+            const sectionIds = ['hero', 'historia', 'nombre', 'tulipanes', 'quiz-girasol', 'distancia', 'comida', 'universo', 'galeria', 'minijuegos', 'promesas', 'sanacion', 'colores-yaire', 'memorial', 'hype', 'estadisticas', 'top5yaire', 'tu-cancion', 'secreto'];
 
             function setActiveLink(id) {
                 document.querySelectorAll('.menu-link').forEach(l => {
@@ -8906,7 +10078,7 @@
             playSound('pop');
             const h = document.getElementById('games-hub'), a = document.getElementById('game-active-area');
             const hubDesc = document.getElementById('games-hub-desc');
-            const g1 = document.getElementById('game1-wrapper'), g2 = document.getElementById('game2-wrapper');
+            const g1 = document.getElementById('game1-wrapper'), g2 = document.getElementById('game2-wrapper'), g3 = document.getElementById('game3-wrapper');
 
             // Hub exit animation
             h.classList.add('opacity-0', 'scale-95');
@@ -8921,16 +10093,20 @@
                 if (hubDesc) hubDesc.classList.add('hidden');
 
                 // Reset wrappers
-                g1.classList.add('hidden'); g2.classList.add('hidden');
+                g1.classList.add('hidden'); g2.classList.add('hidden'); g3.classList.add('hidden');
 
                 // Show specific game
                 if (gameId === 'game1') {
                     g1.classList.remove('hidden');
                     showStartOverlay('game1');
-                }
-                if (gameId === 'game2') {
+                } else if (gameId === 'game2') {
                     g2.classList.remove('hidden');
                     showStartOverlay('game2');
+                } else if (gameId === 'game3') {
+                    g3.classList.remove('hidden');
+                    showStartOverlay('game3');
+                    // Setup board but dont allow clicks yet
+                    initMemoryBoard();
                 }
 
                 // Active Area entry animation
@@ -8953,11 +10129,16 @@
                     document.getElementById('game1-overlay-text').innerText = dictionary[currentLang].game1_start_title || '¡Prepárate!';
                     document.getElementById('game1-overlay-sub').innerHTML = dictionary[currentLang].game1_start_sub || 'Da clics rápidos. Tienes 10s.';
                     document.getElementById('game1-overlay-btn').innerText = dictionary[currentLang].game_start || '¡Empezar!';
-                } else {
+                } else if (game === 'game2') {
                     document.getElementById('game2-overlay-icon').innerText = '🦋';
                     document.getElementById('game2-overlay-text').innerText = dictionary[currentLang].game2_start_title || '¡A volar!';
                     document.getElementById('game2-overlay-sub').innerHTML = dictionary[currentLang].game2_start_sub || 'Esquiva troncos y atrapa flores.';
                     document.getElementById('game2-overlay-btn').innerText = dictionary[currentLang].game_start2 || '¡Empezar!';
+                } else if (game === 'game3') {
+                    document.getElementById('game3-overlay-icon').innerText = '🃏';
+                    document.getElementById('game3-overlay-text').innerText = dictionary[currentLang].game3_start_title || '¡Concéntrate!';
+                    document.getElementById('game3-overlay-sub').innerHTML = dictionary[currentLang].game3_start_sub || 'Encuentra todas las parejas.';
+                    document.getElementById('game3-overlay-btn').innerText = dictionary[currentLang].game_start || '¡Empezar!';
                 }
 
                 overlay.classList.remove('hidden');
@@ -8980,6 +10161,7 @@
                 const b = document.getElementById('start-game2-btn');
                 if (b) { b.disabled = false; b.classList.remove('opacity-50'); }
             }
+            if (game3Active) endGame3(false);
 
             // Prevent scroll jump
             const m = document.getElementById('minijuegos');
@@ -9269,6 +10451,170 @@
                 document.getElementById('game2-overlay-sub').innerText = iR ? (dictionary[currentLang].game2_over_title_win || '¡Récord histórico alcanzado!') : (dictionary[currentLang].game2_over_title_lose || 'Mala suerte, vuelve a intentarlo.');
                 document.getElementById('game2-overlay-text').innerHTML = dictionary[currentLang].game2_gameover.replace('{score}', score2);
                 document.getElementById('game2-overlay-btn').innerText = dictionary[currentLang].game_restart || 'Intentar de nuevo';
+
+                overlay.classList.remove('hidden');
+                void overlay.offsetWidth;
+                overlay.classList.remove('opacity-0');
+                inner.classList.remove('scale-90', 'opacity-0');
+                inner.classList.add('scale-100', 'opacity-100');
+            }
+        }
+
+        let game3Active = false;
+        let game3Timer = null;
+        let game3TimeLeft = 60;
+        let game3Moves = 0;
+        let game3Cards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        const totalPairs = 8;
+        const emojis = ['🌷', '🦋', '🌻', '✨', '💖', '💍', '🧸', '🍓'];
+
+        function initMemoryBoard() {
+            const board = document.getElementById('memory-board');
+            if (!board) return;
+            board.innerHTML = '';
+
+            // Create pairs and shuffle
+            let cards = [...emojis, ...emojis];
+            cards.sort(() => Math.random() - 0.5);
+            game3Cards = cards;
+
+            for (let i = 0; i < cards.length; i++) {
+                const cardHtml = `
+                <div class="memory-card relative w-full aspect-[3/4] cursor-pointer" onclick="flipMemoryCard(this, ${i})" data-index="${i}" data-emoji="${cards[i]}">
+                    <div class="memory-card-inner absolute inset-0 w-full h-full transition-transform duration-500 rounded-xl" style="transform-style: preserve-3d;">
+                        <div class="absolute inset-0 rounded-xl bg-purple-100 dark:bg-purple-900/40 flex items-center justify-center border border-purple-300 dark:border-purple-600 shadow-md" style="backface-visibility: hidden;">
+                            <span class="text-3xl text-purple-400 dark:text-purple-500">❓</span>
+                        </div>
+                        <div class="absolute inset-0 rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center border border-purple-400 dark:border-purple-500 shadow-lg text-4xl" style="backface-visibility: hidden; transform: rotateY(180deg);">
+                            ${cards[i]}
+                        </div>
+                    </div>
+                </div>`;
+                board.innerHTML += cardHtml;
+            }
+        }
+
+        function startMemoryGame() {
+            if (game3Active) return;
+            playSound('ding');
+            game3Active = true;
+            game3TimeLeft = 60;
+            game3Moves = 0;
+            flippedCards = [];
+            matchedPairs = 0;
+
+            document.getElementById('game3-moves').innerText = game3Moves;
+            document.getElementById('game3-time').innerText = game3TimeLeft + 's';
+
+            initMemoryBoard(); // Shuffle new board
+
+            const overlay = document.getElementById('game3-overlay');
+            const inner = document.getElementById('game3-overlay-inner');
+            if (overlay && inner) {
+                overlay.classList.add('opacity-0');
+                if (inner) {
+                    inner.classList.add('scale-90', 'opacity-0');
+                    inner.classList.remove('scale-100', 'opacity-100');
+                }
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+
+            clearInterval(game3Timer);
+            game3Timer = setInterval(() => {
+                game3TimeLeft--;
+                const tEl = document.getElementById('game3-time');
+                tEl.innerText = game3TimeLeft + 's';
+
+                if (game3TimeLeft <= 10) {
+                    tEl.classList.add('animate-shake', 'text-red-500');
+                    playSound('pop');
+                } else {
+                    tEl.classList.remove('animate-shake', 'text-red-500');
+                }
+
+                if (game3TimeLeft <= 0) {
+                    endGame3(false);
+                }
+            }, 1000);
+        }
+
+        function flipMemoryCard(el, index) {
+            if (!game3Active || flippedCards.length >= 2 || el.classList.contains('flipped') || el.classList.contains('matched')) return;
+
+            playSound('flap');
+            el.classList.add('flipped');
+            el.querySelector('.memory-card-inner').style.transform = 'rotateY(180deg)';
+            flippedCards.push({ el, index });
+
+            if (flippedCards.length === 2) {
+                game3Moves++;
+                document.getElementById('game3-moves').innerText = game3Moves;
+                checkMemoryMatch();
+            }
+        }
+
+        function checkMemoryMatch() {
+            const card1 = flippedCards[0];
+            const card2 = flippedCards[1];
+            const emoji1 = game3Cards[card1.index];
+            const emoji2 = game3Cards[card2.index];
+
+            if (emoji1 === emoji2) {
+                // Match
+                setTimeout(() => {
+                    playSound('magic');
+                    card1.el.classList.add('matched');
+                    card2.el.classList.add('matched');
+
+                    // add glowing effect
+                    card1.el.querySelector('.memory-card-inner').classList.add('shadow-[0_0_15px_rgba(168,85,247,0.8)]');
+                    card2.el.querySelector('.memory-card-inner').classList.add('shadow-[0_0_15px_rgba(168,85,247,0.8)]');
+
+                    matchedPairs++;
+                    flippedCards = [];
+
+                    if (matchedPairs === totalPairs) {
+                        setTimeout(() => endGame3(true), 500);
+                    }
+                }, 400);
+            } else {
+                // No match
+                setTimeout(() => {
+                    playSound('pop');
+                    card1.el.classList.remove('flipped');
+                    card2.el.classList.remove('flipped');
+                    card1.el.querySelector('.memory-card-inner').style.transform = '';
+                    card2.el.querySelector('.memory-card-inner').style.transform = '';
+                    flippedCards = [];
+                }, 800);
+            }
+        }
+
+        function endGame3(win) {
+            clearInterval(game3Timer);
+            game3Active = false;
+
+            const tEl = document.getElementById('game3-time');
+            if (tEl) tEl.classList.remove('animate-shake', 'text-red-500');
+
+            const overlay = document.getElementById('game3-overlay');
+            const inner = document.getElementById('game3-overlay-inner');
+            if (overlay && inner) {
+                if (win) {
+                    playSound('magic');
+                    document.getElementById('game3-overlay-icon').innerText = '🏆';
+                    document.getElementById('game3-overlay-text').innerText = dictionary[currentLang].game3_over_title_win || '¡Memoria perfecta!';
+                } else {
+                    playSound('bonk');
+                    document.getElementById('game3-overlay-icon').innerText = '💥';
+                    document.getElementById('game3-overlay-text').innerText = dictionary[currentLang].game3_over_title_lose || 'Inténtalo de nuevo.';
+                }
+
+                let subText = `Movimientos: <strong class="text-purple-500">${game3Moves}</strong> &nbsp;|&nbsp; Tiempo: <strong class="text-purple-500">${game3TimeLeft}s</strong>`;
+                document.getElementById('game3-overlay-sub').innerHTML = subText;
+                document.getElementById('game3-overlay-btn').innerText = dictionary[currentLang].game_restart || "Jugar de nuevo";
 
                 overlay.classList.remove('hidden');
                 void overlay.offsetWidth;
