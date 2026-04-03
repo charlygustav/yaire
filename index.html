@@ -420,6 +420,24 @@
             color: #d4d4d8;
         }
 
+        /* ── Mobile recipe modal fixes ── */
+        @media (max-width: 640px) {
+            #recipe-modal>div {
+                border-radius: 1.25rem;
+                max-height: 100vh;
+                max-height: 100dvh;
+            }
+
+            #recipe-modal {
+                padding: 0.25rem;
+            }
+
+            .recipe-tab-new {
+                padding: .4rem .7rem;
+                font-size: .72rem;
+            }
+        }
+
         @keyframes steamRise {
             0% {
                 transform: translateY(0) scaleX(1);
@@ -660,14 +678,14 @@
 
     <!-- 2. Interactive Recipe Modal — REDESIGNED -->
     <div id="recipe-modal"
-        class="fixed inset-0 z-[120] hidden flex items-center justify-center bg-zinc-950/85 backdrop-blur-lg transition-opacity opacity-0 p-2 sm:p-4 lg:p-6"
+        class="fixed inset-0 z-[120] hidden flex items-center justify-center bg-zinc-950/85 backdrop-blur-lg transition-opacity opacity-0 p-1 sm:p-4 lg:p-6"
         onclick="if(event.target === this) closeModal('recipe-modal', 'recipe-content')">
-        <div class="bg-white dark:bg-[#0e0e12] p-0 rounded-[2.5rem] shadow-[0_30px_80px_rgba(0,0,0,.5)] border border-zinc-200/50 dark:border-zinc-700/40 max-w-5xl lg:max-w-6xl w-full max-h-[96vh] flex flex-col transform scale-95 transition-transform duration-300 overflow-hidden"
+        <div class="bg-white dark:bg-[#0e0e12] p-0 rounded-2xl sm:rounded-[2.5rem] shadow-[0_30px_80px_rgba(0,0,0,.5)] border border-zinc-200/50 dark:border-zinc-700/40 max-w-5xl lg:max-w-6xl w-full max-h-[100dvh] sm:max-h-[96vh] flex flex-col transform scale-95 transition-transform duration-300 overflow-hidden"
             id="recipe-content">
 
             <!-- ══ HERO HEADER cinematográfico ══ -->
             <div class="relative overflow-hidden flex-shrink-0"
-                style="background:linear-gradient(135deg,#1c0a00 0%,#3d1800 40%,#7c2d12 70%,#b45309 100%); min-height:160px;">
+                style="background:linear-gradient(135deg,#1c0a00 0%,#3d1800 40%,#7c2d12 70%,#b45309 100%); min-height:120px;">
                 <!-- Orbes de luz -->
                 <div class="recipe-hero-orb absolute -top-10 -left-10 w-56 h-56 rounded-full opacity-30"
                     style="background:radial-gradient(circle,#fbbf24,transparent 70%);"></div>
@@ -691,8 +709,8 @@
                     </svg>
                 </button>
                 <!-- Contenido header -->
-                <div class="relative z-10 p-6 md:p-8 flex items-end gap-5 h-full">
-                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-3xl flex items-center justify-center text-5xl shadow-2xl flex-shrink-0 border border-white/20"
+                <div class="relative z-10 p-4 sm:p-6 md:p-8 flex items-end gap-3 sm:gap-5 h-full">
+                    <div class="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl sm:rounded-3xl flex items-center justify-center text-3xl sm:text-5xl shadow-2xl flex-shrink-0 border border-white/20"
                         style="background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.05)); backdrop-filter:blur(10px);">
                         🍗</div>
                     <div class="flex-1 min-w-0">
@@ -700,7 +718,7 @@
                             <span class="text-xs font-bold uppercase tracking-widest text-amber-300/80"
                                 data-i18n="rcp_badge">Receta Especial · Para Yaire 💖</span>
                         </div>
-                        <h3 class="text-2xl md:text-3xl lg:text-4xl font-black text-white leading-tight drop-shadow-md"
+                        <h3 class="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-black text-white leading-tight drop-shadow-md"
                             data-i18n="rcp_title">Pechuga a la Crema Especial</h3>
                         <div class="flex items-center gap-3 mt-2 flex-wrap">
                             <span
@@ -718,9 +736,10 @@
             </div>
 
             <!-- ══ TABS ══ -->
-            <div class="px-4 md:px-6 pt-4 pb-0 bg-white dark:bg-[#0e0e12] flex-shrink-0">
+            <div
+                class="px-3 sm:px-4 md:px-6 pt-3 sm:pt-4 pb-0 bg-white dark:bg-[#0e0e12] flex-shrink-0 overflow-x-auto">
                 <div
-                    class="inline-flex gap-0.5 p-1 rounded-full bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200/50 dark:border-zinc-700/40">
+                    class="inline-flex gap-0.5 p-1 rounded-full bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200/50 dark:border-zinc-700/40 w-max">
                     <button class="recipe-tab-new active" onclick="switchRecipeTabNew('ing', this)" id="rtab-ing"
                         data-i18n="rcp_tab_ing">⊞ Ingredientes</button>
                     <button class="recipe-tab-new" onclick="switchRecipeTabNew('prep', this)" id="rtab-prep"
@@ -881,7 +900,7 @@
                 <!-- ─── TAB: PASO A PASO ─── -->
                 <div id="rpane-prep" class="recipe-pane-new hidden p-5 md:p-7 pb-24">
                     <!-- Info bar -->
-                    <div class="grid grid-cols-3 gap-3 mb-6">
+                    <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
                         <div
                             class="bg-amber-50 dark:bg-amber-900/15 rounded-2xl p-3 text-center border border-amber-100 dark:border-amber-900/30">
                             <p class="text-lg font-black text-amber-600 dark:text-amber-400">4</p>
@@ -903,15 +922,15 @@
                     </div>
 
                     <!-- Línea de tiempo -->
-                    <div class="relative pl-12 md:pl-14 space-y-6">
+                    <div class="relative pl-10 sm:pl-12 md:pl-14 space-y-4 sm:space-y-6">
                         <div
-                            class="absolute left-4 md:left-5 top-5 bottom-5 w-0.5 bg-gradient-to-b from-amber-400 via-amber-200 dark:via-amber-900 to-transparent rounded-full">
+                            class="absolute left-3 sm:left-4 md:left-5 top-5 bottom-5 w-0.5 bg-gradient-to-b from-amber-400 via-amber-200 dark:via-amber-900 to-transparent rounded-full">
                         </div>
 
                         <!-- PASO 1 -->
-                        <div class="step-card-new relative bg-white dark:bg-zinc-800/70 p-5 md:p-6 rounded-2xl border-2 border-zinc-100 dark:border-zinc-700 shadow-sm hover:shadow-lg"
+                        <div class="step-card-new relative bg-white dark:bg-zinc-800/70 p-4 sm:p-5 md:p-6 rounded-2xl border-2 border-zinc-100 dark:border-zinc-700 shadow-sm hover:shadow-lg"
                             id="sc1">
-                            <div class="step-num absolute -left-[3.25rem] md:-left-[3.75rem] top-4 w-9 h-9 rounded-full bg-white dark:bg-zinc-900 border-3 border-amber-500 flex items-center justify-center font-black text-amber-600 shadow-md text-sm transition-all duration-300"
+                            <div class="step-num absolute -left-[2.75rem] sm:-left-[3.25rem] md:-left-[3.75rem] top-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white dark:bg-zinc-900 border-3 border-amber-500 flex items-center justify-center font-black text-amber-600 shadow-md text-xs sm:text-sm transition-all duration-300"
                                 style="border-width:3px">1</div>
                             <div class="flex items-start justify-between gap-3 mb-3">
                                 <div class="flex items-center gap-3">
@@ -938,7 +957,8 @@
                                 data-i18n="rcp_s1_text">Salpimentamos las pechugas con cariño y las doramos en el sartén
                                 a fuego medio-alto con mantequilla y un hilo de aceite de oliva, hasta conseguir una
                                 <strong class="text-zinc-800 dark:text-zinc-200">costra dorada impecable</strong> por
-                                ambos lados.</p>
+                                ambos lados.
+                            </p>
                             <!-- Tip expandible -->
                             <button onclick="toggleTip('tip1')"
                                 class="flex items-center gap-2 text-xs font-bold text-amber-600 dark:text-amber-400 mb-2 hover:opacity-80 transition-opacity">
@@ -972,9 +992,9 @@
                         </div>
 
                         <!-- PASO 2 -->
-                        <div class="step-card-new relative bg-white dark:bg-zinc-800/70 p-5 md:p-6 rounded-2xl border-2 border-zinc-100 dark:border-zinc-700 shadow-sm hover:shadow-lg"
+                        <div class="step-card-new relative bg-white dark:bg-zinc-800/70 p-4 sm:p-5 md:p-6 rounded-2xl border-2 border-zinc-100 dark:border-zinc-700 shadow-sm hover:shadow-lg"
                             id="sc2">
-                            <div class="step-num absolute -left-[3.25rem] md:-left-[3.75rem] top-4 w-9 h-9 rounded-full bg-white dark:bg-zinc-900 border-amber-500 flex items-center justify-center font-black text-amber-600 shadow-md text-sm transition-all duration-300"
+                            <div class="step-num absolute -left-[2.75rem] sm:-left-[3.25rem] md:-left-[3.75rem] top-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white dark:bg-zinc-900 border-amber-500 flex items-center justify-center font-black text-amber-600 shadow-md text-xs sm:text-sm transition-all duration-300"
                                 style="border:3px solid #f59e0b">2</div>
                             <div class="flex items-start justify-between gap-3 mb-3">
                                 <div class="flex items-center gap-3">
@@ -1031,9 +1051,9 @@
                         </div>
 
                         <!-- PASO 3 -->
-                        <div class="step-card-new relative bg-white dark:bg-zinc-800/70 p-5 md:p-6 rounded-2xl border-2 border-zinc-100 dark:border-zinc-700 shadow-sm hover:shadow-lg"
+                        <div class="step-card-new relative bg-white dark:bg-zinc-800/70 p-4 sm:p-5 md:p-6 rounded-2xl border-2 border-zinc-100 dark:border-zinc-700 shadow-sm hover:shadow-lg"
                             id="sc3">
-                            <div class="step-num absolute -left-[3.25rem] md:-left-[3.75rem] top-4 w-9 h-9 rounded-full bg-white dark:bg-zinc-900 flex items-center justify-center font-black text-amber-600 shadow-md text-sm transition-all duration-300"
+                            <div class="step-num absolute -left-[2.75rem] sm:-left-[3.25rem] md:-left-[3.75rem] top-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white dark:bg-zinc-900 flex items-center justify-center font-black text-amber-600 shadow-md text-xs sm:text-sm transition-all duration-300"
                                 style="border:3px solid #f59e0b">3</div>
                             <div class="flex items-start justify-between gap-3 mb-3">
                                 <div class="flex items-center gap-3">
@@ -1090,9 +1110,9 @@
                         </div>
 
                         <!-- PASO 4 -->
-                        <div class="step-card-new relative bg-white dark:bg-zinc-800/70 p-5 md:p-6 rounded-2xl border-2 border-zinc-100 dark:border-zinc-700 shadow-sm hover:shadow-lg"
+                        <div class="step-card-new relative bg-white dark:bg-zinc-800/70 p-4 sm:p-5 md:p-6 rounded-2xl border-2 border-zinc-100 dark:border-zinc-700 shadow-sm hover:shadow-lg"
                             id="sc4">
-                            <div class="step-num absolute -left-[3.25rem] md:-left-[3.75rem] top-4 w-9 h-9 rounded-full bg-white dark:bg-zinc-900 flex items-center justify-center font-black text-amber-600 shadow-md text-sm transition-all duration-300"
+                            <div class="step-num absolute -left-[2.75rem] sm:-left-[3.25rem] md:-left-[3.75rem] top-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white dark:bg-zinc-900 flex items-center justify-center font-black text-amber-600 shadow-md text-xs sm:text-sm transition-all duration-300"
                                 style="border:3px solid #f59e0b">4</div>
                             <div class="flex items-start justify-between gap-3 mb-3">
                                 <div class="flex items-center gap-3">
@@ -1598,15 +1618,30 @@
         </div>
     </div>
 
-    <!-- Loader Screen -->
+    <!-- Loader Screen — Premium Redesign -->
     <div id="loader"
-        class="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-zinc-50 dark:bg-zinc-950 transition-opacity duration-700">
-        <div class="flex flex-col items-center gap-8 w-full max-w-xs px-8">
-            <!-- Tulipán rosa animado -->
+        class="fixed inset-0 z-[200] flex flex-col items-center justify-center transition-opacity duration-700"
+        style="background: #000;">
+
+        <!-- Ambient color gradients -->
+        <div id="loader-gradients"
+            class="absolute inset-0 overflow-hidden pointer-events-none transition-all duration-700">
+            <div class="absolute -top-1/4 -left-1/4 w-[60%] h-[60%] rounded-full opacity-30 blur-[100px] loader-gradient-drift-1 loader-grad-blob"
+                style="background: radial-gradient(circle, #ec4899, transparent 70%);"></div>
+            <div class="absolute -bottom-1/4 -right-1/4 w-[50%] h-[50%] rounded-full opacity-25 blur-[100px] loader-gradient-drift-2 loader-grad-blob"
+                style="background: radial-gradient(circle, #f59e0b, transparent 70%);"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] h-[40%] rounded-full opacity-15 blur-[80px] loader-gradient-drift-3 loader-grad-blob"
+                style="background: radial-gradient(circle, #db2777, transparent 70%);"></div>
+        </div>
+
+        <!-- Central content -->
+        <div class="relative z-10 flex flex-col items-center gap-6">
+
+            <!-- Tulipán rosa protagonista -->
             <div class="relative flex items-center justify-center">
-                <div class="absolute w-32 h-32 rounded-full bg-tulip-500 opacity-10 animate-ping"></div>
-                <svg id="loader-tulip" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 130"
-                    class="w-28 h-28 drop-shadow-xl" style="animation: tulipFloat 2.5s ease-in-out infinite;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 130"
+                    class="relative w-24 h-24 drop-shadow-2xl loader-tulip-float"
+                    style="filter: drop-shadow(0 0 20px rgba(236,72,153,0.4));">
                     <!-- Tallo -->
                     <path d="M50 130 Q45 100 48 80" stroke="#22c55e" stroke-width="3.5" fill="none"
                         stroke-linecap="round" />
@@ -1628,18 +1663,30 @@
                     <ellipse cx="44" cy="36" rx="4" ry="7" fill="white" opacity="0.25" transform="rotate(-10 44 36)" />
                 </svg>
             </div>
-            <!-- Texto -->
-            <div class="text-center">
-                <p class="text-zinc-700 dark:text-zinc-200 text-xl font-bold tracking-wide">Cargando...</p>
-                <p id="loader-percent" class="text-tulip-500 font-extrabold text-3xl mt-1">0%</p>
+
+            <!-- Loading message with typing effect -->
+            <div class="text-center mt-4">
+                <p id="loader-message"
+                    class="text-white/90 text-sm md:text-base font-medium tracking-wide h-6 overflow-hidden"></p>
+                <p id="loader-percent"
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-tulip-500 font-black text-2xl mt-2 tabular-nums">
+                    0%</p>
             </div>
-            <!-- Barra de progreso -->
-            <div class="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-2 overflow-hidden">
+
+            <!-- Slim progress bar -->
+            <div class="w-56 sm:w-64 h-1 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
                 <div id="loader-progress" class="h-full rounded-full transition-all duration-300 ease-out"
-                    style="width: 0%; background: linear-gradient(to right, #ec4899, #db2777);"></div>
+                    style="width: 0%; background: linear-gradient(90deg, #f59e0b, #ec4899, #db2777);"></div>
             </div>
+
         </div>
+
         <style>
+            /* Tulip float animation */
+            .loader-tulip-float {
+                animation: tulipFloat 2.5s ease-in-out infinite;
+            }
+
             @keyframes tulipFloat {
 
                 0%,
@@ -1648,8 +1695,108 @@
                 }
 
                 50% {
-                    transform: translateY(-10px) rotate(2deg);
+                    transform: translateY(-12px) rotate(2deg);
                 }
+            }
+
+            /* Hero entrance animations */
+            .hero-enter-ready .hero-anim {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            .hero-enter-active .hero-anim {
+                opacity: 1;
+                transform: translateY(0);
+                transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .hero-enter-active .hero-anim-1 {
+                transition-delay: 0s;
+            }
+
+            .hero-enter-active .hero-anim-2 {
+                transition-delay: 0.15s;
+            }
+
+            .hero-enter-active .hero-anim-3 {
+                transition-delay: 0.3s;
+            }
+
+            .hero-enter-active .hero-anim-4 {
+                transition-delay: 0.5s;
+            }
+
+            /* Ambient gradient drift animations */
+            .loader-gradient-drift-1 {
+                animation: gradDrift1 6s ease-in-out infinite;
+            }
+
+            .loader-gradient-drift-2 {
+                animation: gradDrift2 7s ease-in-out infinite;
+            }
+
+            .loader-gradient-drift-3 {
+                animation: gradDrift3 5s ease-in-out infinite;
+            }
+
+            @keyframes gradDrift1 {
+
+                0%,
+                100% {
+                    transform: translate(0, 0) scale(1);
+                    opacity: 0.30;
+                }
+
+                50% {
+                    transform: translate(10%, 8%) scale(1.1);
+                    opacity: 0.40;
+                }
+            }
+
+            @keyframes gradDrift2 {
+
+                0%,
+                100% {
+                    transform: translate(0, 0) scale(1);
+                    opacity: 0.25;
+                }
+
+                50% {
+                    transform: translate(-8%, -10%) scale(1.15);
+                    opacity: 0.35;
+                }
+            }
+
+            @keyframes gradDrift3 {
+
+                0%,
+                100% {
+                    transform: translate(-50%, -50%) scale(1);
+                    opacity: 0.15;
+                }
+
+                50% {
+                    transform: translate(-50%, -50%) scale(1.3);
+                    opacity: 0.25;
+                }
+            }
+
+            /* Loader hide */
+            .loader-hidden {
+                opacity: 0 !important;
+                visibility: hidden;
+                transition: opacity 0.7s ease, visibility 0.7s ease;
+            }
+
+            /* Gradient exit animation */
+            .loader-grad-blob {
+                transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease-out;
+            }
+
+            .loader-grads-exit .loader-grad-blob {
+                transform: scale(2.5) !important;
+                opacity: 0 !important;
             }
         </style>
     </div>
@@ -1888,23 +2035,28 @@
 
         <!-- Section: Hero -->
         <section id="hero"
-            class="relative min-h-[85vh] flex flex-col justify-center items-center text-center reveal pt-10 pb-32 active">
-            <div
-                class="inline-block px-5 py-2 rounded-full border border-brand-500/30 bg-gradient-to-r from-brand-500/10 to-tulip-500/10 text-brand-600 dark:text-brand-400 text-sm font-bold mb-8 uppercase tracking-widest glow-effect">
-                <span data-i18n="hero_badge">¡Felices 2 Meses! (Y contando)</span> ✨
-            </div>
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter mb-6 leading-tight">
-                <span data-i18n="hero_title1">Mi lugar favorito</span><br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-tulip-500"
-                    data-i18n="hero_title2">es contigo.</span>
-            </h1>
-            <p class="max-w-3xl mx-auto text-lg md:text-xl text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-0 font-serif italic px-4"
-                data-i18n="hero_subtitle">Eres la casualidad más hermosa que me ha pasado, la dueña de mis pensamientos
-                más profundos, el motivo de mis mejores sonrisas y la mujer con la que quiero construir, cuidar y
-                compartir cada pequeño instante del resto de mis días. Esta página es nuestra, para siempre.</p>
+            class="relative min-h-[85vh] flex flex-col justify-center items-center text-center reveal pt-10 pb-32 active overflow-hidden hero-enter-ready">
 
-            <!-- Botón de bajar arreglado y posicionado absolutamente -->
-            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+            <div class="relative z-10 flex flex-col items-center">
+                <div
+                    class="hero-anim hero-anim-1 inline-block px-5 py-2 rounded-full border border-brand-500/30 bg-gradient-to-r from-brand-500/10 to-tulip-500/10 text-brand-600 dark:text-brand-400 text-sm font-bold mb-8 uppercase tracking-widest glow-effect">
+                    <span data-i18n="hero_badge">¡Felices 2 Meses! (Y contando)</span> ✨
+                </div>
+                <h1
+                    class="hero-anim hero-anim-2 text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter mb-6 leading-tight">
+                    <span data-i18n="hero_title1">Mi lugar favorito</span><br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-tulip-500"
+                        data-i18n="hero_title2">es contigo.</span>
+                </h1>
+                <p class="hero-anim hero-anim-3 max-w-3xl mx-auto text-lg md:text-xl text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-0 font-serif italic px-4"
+                    data-i18n="hero_subtitle">Eres la casualidad más hermosa que me ha pasado, la dueña de mis
+                    pensamientos
+                    más profundos, el motivo de mis mejores sonrisas y la mujer con la que quiero construir, cuidar y
+                    compartir cada pequeño instante del resto de mis días. Esta página es nuestra, para siempre.</p>
+            </div>
+
+            <!-- Botón de bajar -->
+            <div class="hero-anim hero-anim-4 absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
                 <a href="#historia"
                     onclick="document.getElementById('historia').scrollIntoView({behavior:'smooth'});return false;"
                     class="floating flex items-center justify-center w-14 h-14 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:text-brand-500 dark:hover:text-brand-400 transition-all shadow-md hover:shadow-lg cursor-pointer">
@@ -1929,7 +2081,8 @@
                         data-i18n="origin_text1">¿Quién iba a decir que detrás de unas pantallas, en el mundo virtual de
                         <strong>Hevvo</strong>, iba a encontrar al amor de mi vida? Nos mudamos a <strong>Habbo
                             ID</strong> para seguir nuestra historia, y sin darnos cuenta, lo que empezó como un juego
-                        se convirtió en el sentimiento más real, maduro y profundo que he experimentado.</p>
+                        se convirtió en el sentimiento más real, maduro y profundo que he experimentado.
+                    </p>
                     <div class="p-6 bg-zinc-100 dark:bg-zinc-900/50 rounded-2xl border-l-4 border-brand-500 mb-6">
                         <p class="text-zinc-800 dark:text-zinc-200 leading-relaxed font-medium italic"
                             data-i18n="origin_text_key">"Todo esto no hubiera sido posible sin tu amiga Key. A ella le
@@ -2381,7 +2534,8 @@
                         <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed font-light mb-6"
                             data-i18n="food_card1_desc">Sé perfectamente que tu comida favorita en todo el mundo es la
                             <strong>Pechuga a la Crema</strong>. Como no puedo enviártela por correo, ya tengo el plan
-                            perfecto: aprender a cocinarla con el nivel exacto de cremosidad y sabor que te mereces.</p>
+                            perfecto: aprender a cocinarla con el nivel exacto de cremosidad y sabor que te mereces.
+                        </p>
                     </div>
                     <button onclick="openRecipeModal()"
                         class="relative z-10 w-full flex items-center justify-center bg-zinc-900 dark:bg-zinc-800 text-white px-6 py-4 rounded-xl font-bold hover:opacity-80 transition-all shadow-md active:scale-95">
@@ -3063,6 +3217,7 @@
                 align-items: center;
                 justify-content: center;
                 transition: all .3s;
+                cursor: pointer;
             }
 
             .heal-breathe-circle.inhale {
@@ -7707,18 +7862,65 @@
         // ══════════ INICIO PRINCIPAL ══════════
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Carga Animada
-            spawnLoaderParticles();
             let progress = 0;
             const percentText = document.getElementById('loader-percent');
             const progressBar = document.getElementById('loader-progress');
+            const loaderMsg = document.getElementById('loader-message');
+
+            // Rotating loader messages
+            const loaderMessages = [
+                'Preparando nuestro universo...',
+                'Cargando recuerdos...',
+                'Pintando tulipanes...',
+                'Conectando corazones...',
+                'Casi listo...'
+            ];
+            let msgIndex = 0;
+            if (loaderMsg) {
+                loaderMsg.style.transition = 'none';
+                loaderMsg.style.opacity = '0';
+                loaderMsg.style.transform = 'translateY(10px)';
+                loaderMsg.textContent = loaderMessages[0];
+                // Force repaint, then animate in
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        loaderMsg.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                        loaderMsg.style.opacity = '1';
+                        loaderMsg.style.transform = 'translateY(0)';
+                    });
+                });
+                // Start rotating after first message has shown
+                setTimeout(() => {
+                    setInterval(() => {
+                        msgIndex = (msgIndex + 1) % loaderMessages.length;
+                        loaderMsg.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        loaderMsg.style.opacity = '0';
+                        loaderMsg.style.transform = 'translateY(6px)';
+                        setTimeout(() => {
+                            loaderMsg.textContent = loaderMessages[msgIndex];
+                            loaderMsg.style.opacity = '1';
+                            loaderMsg.style.transform = 'translateY(0)';
+                        }, 300);
+                    }, 1500);
+                }, 1200);
+            }
 
             const loaderInterval = setInterval(() => {
-                progress += Math.floor(Math.random() * 15) + 5;
+                progress += Math.floor(Math.random() * 12) + 3;
                 if (progress >= 100) {
                     progress = 100;
                     clearInterval(loaderInterval);
+                    // Animate gradients out first
+                    const grads = document.getElementById('loader-gradients');
+                    if (grads) grads.classList.add('loader-grads-exit');
                     setTimeout(() => {
                         document.getElementById('loader').classList.add('loader-hidden');
+                        // Trigger hero entrance animation
+                        const heroSection = document.getElementById('hero');
+                        if (heroSection) {
+                            heroSection.classList.remove('hero-enter-ready');
+                            heroSection.classList.add('hero-enter-active');
+                        }
                         initScrollSpy();
                         // Observer for word bars in top5 section
                         const top5Section = document.getElementById('top5yaire');
@@ -7728,11 +7930,11 @@
                             }, { threshold: 0.3 });
                             barObs.observe(top5Section);
                         }
-                    }, 400);
+                    }, 800);
                 }
                 if (percentText) percentText.innerText = progress + '%';
                 if (progressBar) progressBar.style.width = progress + '%';
-            }, 100);
+            }, 120);
 
             // 2. Inicialización Básica
             initTheme();
@@ -8599,24 +8801,6 @@
                 const target = bar.style.getPropertyValue('--wb');
                 bar.style.width = target;
             });
-        }
-
-        // ══════════ LOADER PARTICLES ══════════
-        function spawnLoaderParticles() {
-            const c = document.getElementById('loader-particles');
-            if (!c) return;
-            const emojis = ['🌷', '💖', '✨', '🌸', '💕', '🌺'];
-            for (let i = 0; i < 18; i++) {
-                const p = document.createElement('span');
-                p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                const x = Math.random() * 100;
-                const dx = (Math.random() - 0.5) * 80;
-                const pr = Math.random() * 360;
-                const dur = 4 + Math.random() * 5;
-                const delay = Math.random() * 6;
-                p.style.cssText = `position:absolute;left:${x}%;bottom:-5%;font-size:${12 + Math.random() * 14}px;opacity:0;animation:loaderParticleFly ${dur}s ${delay}s ease-in-out infinite;--px:${dx}px;--pr:${pr}deg;pointer-events:none;`;
-                c.appendChild(p);
-            }
         }
 
         // ══════════ JUEGOS Y QUIZ ══════════
