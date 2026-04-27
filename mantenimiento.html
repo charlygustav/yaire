@@ -447,6 +447,54 @@
         top: .75rem;
       }
     }
+    /* Collapse toggle */
+    .mp-toggle {
+      position: absolute;
+      top: .5rem; left: -.65rem;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(12,12,14,.92);
+      backdrop-filter: blur(14px);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: transform .2s, background .2s;
+      z-index: 61;
+    }
+    .mp-toggle:hover { background: rgba(255,255,255,.1); }
+    .mp-toggle svg {
+      width: 10px; height: 10px;
+      fill: #a1a1aa;
+      transition: transform .3s ease;
+    }
+    .mini-player.collapsed .mp-toggle svg {
+      transform: rotate(180deg);
+    }
+    .mini-player .mp-collapsible {
+      max-height: 200px;
+      overflow: hidden;
+      transition: max-height .35s ease, opacity .25s ease;
+      opacity: 1;
+    }
+    .mini-player.collapsed .mp-collapsible {
+      max-height: 0;
+      opacity: 0;
+    }
+    .mini-player.collapsed {
+      padding: .5rem .85rem;
+    }
+    .mp-collapsed-label {
+      display: none;
+      font-size: .6rem;
+      font-weight: 600;
+      color: #71717a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .mini-player.collapsed .mp-collapsed-label {
+      display: block;
+    }
   </style>
   <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -575,42 +623,45 @@
 
   <!-- Mini Player -->
   <div class="mini-player" id="mini-player">
-    <div class="mini-player-top">
-      <!-- Cover Art -->
-      <div class="mp-cover" id="mp-cover">
-        <div class="mp-cover-bg" id="mp-cover-bg" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);"></div>
-        <span class="mp-cover-icon">🎵</span>
+    <!-- Collapse toggle -->
+    <button class="mp-toggle" id="mp-toggle" aria-label="Contraer">
+      <svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg>
+    </button>
+    <div class="mp-collapsible">
+      <div class="mini-player-top">
+        <!-- Track Info -->
+        <div class="mp-info">
+          <div class="mp-title" id="mp-title">O.Sky</div>
+          <div class="mp-artist" id="mp-artist">Otis McDonald</div>
+        </div>
+        <!-- Controls -->
+        <div class="mp-controls">
+          <!-- Prev -->
+          <button class="mp-ctrl" id="mp-prev" aria-label="Anterior">
+            <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+          </button>
+          <!-- Play/Pause -->
+          <button class="mp-ctrl mp-ctrl-play" id="mp-play" aria-label="Play">
+            <svg id="mp-icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="mp-icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6zm8-14v14h4V5z"/></svg>
+          </button>
+          <!-- Next -->
+          <button class="mp-ctrl" id="mp-next" aria-label="Siguiente">
+            <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6z"/></svg>
+          </button>
+        </div>
       </div>
-      <!-- Track Info -->
-      <div class="mp-info">
-        <div class="mp-title" id="mp-title">O.Sky</div>
-        <div class="mp-artist" id="mp-artist">Otis McDonald</div>
-      </div>
-      <!-- Controls -->
-      <div class="mp-controls">
-        <!-- Prev -->
-        <button class="mp-ctrl" id="mp-prev" aria-label="Anterior">
-          <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-        </button>
-        <!-- Play/Pause -->
-        <button class="mp-ctrl mp-ctrl-play" id="mp-play" aria-label="Play">
-          <svg id="mp-icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          <svg id="mp-icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6zm8-14v14h4V5z"/></svg>
-        </button>
-        <!-- Next -->
-        <button class="mp-ctrl" id="mp-next" aria-label="Siguiente">
-          <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zm2 0V6l6.5 6L8 18zM16 6v12h2V6z"/></svg>
-        </button>
+      <!-- Progress -->
+      <div class="mp-progress-wrap">
+        <span class="mp-time" id="mp-time-now">0:00</span>
+        <div class="mp-progress-track" id="mp-progress-track">
+          <div class="mp-progress-fill" id="mp-progress-fill"></div>
+        </div>
+        <span class="mp-time mp-time-end" id="mp-time-end">0:00</span>
       </div>
     </div>
-    <!-- Progress -->
-    <div class="mp-progress-wrap">
-      <span class="mp-time" id="mp-time-now">0:00</span>
-      <div class="mp-progress-track" id="mp-progress-track">
-        <div class="mp-progress-fill" id="mp-progress-fill"></div>
-      </div>
-      <span class="mp-time mp-time-end" id="mp-time-end">0:00</span>
-    </div>
+    <!-- Collapsed label -->
+    <div class="mp-collapsed-label" id="mp-collapsed-label">🎵 O.Sky — Otis McDonald</div>
   </div>
 
   <script>
@@ -750,13 +801,10 @@
 
       // Footer
       .to('.footer-strip', { opacity: 1, y: 0, duration: .45 }, 1.1);
-    // ── Música de fondo (mini player) ──
     const audio = document.getElementById('bg-music');
     const player = document.getElementById('mini-player');
     const mpTitle = document.getElementById('mp-title');
     const mpArtist = document.getElementById('mp-artist');
-    const mpCover = document.getElementById('mp-cover');
-    const mpCoverBg = document.getElementById('mp-cover-bg');
     const mpPlayBtn = document.getElementById('mp-play');
     const mpIconPlay = document.getElementById('mp-icon-play');
     const mpIconPause = document.getElementById('mp-icon-pause');
@@ -766,6 +814,8 @@
     const mpProgressFill = document.getElementById('mp-progress-fill');
     const mpTimeNow = document.getElementById('mp-time-now');
     const mpTimeEnd = document.getElementById('mp-time-end');
+    const mpToggle = document.getElementById('mp-toggle');
+    const mpCollapsedLabel = document.getElementById('mp-collapsed-label');
 
     const playlist = [
       { src: 'sounds/Otis McDonald - O.Sky.mp3',                             title: 'O.Sky',            artist: 'Otis McDonald',            icon: '☀️', gradient: 'linear-gradient(135deg, #f59e0b, #ef4444)' },
@@ -789,8 +839,7 @@
       audio.src = track.src;
       mpTitle.textContent = track.title;
       mpArtist.textContent = track.artist;
-      mpCoverBg.style.background = track.gradient;
-      mpCover.querySelector('.mp-cover-icon').textContent = track.icon;
+      mpCollapsedLabel.textContent = '🎵 ' + track.title + ' — ' + track.artist;
       mpTimeNow.textContent = '0:00';
       mpTimeEnd.textContent = '0:00';
       mpProgressFill.style.width = '0%';
@@ -804,7 +853,6 @@
       isPlaying = playing;
       mpIconPlay.style.display  = playing ? 'none'  : 'block';
       mpIconPause.style.display = playing ? 'block' : 'none';
-      mpCover.classList.toggle('spinning', playing);
     }
 
     // Play/Pause
@@ -893,8 +941,13 @@
       });
     }
 
+    // Collapse toggle
+    mpToggle.addEventListener('click', () => {
+      player.classList.toggle('collapsed');
+    });
+
     // GSAP: reveal the mini player
-    gsap.set('#mini-player', { opacity: 0, y: 30 });
+    gsap.set('#mini-player', { opacity: 0, y: -20 });
     gsap.to('#mini-player', { opacity: 1, y: 0, duration: .6, delay: 1.3, ease: 'power3.out', onComplete: () => player.classList.add('visible') });
   </script>
 </body>
