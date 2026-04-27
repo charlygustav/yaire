@@ -405,7 +405,48 @@
       fill: #fff;
       width: 16px; height: 16px;
     }
-
+    .mp-ctrl-play:hover svg { fill: #fff; }
+    /* Progress bar */
+    .mp-progress-wrap {
+      margin-top: .55rem;
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+    }
+    .mp-time {
+      font-size: .55rem;
+      font-weight: 600;
+      color: #52525b;
+      min-width: 28px;
+      font-variant-numeric: tabular-nums;
+    }
+    .mp-time-end { text-align: right; }
+    .mp-progress-track {
+      flex: 1;
+      height: 4px;
+      background: rgba(255,255,255,.08);
+      border-radius: 999px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .mp-progress-track:hover {
+      height: 6px;
+    }
+    .mp-progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--tulip-500), var(--amber-400));
+      transition: width .15s linear;
+    }
+    @media (max-width: 768px) {
+      .mini-player {
+        left: .75rem; right: .75rem;
+        width: auto;
+        top: .75rem;
+      }
+    }
   </style>
   <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -553,6 +594,14 @@
           <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6z"/></svg>
         </button>
       </div>
+    </div>
+    <!-- Progress -->
+    <div class="mp-progress-wrap">
+      <span class="mp-time" id="mp-time-now">0:00</span>
+      <div class="mp-progress-track" id="mp-progress-track">
+        <div class="mp-progress-fill" id="mp-progress-fill"></div>
+      </div>
+      <span class="mp-time mp-time-end" id="mp-time-end">0:00</span>
     </div>
   </div>
 
@@ -706,8 +755,6 @@
     const mpProgressFill = document.getElementById('mp-progress-fill');
     const mpTimeNow = document.getElementById('mp-time-now');
     const mpTimeEnd = document.getElementById('mp-time-end');
-    const mpToggle = document.getElementById('mp-toggle');
-    const mpCollapsedLabel = document.getElementById('mp-collapsed-label');
 
     const playlist = [
       { src: 'sounds/Otis McDonald - O.Sky.mp3',                             title: 'O.Sky',            artist: 'Otis McDonald',            icon: '☀️', gradient: 'linear-gradient(135deg, #f59e0b, #ef4444)' },
@@ -731,7 +778,6 @@
       audio.src = track.src;
       mpTitle.textContent = track.title;
       mpArtist.textContent = track.artist;
-      mpCollapsedLabel.textContent = '🎵 ' + track.title + ' — ' + track.artist;
       mpTimeNow.textContent = '0:00';
       mpTimeEnd.textContent = '0:00';
       mpProgressFill.style.width = '0%';
@@ -833,10 +879,6 @@
       });
     }
 
-    // Collapse toggle
-    mpToggle.addEventListener('click', () => {
-      player.classList.toggle('collapsed');
-    });
 
     // GSAP: reveal the mini player
     gsap.set('#mini-player', { opacity: 0, y: -20 });
