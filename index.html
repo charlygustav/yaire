@@ -3115,25 +3115,25 @@
 
         <!-- Spotlight Ultra-Compact Player -->
         <div class="mx-3 mb-3">
-            <div class="flex items-center gap-3 p-2 rounded-xl bg-zinc-50/50 dark:bg-zinc-900/20 border border-transparent hover:border-zinc-200/50 dark:hover:border-zinc-700/50 transition-all group">
+            <div class="flex items-center gap-2 p-1.5 rounded-xl bg-zinc-50/50 dark:bg-zinc-900/20 border border-transparent hover:border-zinc-200/50 dark:hover:border-zinc-700/50 transition-all group">
                 <!-- Icono giratorio al reproducir -->
-                <div class="w-9 h-9 flex-shrink-0 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-brand-500 relative overflow-hidden" id="spotlight-icon-wrap">
-                    <span id="spotlight-icon" class="text-sm transition-transform duration-700">🎵</span>
+                <div class="w-7 h-7 flex-shrink-0 rounded-md bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-brand-500 relative overflow-hidden" id="spotlight-icon-wrap">
+                    <span id="spotlight-icon" class="text-xs transition-transform duration-700">🎵</span>
                 </div>
                 
                 <!-- Info de pista -->
                 <div class="flex-1 min-w-0">
-                    <p class="text-[11px] font-bold text-zinc-700 dark:text-zinc-200 truncate leading-tight" id="spotlight-title">Spotlight Radio</p>
-                    <p class="text-[9px] text-zinc-500 dark:text-zinc-400 truncate mt-0.5" id="spotlight-artist">Cargando...</p>
+                    <p class="text-[10px] font-bold text-zinc-700 dark:text-zinc-200 truncate leading-tight" id="spotlight-title">Spotlight Radio</p>
+                    <p class="text-[8px] text-zinc-500 dark:text-zinc-400 truncate mt-0.5" id="spotlight-artist">Cargando...</p>
                 </div>
                 
                 <!-- Controles Compactos -->
                 <div class="flex items-center gap-0.5 opacity-80 group-hover:opacity-100 transition-opacity">
-                    <button class="w-8 h-8 rounded-full flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-brand-500 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors" onclick="spotlightTogglePlay()">
-                        <svg class="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24" id="spotlight-play-icon"><path d="M8 5v14l11-7z"/></svg>
+                    <button class="w-6 h-6 rounded-full flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-brand-500 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors" onclick="spotlightTogglePlay()">
+                        <svg class="w-3 h-3 ml-0.5" fill="currentColor" viewBox="0 0 24 24" id="spotlight-play-icon"><path d="M8 5v14l11-7z"/></svg>
                     </button>
-                    <button class="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-brand-500 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors" onclick="spotlightNext()">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                    <button class="w-6 h-6 rounded-full flex items-center justify-center text-zinc-400 hover:text-brand-500 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors" onclick="spotlightNext()">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
                     </button>
                 </div>
             </div>
