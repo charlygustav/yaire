@@ -14980,6 +14980,55 @@ De película.
                         scrollTrigger: { trigger: grid, start: 'top 88%', once: true }
                     });
                 });
+
+                // ─── 10. SECTION TITLES (H2) ─────────────────────────────────
+                var sectionTitles = Array.from(document.querySelectorAll('.cv-section h2, .section-title, .enigma-title'));
+                sectionTitles.forEach(function(title) {
+                    gsap.fromTo(title, 
+                        { opacity: 0, y: 30, scale: 0.95 },
+                        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: title, start: 'top 92%', once: true } }
+                    );
+                });
+
+                // ─── 11. GSAP HOVER INTERACTIONS FOR BUTTONS ─────────────────
+                var interactableBtns = document.querySelectorAll('.menu-link-item, .vault-btn, .tulip-color-btn, #spotlight-play-btn, .game-card');
+                interactableBtns.forEach(function(btn) {
+                    // Pre-bind hardware acceleration to prevent jumpiness on first hover
+                    gsap.set(btn, { force3D: true });
+                    btn.addEventListener('mouseenter', function() {
+                        gsap.to(btn, { scale: 1.04, duration: 0.4, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
+                    });
+                    btn.addEventListener('mouseleave', function() {
+                        gsap.to(btn, { scale: 1, duration: 0.3, ease: 'power2.out', overwrite: 'auto' });
+                    });
+                    btn.addEventListener('mousedown', function() {
+                        gsap.to(btn, { scale: 0.94, duration: 0.1, overwrite: 'auto' });
+                    });
+                    btn.addEventListener('mouseup', function() {
+                        gsap.to(btn, { scale: 1.04, duration: 0.4, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
+                    });
+                });
+
+                // ─── 12. CONTINUOUS SUBTLE FLOATING (YOYO) ───────────────────
+                var floatingIcons = document.querySelectorAll('.menu-link-icon, .menu-new-badge');
+                floatingIcons.forEach(function(icon) {
+                    gsap.set(icon, { force3D: true });
+                    var delay = Math.random() * 1.5;
+                    if(icon.classList.contains('menu-new-badge')) {
+                        gsap.to(icon, { scale: 1.08, duration: 0.8, ease: 'power1.inOut', yoyo: true, repeat: -1, delay: delay });
+                    } else {
+                        gsap.to(icon, { y: -3, duration: 2 + Math.random(), ease: 'sine.inOut', yoyo: true, repeat: -1, delay: delay });
+                    }
+                });
+                
+                // ─── 13. HERO SECTION REVEAL ─────────────────────────────────
+                var heroElements = document.querySelectorAll('#hero-title, #hero-subtitle, #hero-countdown');
+                if (heroElements.length) {
+                    gsap.fromTo(heroElements, 
+                        { opacity: 0, y: 20 },
+                        { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.2, delay: 0.2 }
+                    );
+                }
             }
 
             // Wait until loader is fully hidden before setting up animations
