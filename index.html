@@ -3139,13 +3139,6 @@
             </div>
 
 
-            
-            <style>
-                .spot-spin { animation: spotSpinAnim 3s linear infinite; }
-                .spot-paused { animation-play-state: paused; }
-                @keyframes spotSpinAnim { 100% { transform: rotate(360deg) scale(1.1); } }
-            </style>
-
             <script>
                 const spotlightTracks = [
                     { title: "Bing Bong", artist: "Yailin la Mas Viral", src: "radio/Bing Bong - Yailin la Mas Viral - SpotubeDL.com.mp3" },
@@ -3215,19 +3208,15 @@
 
                 function spotlightUpdateUI() {
                     const icon = document.getElementById('spotlight-play-icon');
-                    const spinIcon = document.getElementById('spotlight-icon');
                     const iconWrap = document.getElementById('spotlight-icon-wrap');
                     
                     if(isSpotPlaying) {
                         icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
                         icon.classList.remove('ml-0.5');
-                        spinIcon.classList.add('spot-spin');
-                        spinIcon.classList.remove('spot-paused');
                         iconWrap.classList.add('bg-brand-50', 'dark:bg-brand-900/20');
                     } else {
                         icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
                         icon.classList.add('ml-0.5');
-                        if(spinIcon.classList.contains('spot-spin')) spinIcon.classList.add('spot-paused');
                         iconWrap.classList.remove('bg-brand-50', 'dark:bg-brand-900/20');
                     }
                 }
