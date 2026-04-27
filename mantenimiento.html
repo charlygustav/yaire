@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>En Mantenimiento · Yaire 🌷</title>
+  <meta name="description" content="La página está temporalmente en mantenimiento. Volvemos pronto.">
+  <link rel="icon" type="image/x-icon" href="tulip.ico?v=3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Merriweather:ital@1&display=swap">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --tulip-400: #f472b6;
+      --tulip-500: #ec4899;
+      --amber-400: #fbbf24;
+      --amber-500: #f59e0b;
+      --bg:      #09090b;
+      --border:  rgba(255,255,255,0.07);
+      --text:    #f4f4f5;
+      --muted:   #71717a;
+    }
+
+    @keyframes auroraShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(-45deg, #09090b, #1a0a1e, #0d0a1a, #1a0d06, #0d1a0a, #09090b);
+      background-size: 400% 400%;
+      animation: auroraShift 18s ease infinite;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+
+    /* ═══ Orbs ═══ */
+    .bg-orb {
+      position: fixed; border-radius: 50%;
+      filter: blur(130px); pointer-events: none; z-index: 0;
+      animation: orbDrift 16s ease-in-out infinite alternate;
+    }
+    .orb-pink  { width: 55vw; height: 55vw; max-width: 700px; max-height: 700px;
+                 background: radial-gradient(circle, rgba(236,72,153,.22) 0%, transparent 70%);
+                 top: -15vh; left: -8vw; }
+    .orb-amber { width: 40vw; height: 40vw; max-width: 520px; max-height: 520px;
+                 background: radial-gradient(circle, rgba(245,158,11,.18) 0%, transparent 70%);
+                 bottom: -10vh; right: -5vw; animation-delay: -8s; }
+    .orb-indigo{ width: 30vw; height: 30vw; max-width: 400px; max-height: 400px;
+                 background: radial-gradient(circle, rgba(99,102,241,.14) 0%, transparent 70%);
+                 top: 40%; left: 45%; animation-delay: -4s; }
+    @keyframes orbDrift {
+      0%   { transform: translate(0,0) scale(1); }
+      100% { transform: translate(24px,16px) scale(1.07); }
+    }
+
+
+
+    /* ═══ Layout principal: dos columnas ═══ */
+    .layout {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      width: 100vw; height: 100dvh;
+    }
+
+    /* ── Columna izquierda: panel visual ── */
+    .col-left {
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      padding: 3rem 3.5rem;
+      border-right: 1px solid var(--border);
+      animation: fadeSlideL .9s cubic-bezier(.22,1,.36,1) both;
+      position: relative; overflow: hidden;
+    }
+    @keyframes fadeSlideL {
+      from { opacity: 0; transform: translateX(-28px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .logo-area { display: flex; align-items: center; gap: .75rem; }
+    .logo-emoji {
+      font-size: 2rem;
+      filter: drop-shadow(0 0 14px rgba(236,72,153,.6));
+      animation: floatIcon 3.5s ease-in-out infinite;
+    }
+    @keyframes floatIcon {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-7px); }
+    }
+    .logo-text { font-size: 2rem; font-weight: 900; letter-spacing: -.06em; color: #fff; line-height: 1; }
+
+    /* ── Countdown ── */
+    .countdown-wrap { text-align: left; }
+    .countdown-title {
+      font-size: .65rem; font-weight: 800; text-transform: uppercase; letter-spacing: .16em;
+      color: var(--muted); margin-bottom: 1.1rem;
+    }
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .75rem;
+    }
+    .cd-box {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      padding: 1.1rem .5rem .9rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: background .25s;
+    }
+    .cd-box::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(236,72,153,.06), rgba(245,158,11,.06));
+      opacity: 0;
+      transition: opacity .25s;
+    }
+    .cd-box:hover::before { opacity: 1; }
+    .cd-box:hover { border-color: rgba(236,72,153,.25); }
+    .cd-num {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 900;
+      letter-spacing: -.04em;
+      line-height: 1;
+      background: linear-gradient(135deg, #fff 20%, var(--tulip-400) 70%, var(--amber-400));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      animation: cdPulse 1s ease-in-out;
+    }
+    @keyframes cdPulse {
+      0%   { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+    .cd-label {
+      font-size: .6rem; font-weight: 800; text-transform: uppercase; letter-spacing: .14em;
+      color: var(--muted); margin-top: .4rem; display: block;
+    }
+    /* Separador parpadeante entre boxes */
+    .cd-sep {
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(1.6rem, 3vw, 2.8rem); font-weight: 900;
+      color: var(--tulip-400);
+      padding-bottom: 1.2rem;
+      animation: dotBlink 1s ease-in-out infinite;
+      /* No renderizar como columna extra, usar pseudo-elementos en su lugar */
+    }
+
+
+    /* Status cards bottom-left */
+    .status-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: .75rem;
+    }
+    .status-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1rem 1.1rem;
+      transition: background .2s;
+    }
+    .status-card:hover { background: rgba(255,255,255,.06); }
+    .status-card-icon { font-size: 1.3rem; margin-bottom: .45rem; }
+    .status-card-label {
+      font-size: .6rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em;
+      color: var(--muted); margin-bottom: .15rem;
+    }
+    .status-card-val {
+      font-size: .9rem; font-weight: 700; color: var(--text);
+    }
+    .ok  { color: #4ade80; }
+    .wrn { color: var(--amber-400); }
+
+    /* ── Columna derecha: contenido central ── */
+    .col-right {
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 3rem 4rem;
+      animation: fadeSlideR .9s cubic-bezier(.22,1,.36,1) .1s both;
+    }
+    @keyframes fadeSlideR {
+      from { opacity: 0; transform: translateX(28px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: .45rem;
+      font-size: .62rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--amber-400);
+      background: rgba(245,158,11,.1);
+      border: 1px solid rgba(245,158,11,.25);
+      border-radius: 999px;
+      padding: .3rem .9rem;
+      margin-bottom: 1.6rem;
+      width: fit-content;
+    }
+    .badge-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--amber-400);
+      animation: dotBlink 1.4s ease-in-out infinite;
+    }
+    @keyframes dotBlink { 0%,100% { opacity: 1; } 50% { opacity: .15; } }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900; line-height: 1.1; letter-spacing: -.03em;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 25%, var(--tulip-400));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: clamp(.9rem, 1.3vw, 1.05rem);
+      color: var(--muted); line-height: 1.7; margin-bottom: 2.5rem;
+      max-width: 36ch;
+    }
+    .subtitle em {
+      font-family: 'Merriweather', serif;
+      color: var(--tulip-400); font-style: italic;
+    }
+
+    /* Progreso */
+    .progress-label {
+      display: flex; justify-content: space-between;
+      font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+      color: var(--muted); margin-bottom: .55rem;
+    }
+    .progress-track {
+      background: rgba(255,255,255,.06);
+      border-radius: 999px; height: 8px; overflow: hidden; margin-bottom: 2.5rem;
+    }
+    .progress-fill {
+      height: 100%; width: 0%; border-radius: 999px;
+      background: linear-gradient(90deg, var(--tulip-500), var(--amber-400), var(--tulip-400));
+      background-size: 200% 100%;
+      animation: shimmerFill 2.6s linear infinite;
+      transition: width .8s cubic-bezier(.22,1,.36,1);
+    }
+    @keyframes shimmerFill {
+      0%   { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    /* Pills */
+    .pills {
+      display: flex; flex-wrap: wrap; gap: .55rem; margin-bottom: 2.5rem;
+    }
+    .pill {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .7rem; font-weight: 600; color: var(--muted);
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 999px; padding: .38rem 1rem;
+      transition: background .2s, color .2s;
+    }
+    .pill:hover { background: rgba(255,255,255,.08); color: var(--text); }
+
+
+
+    /* Divider */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0 0 2rem; }
+
+    /* Footer strip */
+    .footer-strip {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      border-top: 1px solid var(--border);
+      background: rgba(9,9,11,.7);
+      backdrop-filter: blur(16px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .7rem 3rem;
+      font-size: .68rem; color: var(--muted);
+      z-index: 10;
+    }
+    .footer-strip a { color: var(--muted); text-decoration: none; }
+    .footer-strip a:hover { color: var(--tulip-400); }
+
+    /* ═══ Responsive: una columna en mobile ═══ */
+    @media (max-width: 768px) {
+      html, body { overflow: auto; }
+      .layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr; height: auto; min-height: 100dvh; }
+      .col-left  { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem 1.5rem; }
+      .col-right { padding: 2rem 1.5rem; }
+      .clock-time { font-size: 3.5rem; }
+      .status-grid { grid-template-columns: 1fr 1fr; }
+      .footer-strip { padding: .6rem 1.5rem; }
+    }
+    /* ── Botón de música flotante ── */
+    .music-btn {
+      position: fixed;
+      bottom: 3.8rem;
+      right: 1.8rem;
+      z-index: 50;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(17,17,19,.85);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(14px);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease, border-color .25s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,.4);
+      opacity: 0;
+    }
+    .music-btn:hover {
+      transform: scale(1.12);
+      border-color: rgba(236,72,153,.45);
+      box-shadow: 0 6px 28px rgba(236,72,153,.3);
+    }
+    .music-btn svg { width: 20px; height: 20px; fill: #f4f4f5; transition: fill .2s; }
+    .music-btn.playing { border-color: rgba(236,72,153,.5); }
+    .music-btn.playing svg { fill: var(--tulip-400); }
+    .music-btn.pulse { animation: musicPulse 2s ease-in-out infinite; }
+    @keyframes musicPulse {
+      0%,100% { box-shadow: 0 4px 20px rgba(0,0,0,.4), 0 0 0 0 rgba(236,72,153,0); }
+      50%      { box-shadow: 0 4px 20px rgba(0,0,0,.4), 0 0 0 8px rgba(236,72,153,.15); }
+    }
+    .music-label {
+      position: fixed;
+      bottom: 3.8rem;
+      right: 4.6rem;
+      z-index: 50;
+      font-size: .65rem; font-weight: 700;
+      color: var(--muted);
+      background: rgba(17,17,19,.85);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: .3rem .8rem;
+      backdrop-filter: blur(14px);
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(8px);
+      transition: opacity .3s ease, transform .3s ease;
+      pointer-events: none;
+    }
+    .music-btn:hover + .music-label,
+    .music-label:hover { opacity: 1 !important; transform: translateX(0) !important; }
+  </style>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+
+  <!-- Orbs -->
+  <div class="bg-orb orb-pink"></div>
+  <div class="bg-orb orb-amber"></div>
+  <div class="bg-orb orb-indigo"></div>
+
+
+  <!-- Layout principal -->
+  <div class="layout" id="main-layout">
+
+    <!-- ── COLUMNA IZQUIERDA ── -->
+    <div class="col-left">
+
+      <!-- Logo -->
+      <div class="logo-area">
+        <span class="logo-text">28E</span>
+      </div>
+
+      <!-- Countdown al 28 de Enero -->
+      <div class="countdown-wrap">
+        <div class="countdown-title">⏳ Faltan para el 28 de Abril</div>
+        <div class="countdown-grid">
+          <div class="cd-box">
+            <span class="cd-num" id="cd-days">--</span>
+            <span class="cd-label">Días</span>
+          </div>
+          <div class="cd-box">
+            <span class="cd-num" id="cd-hours">--</span>
+            <span class="cd-label">Horas</span>
+          </div>
+          <div class="cd-box">
+            <span class="cd-num" id="cd-mins">--</span>
+            <span class="cd-label">Minutos</span>
+          </div>
+          <div class="cd-box">
+            <span class="cd-num" id="cd-secs">--</span>
+            <span class="cd-label">Segundos</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Estado de sistemas -->
+      <div class="status-grid">
+        <div class="status-card">
+          <div class="status-card-icon">🖥️</div>
+          <div class="status-card-label">Servidor</div>
+          <div class="status-card-val ok">Operativo</div>
+        </div>
+        <div class="status-card">
+          <div class="status-card-icon">🔄</div>
+          <div class="status-card-label">Despliegue</div>
+          <div class="status-card-val wrn">En proceso</div>
+        </div>
+        <div class="status-card">
+          <div class="status-card-icon">🗃️</div>
+          <div class="status-card-label">Base de datos</div>
+          <div class="status-card-val ok">Estable</div>
+        </div>
+        <div class="status-card">
+          <div class="status-card-icon">🛡️</div>
+          <div class="status-card-label">Seguridad</div>
+          <div class="status-card-val ok">Activa</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── COLUMNA DERECHA ── -->
+    <div class="col-right">
+
+      <!-- Badge -->
+      <div class="badge">
+        <span class="badge-dot"></span>
+        En mantenimiento
+      </div>
+
+      <!-- Título -->
+      <h1>Volvemos<br>muy pronto</h1>
+
+      <!-- Subtítulo -->
+      <p class="subtitle">
+        Estamos puliendo cada detalle para que todo
+        luzca perfecto para <em>ti</em>.&nbsp;
+        Gracias por tu paciencia. 🌸
+      </p>
+
+      <!-- Progreso -->
+      <div class="progress-label">
+        <span>Progreso del mantenimiento</span>
+        <span id="pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill"></div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Pills -->
+      <div class="pills">
+        <div class="pill">🔧 Actualizando dependencias</div>
+        <div class="pill">⚡ Optimizando velocidad</div>
+        <div class="pill">🎨 Nuevas sorpresas</div>
+        <div class="pill">💾 Respaldando datos</div>
+        <div class="pill">🔒 Mejorando seguridad</div>
+        <div class="pill">🌸 Añadiendo detalles</div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- Footer strip -->
+  <footer class="footer-strip">
+    <span>&copy; <span id="yr"></span> Charles Gustav. Todos los derechos reservados.</span>
+    <span id="uptime-label">Tiempo en mantenimiento: <b id="uptime">00:00:00</b></span>
+  </footer>
+
+  <!-- Audio de fondo -->
+  <audio id="bg-music" preload="auto">
+    <source src="sounds/Otis McDonald - O.Sky.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Botón play/pause flotante -->
+  <button class="music-btn" id="music-btn" aria-label="Reproducir música">
+    <!-- ▶ Play icon -->
+    <svg id="icon-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+    <!-- ⏸ Pause icon (oculto) -->
+    <svg id="icon-pause" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display:none"><path d="M6 19h4V5H6zm8-14v14h4V5z"/></svg>
+  </button>
+  <div class="music-label" id="music-label">O.Sky – Otis McDonald</div>
+
+  <script>
+    // ── Año ──
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // ── Countdown al 28 de Abril ──
+    function pad(n){ return String(n).padStart(2,'0'); }
+    const daysEl  = document.getElementById('cd-days');
+    const hoursEl = document.getElementById('cd-hours');
+    const minsEl  = document.getElementById('cd-mins');
+    const secsEl  = document.getElementById('cd-secs');
+    const pctEl   = document.getElementById('pct');
+    const fillEl  = document.querySelector('.progress-fill');
+
+    // Inicio del mantenimiento (26 Abril 2026)
+    const MAINT_START = new Date(2026, 3, 26, 0, 0, 0);
+
+    function getTarget28() {
+      const now = new Date();
+      let y = now.getFullYear();
+      let t = new Date(y, 3, 28, 0, 0, 0); // 3 = Abril
+      if (t <= now) t = new Date(y + 1, 3, 28, 0, 0, 0);
+      return t;
+    }
+    const TARGET_DATE = getTarget28();
+
+    function animateNum(el, newVal) {
+      if (el.textContent === newVal) return;
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = 'cdPulse .35s ease-out';
+      el.textContent = newVal;
+    }
+
+    function tickCountdown() {
+      const now    = new Date();
+      const diff   = TARGET_DATE - now;
+
+      // ── Progreso basado en el countdown ──
+      const total   = TARGET_DATE - MAINT_START;
+      const elapsed = now - MAINT_START;
+      const pct     = Math.min(100, Math.max(0, Math.round((elapsed / total) * 100)));
+      fillEl.style.width = pct + '%';
+      pctEl.textContent  = pct + '%';
+
+      if (diff <= 0) {
+        daysEl.textContent = hoursEl.textContent = minsEl.textContent = secsEl.textContent = '00';
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const totalSecs = Math.floor(diff / 1000);
+      const d  = Math.floor(totalSecs / 86400);
+      const h  = Math.floor((totalSecs % 86400) / 3600);
+      const m  = Math.floor((totalSecs % 3600)  / 60);
+      const s  = totalSecs % 60;
+
+      animateNum(daysEl,  pad(d));
+      animateNum(hoursEl, pad(h));
+      animateNum(minsEl,  pad(m));
+      animateNum(secsEl,  pad(s));
+    }
+    tickCountdown();
+    setInterval(tickCountdown, 1000);
+
+    // ── Tiempo de mantenimiento ──
+    const start = Date.now();
+    const uptimeEl = document.getElementById('uptime');
+    function tickUptime() {
+      let s = Math.floor((Date.now() - start) / 1000);
+      const h = Math.floor(s / 3600); s %= 3600;
+      const m = Math.floor(s / 60);   s %= 60;
+      uptimeEl.textContent = pad(h)+':'+pad(m)+':'+pad(s);
+    }
+    setInterval(tickUptime, 1000);
+
+
+
+
+    // ── GSAP Entrance Timeline ──
+    gsap.set('.col-left',      { opacity: 0, x: -60 });
+    gsap.set('.col-right',     { opacity: 0, x:  60 });
+    gsap.set('.logo-area',     { opacity: 0, y: -20 });
+    gsap.set('.countdown-title', { opacity: 0, y: 16 });
+    gsap.set('.cd-box',        { opacity: 0, y: 40, scale: 0.85 });
+    gsap.set('.status-card',   { opacity: 0, y: 30 });
+    gsap.set('.badge',         { opacity: 0, scale: 0.8 });
+    gsap.set('h1',             { opacity: 0, y: 32 });
+    gsap.set('.subtitle',      { opacity: 0, y: 20 });
+    gsap.set('.progress-label, .progress-track', { opacity: 0 });
+    gsap.set('.divider',       { opacity: 0, scaleX: 0 });
+    gsap.set('.pill',          { opacity: 0, y: 16, scale: 0.9 });
+    gsap.set('.footer-strip',  { opacity: 0, y: 20 });
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    tl
+      // Columnas entran desde los lados
+      .to('.col-left',  { opacity: 1, x: 0, duration: .8 }, 0)
+      .to('.col-right', { opacity: 1, x: 0, duration: .8 }, 0.1)
+
+      // Logo
+      .to('.logo-area', { opacity: 1, y: 0, duration: .5 }, 0.3)
+
+      // Título countdown
+      .to('.countdown-title', { opacity: 1, y: 0, duration: .5 }, 0.45)
+
+      // Cajas del countdown con elastic stagger
+      .to('.cd-box', {
+          opacity: 1, y: 0, scale: 1,
+          duration: .7,
+          ease: 'back.out(1.6)',
+          stagger: 0.1
+        }, 0.55)
+
+      // Tarjetas de estado
+      .to('.status-card', {
+          opacity: 1, y: 0,
+          duration: .5,
+          stagger: 0.09
+        }, 0.75)
+
+      // Columna derecha: badge, h1, subtitle
+      .to('.badge',    { opacity: 1, scale: 1, duration: .45, ease: 'back.out(2)' }, 0.4)
+      .to('h1',        { opacity: 1, y: 0, duration: .6 }, 0.55)
+      .to('.subtitle', { opacity: 1, y: 0, duration: .5 }, 0.7)
+
+      // Barra de progreso
+      .to('.progress-label, .progress-track', { opacity: 1, duration: .4 }, 0.85)
+
+      // Divider con efecto wipe
+      .to('.divider', { opacity: 1, scaleX: 1, duration: .5, ease: 'power2.inOut', transformOrigin: 'left center' }, 0.95)
+
+      // Pills en cascada
+      .to('.pill', {
+          opacity: 1, y: 0, scale: 1,
+          duration: .4,
+          ease: 'back.out(1.4)',
+          stagger: 0.07
+        }, 1.0)
+
+      // Footer
+      .to('.footer-strip', { opacity: 1, y: 0, duration: .45 }, 1.1);
+    // ── Música de fondo (playlist) ──
+    const audio     = document.getElementById('bg-music');
+    const musicBtn  = document.getElementById('music-btn');
+    const iconPlay  = document.getElementById('icon-play');
+    const iconPause = document.getElementById('icon-pause');
+
+    const playlist = [
+      { src: "sounds/Otis McDonald - O.Sky.mp3",                                          label: "O.Sky – Otis McDonald" },
+      { src: "sounds/Oro Fundido - Oblivion's Mighty Trash - SpotubeDL.com.mp3",          label: "Oro Fundido – Oblivion's Mighty Trash" },
+      { src: "sounds/Otis McDonald - CRAZY - Live (SPOTISAVER).mp3",                      label: "CRAZY (Live) – Otis McDonald" },
+      { src: "sounds/Huan62 - Toto Lindo.mp3",                                            label: "Toto Lindo – Huan62" }
+    ];
+    let trackIndex = 0;
+    const musicLabel = document.getElementById('music-label');
+
+    function loadTrack(index) {
+      audio.src  = playlist[index].src;
+      musicLabel.textContent = playlist[index].label;
+    }
+
+    // Al terminar una pista, avanzar a la siguiente o volver a la primera
+    audio.addEventListener('ended', () => {
+      trackIndex++;
+      if (trackIndex >= playlist.length) {
+        trackIndex = 0;
+      }
+      loadTrack(trackIndex);
+      audio.play().then(() => setPlaying(true)).catch(() => {});
+    });
+
+    function setPlaying(playing) {
+      iconPlay.style.display  = playing ? 'none'  : 'block';
+      iconPause.style.display = playing ? 'block' : 'none';
+      musicBtn.classList.toggle('playing', playing);
+      musicBtn.classList.toggle('pulse',   playing);
+    }
+
+    function fadeInVolume() {
+      let vol = 0;
+      const fade = setInterval(() => {
+        vol = Math.min(1, vol + 0.04);
+        audio.volume = vol;
+        if (vol >= 1) clearInterval(fade);
+      }, 80);
+    }
+
+    // Intento de autoplay al cargar
+    audio.volume = 0;
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        setPlaying(true);
+        fadeInVolume();
+      }).catch(() => {
+        setPlaying(false);
+        document.addEventListener('click', function startOnClick() {
+          audio.volume = 0;
+          audio.play().then(() => {
+            setPlaying(true);
+            fadeInVolume();
+          });
+          document.removeEventListener('click', startOnClick);
+        }, { once: true });
+      });
+    }
+
+    // Toggle manual play/pause
+    musicBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (audio.paused) {
+        audio.play();
+        setPlaying(true);
+      } else {
+        audio.pause();
+        setPlaying(false);
+      }
+    });
+
+    // GSAP: animar el botón
+    gsap.to('.music-btn', { opacity: 1, duration: .5, delay: 1.3 });
+  </script>
+</body>
+</html>
