@@ -3020,6 +3020,11 @@
                     <span class="menu-link-icon bg-sky-50 dark:bg-sky-900/20">✈️</span>
                     <span data-i18n="menu_dist">La Distancia</span>
                 </a>
+                <button id="install-pwa-btn" class="menu-link-item text-zinc-600 dark:text-zinc-400 text-left w-full hidden">
+                    <span class="menu-link-icon bg-emerald-50 dark:bg-emerald-900/20">📱</span>
+                    <span>Instalar App</span>
+                    <span class="menu-new-badge menu-new-badge-inline !bg-emerald-500/10 !text-emerald-600 border-emerald-500/20 dark:!bg-emerald-500/20 dark:!text-emerald-400">PWA</span>
+                </button>
             </div>
 
             <!-- Experiencias -->
@@ -14922,8 +14927,10 @@ De película.
         })();
     </script>
 
-    <!-- 🌷 PWA Service Worker Registration -->
+    <!-- 🌷 PWA Service Worker Registration & Install -->
     <script>
+        let deferredPrompt;
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
@@ -14931,6 +14938,31 @@ De película.
                     .catch(err => console.warn('SW registration failed:', err));
             });
         }
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const installBtn = document.getElementById('install-pwa-btn');
+            if (installBtn) {
+                installBtn.classList.remove('hidden');
+                installBtn.addEventListener('click', async () => {
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        const { outcome } = await deferredPrompt.userChoice;
+                        console.log(`Install prompt outcome: ${outcome}`);
+                        deferredPrompt = null;
+                        installBtn.classList.add('hidden');
+                    }
+                });
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA installed successfully');
+            const installBtn = document.getElementById('install-pwa-btn');
+            if (installBtn) installBtn.classList.add('hidden');
+            deferredPrompt = null;
+        });
     </script>
 
 
