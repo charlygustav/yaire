@@ -8,6 +8,17 @@
     <meta name="description" content="Para Yaire 🌷 — Mi lugar favorito es contigo. Feliz 28E.">
     <link rel="icon" type="image/x-icon" href="tulip.ico?v=3">
 
+    <!-- Bloqueo temporal: Redirigir a mantenimiento antes del 28 de Abril -->
+    <script>
+        (function() {
+            // Fecha de desbloqueo: 28 de Abril de 2026 a las 00:00:00 (Mes 3 = Abril)
+            const unlockDate = new Date(2026, 3, 28, 0, 0, 0);
+            if (new Date() < unlockDate) {
+                window.location.replace("mantenimiento.html");
+            }
+        })();
+    </script>
+
     <!-- ═══ Performance: Preconnect to external origins ═══ -->
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
