@@ -514,7 +514,8 @@
       // ── Progreso basado en el countdown ──
       const total   = TARGET_DATE - MAINT_START;
       const elapsed = now - MAINT_START;
-      const pct     = Math.min(100, Math.max(0, Math.round((elapsed / total) * 100)));
+      const rawPct  = (elapsed / total) * 100;
+      const pct     = Math.min(100, Math.max(0, rawPct)).toFixed(4);
       fillEl.style.width = pct + '%';
       pctEl.textContent  = pct + '%';
 
