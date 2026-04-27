@@ -3,7 +3,7 @@
 // Cache-first strategy for offline support
 // ═══════════════════════════════════════════════════════════════════════
 
-const CACHE_NAME = 'yaire-v10';
+const CACHE_NAME = 'yaire-v11';
 
 // Core assets to cache for offline use (essential for first paint)
 const CORE_ASSETS = [
