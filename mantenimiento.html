@@ -294,56 +294,159 @@
       .status-grid { grid-template-columns: 1fr 1fr; }
       .footer-strip { padding: .6rem 1.5rem; }
     }
-    /* ── Botón de música flotante ── */
-    .music-btn {
+    /* ── Mini Player ── */
+    .mini-player {
       position: fixed;
-      bottom: 3.8rem;
-      right: 1.8rem;
-      z-index: 50;
-      width: 48px; height: 48px;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 60;
+      width: 340px;
+      background: rgba(12, 12, 14, 0.92);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 1.25rem;
+      backdrop-filter: blur(24px) saturate(1.4);
+      box-shadow: 0 8px 40px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.04) inset;
+      padding: 1rem 1.15rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .4s ease, transform .4s ease;
+    }
+    .mini-player.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .mini-player-top {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+    }
+    .mp-cover {
+      width: 52px; height: 52px;
+      border-radius: .75rem;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .mp-cover-bg {
+      position: absolute; inset: 0;
+      transition: opacity .4s ease;
+    }
+    .mp-cover-icon {
+      position: relative; z-index: 1;
+      filter: drop-shadow(0 1px 4px rgba(0,0,0,.6));
+    }
+    .mp-cover.spinning .mp-cover-icon {
+      animation: coverSpin 4s linear infinite;
+    }
+    @keyframes coverSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .mp-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .mp-title {
+      font-size: .82rem;
+      font-weight: 700;
+      color: #f4f4f5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.3;
+    }
+    .mp-artist {
+      font-size: .68rem;
+      font-weight: 500;
+      color: #71717a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .mp-controls {
+      display: flex;
+      align-items: center;
+      gap: .15rem;
+      flex-shrink: 0;
+    }
+    .mp-ctrl {
+      width: 34px; height: 34px;
       border-radius: 50%;
-      background: rgba(17,17,19,.85);
-      border: 1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(14px);
+      border: none;
+      background: transparent;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease, border-color .25s ease;
-      box-shadow: 0 4px 20px rgba(0,0,0,.4);
-      opacity: 0;
+      transition: background .2s, transform .15s;
     }
-    .music-btn:hover {
-      transform: scale(1.12);
-      border-color: rgba(236,72,153,.45);
-      box-shadow: 0 6px 28px rgba(236,72,153,.3);
+    .mp-ctrl:hover {
+      background: rgba(255,255,255,.08);
     }
-    .music-btn svg { width: 20px; height: 20px; fill: #f4f4f5; transition: fill .2s; }
-    .music-btn.playing { border-color: rgba(236,72,153,.5); }
-    .music-btn.playing svg { fill: var(--tulip-400); }
-    .music-btn.pulse { animation: musicPulse 2s ease-in-out infinite; }
-    @keyframes musicPulse {
-      0%,100% { box-shadow: 0 4px 20px rgba(0,0,0,.4), 0 0 0 0 rgba(236,72,153,0); }
-      50%      { box-shadow: 0 4px 20px rgba(0,0,0,.4), 0 0 0 8px rgba(236,72,153,.15); }
+    .mp-ctrl:active {
+      transform: scale(0.9);
     }
-    .music-label {
-      position: fixed;
-      bottom: 3.8rem;
-      right: 4.6rem;
-      z-index: 50;
-      font-size: .65rem; font-weight: 700;
-      color: var(--muted);
-      background: rgba(17,17,19,.85);
-      border: 1px solid var(--border);
+    .mp-ctrl svg {
+      width: 16px; height: 16px;
+      fill: #a1a1aa;
+      transition: fill .2s;
+    }
+    .mp-ctrl:hover svg { fill: #f4f4f5; }
+    .mp-ctrl-play {
+      width: 40px; height: 40px;
+      background: var(--tulip-500);
+      border-radius: 50%;
+    }
+    .mp-ctrl-play:hover {
+      background: var(--tulip-400);
+    }
+    .mp-ctrl-play svg {
+      fill: #fff;
+      width: 18px; height: 18px;
+    }
+    .mp-ctrl-play:hover svg { fill: #fff; }
+    /* Progress bar */
+    .mp-progress-wrap {
+      margin-top: .65rem;
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+    }
+    .mp-time {
+      font-size: .58rem;
+      font-weight: 600;
+      color: #52525b;
+      min-width: 30px;
+      font-variant-numeric: tabular-nums;
+    }
+    .mp-time-end { text-align: right; }
+    .mp-progress-track {
+      flex: 1;
+      height: 4px;
+      background: rgba(255,255,255,.08);
       border-radius: 999px;
-      padding: .3rem .8rem;
-      backdrop-filter: blur(14px);
-      white-space: nowrap;
-      opacity: 0;
-      transform: translateX(8px);
-      transition: opacity .3s ease, transform .3s ease;
-      pointer-events: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
-    .music-btn:hover + .music-label,
-    .music-label:hover { opacity: 1 !important; transform: translateX(0) !important; }
+    .mp-progress-track:hover {
+      height: 6px;
+    }
+    .mp-progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--tulip-500), var(--amber-400));
+      transition: width .15s linear;
+    }
+    @media (max-width: 768px) {
+      .mini-player {
+        left: .75rem; right: .75rem;
+        width: auto;
+        bottom: .75rem;
+      }
+    }
   </style>
   <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -466,19 +569,45 @@
     <span id="uptime-label">Tiempo en mantenimiento: <b id="uptime">00:00:00</b></span>
   </footer>
 
-  <!-- Audio de fondo -->
-  <audio id="bg-music" preload="auto">
-    <source src="sounds/Otis McDonald - O.Sky.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- Botón play/pause flotante -->
-  <button class="music-btn" id="music-btn" aria-label="Reproducir música">
-    <!-- ▶ Play icon -->
-    <svg id="icon-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-    <!-- ⏸ Pause icon (oculto) -->
-    <svg id="icon-pause" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display:none"><path d="M6 19h4V5H6zm8-14v14h4V5z"/></svg>
-  </button>
-  <div class="music-label" id="music-label">O.Sky – Otis McDonald</div>
+  <!-- Mini Player -->
+  <div class="mini-player" id="mini-player">
+    <div class="mini-player-top">
+      <!-- Cover Art -->
+      <div class="mp-cover" id="mp-cover">
+        <div class="mp-cover-bg" id="mp-cover-bg" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);"></div>
+        <span class="mp-cover-icon">🎵</span>
+      </div>
+      <!-- Track Info -->
+      <div class="mp-info">
+        <div class="mp-title" id="mp-title">O.Sky</div>
+        <div class="mp-artist" id="mp-artist">Otis McDonald</div>
+      </div>
+      <!-- Controls -->
+      <div class="mp-controls">
+        <!-- Prev -->
+        <button class="mp-ctrl" id="mp-prev" aria-label="Anterior">
+          <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+        </button>
+        <!-- Play/Pause -->
+        <button class="mp-ctrl mp-ctrl-play" id="mp-play" aria-label="Play">
+          <svg id="mp-icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="mp-icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6zm8-14v14h4V5z"/></svg>
+        </button>
+        <!-- Next -->
+        <button class="mp-ctrl" id="mp-next" aria-label="Siguiente">
+          <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zm2 0V6l6.5 6L8 18zM16 6v12h2V6z"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- Progress -->
+    <div class="mp-progress-wrap">
+      <span class="mp-time" id="mp-time-now">0:00</span>
+      <div class="mp-progress-track" id="mp-progress-track">
+        <div class="mp-progress-fill" id="mp-progress-fill"></div>
+      </div>
+      <span class="mp-time mp-time-end" id="mp-time-end">0:00</span>
+    </div>
+  </div>
 
   <script>
     // ── Año ──
@@ -617,86 +746,152 @@
 
       // Footer
       .to('.footer-strip', { opacity: 1, y: 0, duration: .45 }, 1.1);
-    // ── Música de fondo (playlist) ──
-    const audio     = document.getElementById('bg-music');
-    const musicBtn  = document.getElementById('music-btn');
-    const iconPlay  = document.getElementById('icon-play');
-    const iconPause = document.getElementById('icon-pause');
+    // ── Música de fondo (mini player) ──
+    const audio = document.getElementById('bg-music');
+    const player = document.getElementById('mini-player');
+    const mpTitle = document.getElementById('mp-title');
+    const mpArtist = document.getElementById('mp-artist');
+    const mpCover = document.getElementById('mp-cover');
+    const mpCoverBg = document.getElementById('mp-cover-bg');
+    const mpPlayBtn = document.getElementById('mp-play');
+    const mpIconPlay = document.getElementById('mp-icon-play');
+    const mpIconPause = document.getElementById('mp-icon-pause');
+    const mpPrev = document.getElementById('mp-prev');
+    const mpNext = document.getElementById('mp-next');
+    const mpProgressTrack = document.getElementById('mp-progress-track');
+    const mpProgressFill = document.getElementById('mp-progress-fill');
+    const mpTimeNow = document.getElementById('mp-time-now');
+    const mpTimeEnd = document.getElementById('mp-time-end');
 
     const playlist = [
-      { src: "sounds/Otis McDonald - O.Sky.mp3",                                          label: "O.Sky – Otis McDonald" },
-      { src: "sounds/Oro Fundido - Oblivion's Mighty Trash - SpotubeDL.com.mp3",          label: "Oro Fundido – Oblivion's Mighty Trash" },
-      { src: "sounds/Otis McDonald - CRAZY - Live (SPOTISAVER).mp3",                      label: "CRAZY (Live) – Otis McDonald" },
-      { src: "sounds/Huan62 - Toto Lindo.mp3",                                            label: "Toto Lindo – Huan62" }
+      { src: 'sounds/Otis McDonald - O.Sky.mp3',                             title: 'O.Sky',            artist: 'Otis McDonald',            icon: '☀️', gradient: 'linear-gradient(135deg, #f59e0b, #ef4444)' },
+      { src: 'sounds/THIZZY52 - BLOCKKIDS.mp3',                              title: 'BLOCKKIDS',        artist: 'THIZZY52',                 icon: '🔥', gradient: 'linear-gradient(135deg, #8b5cf6, #3b82f6)' },
+      { src: "sounds/Oro Fundido - Oblivion's Mighty Trash - SpotubeDL.com.mp3", title: 'Oro Fundido',  artist: "Oblivion's Mighty Trash",  icon: '✨', gradient: 'linear-gradient(135deg, #fbbf24, #d97706)' },
+      { src: 'sounds/Otis McDonald - CRAZY - Live (SPOTISAVER).mp3',          title: 'CRAZY (Live)',     artist: 'Otis McDonald',            icon: '🎸', gradient: 'linear-gradient(135deg, #ec4899, #8b5cf6)' },
+      { src: 'sounds/Huan62 - Toto Lindo.mp3',                               title: 'Toto Lindo',       artist: 'Huan62',                   icon: '🌴', gradient: 'linear-gradient(135deg, #10b981, #06b6d4)' },
     ];
     let trackIndex = 0;
-    const musicLabel = document.getElementById('music-label');
+    let isPlaying = false;
 
-    function loadTrack(index) {
-      audio.src  = playlist[index].src;
-      musicLabel.textContent = playlist[index].label;
+    function formatTime(sec) {
+      if (!sec || isNaN(sec)) return '0:00';
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return m + ':' + String(s).padStart(2, '0');
     }
 
-    // Al terminar una pista, avanzar a la siguiente o volver a la primera
-    audio.addEventListener('ended', () => {
-      trackIndex++;
-      if (trackIndex >= playlist.length) {
-        trackIndex = 0;
+    function loadTrack(index, autoplay) {
+      const track = playlist[index];
+      audio.src = track.src;
+      mpTitle.textContent = track.title;
+      mpArtist.textContent = track.artist;
+      mpCoverBg.style.background = track.gradient;
+      mpCover.querySelector('.mp-cover-icon').textContent = track.icon;
+      mpTimeNow.textContent = '0:00';
+      mpTimeEnd.textContent = '0:00';
+      mpProgressFill.style.width = '0%';
+
+      if (autoplay) {
+        audio.play().then(() => setPlaying(true)).catch(() => {});
       }
-      loadTrack(trackIndex);
-      audio.play().then(() => setPlaying(true)).catch(() => {});
-    });
+    }
 
     function setPlaying(playing) {
-      iconPlay.style.display  = playing ? 'none'  : 'block';
-      iconPause.style.display = playing ? 'block' : 'none';
-      musicBtn.classList.toggle('playing', playing);
-      musicBtn.classList.toggle('pulse',   playing);
+      isPlaying = playing;
+      mpIconPlay.style.display  = playing ? 'none'  : 'block';
+      mpIconPause.style.display = playing ? 'block' : 'none';
+      mpCover.classList.toggle('spinning', playing);
     }
 
-    function fadeInVolume() {
-      let vol = 0;
-      const fade = setInterval(() => {
-        vol = Math.min(1, vol + 0.04);
-        audio.volume = vol;
-        if (vol >= 1) clearInterval(fade);
-      }, 80);
-    }
-
-    // Intento de autoplay al cargar
-    audio.volume = 0;
-    const playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        setPlaying(true);
-        fadeInVolume();
-      }).catch(() => {
-        setPlaying(false);
-        document.addEventListener('click', function startOnClick() {
-          audio.volume = 0;
-          audio.play().then(() => {
-            setPlaying(true);
-            fadeInVolume();
-          });
-          document.removeEventListener('click', startOnClick);
-        }, { once: true });
-      });
-    }
-
-    // Toggle manual play/pause
-    musicBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
+    // Play/Pause
+    mpPlayBtn.addEventListener('click', () => {
       if (audio.paused) {
-        audio.play();
-        setPlaying(true);
+        audio.play().then(() => setPlaying(true)).catch(() => {});
       } else {
         audio.pause();
         setPlaying(false);
       }
     });
 
-    // GSAP: animar el botón
-    gsap.to('.music-btn', { opacity: 1, duration: .5, delay: 1.3 });
+    // Next
+    mpNext.addEventListener('click', () => {
+      trackIndex = (trackIndex + 1) % playlist.length;
+      loadTrack(trackIndex, true);
+    });
+
+    // Prev
+    mpPrev.addEventListener('click', () => {
+      if (audio.currentTime > 3) {
+        audio.currentTime = 0;
+      } else {
+        trackIndex = (trackIndex - 1 + playlist.length) % playlist.length;
+        loadTrack(trackIndex, true);
+      }
+    });
+
+    // Auto next on end
+    audio.addEventListener('ended', () => {
+      trackIndex = (trackIndex + 1) % playlist.length;
+      loadTrack(trackIndex, true);
+    });
+
+    // Progress bar update
+    audio.addEventListener('timeupdate', () => {
+      if (!audio.duration) return;
+      const pct = (audio.currentTime / audio.duration) * 100;
+      mpProgressFill.style.width = pct + '%';
+      mpTimeNow.textContent = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      mpTimeEnd.textContent = formatTime(audio.duration);
+    });
+
+    // Click to seek
+    mpProgressTrack.addEventListener('click', (e) => {
+      const rect = mpProgressTrack.getBoundingClientRect();
+      const ratio = (e.clientX - rect.left) / rect.width;
+      if (audio.duration) {
+        audio.currentTime = ratio * audio.duration;
+      }
+    });
+
+    // Init first track
+    loadTrack(0, false);
+
+    // Autoplay attempt with fade-in
+    audio.volume = 0;
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        setPlaying(true);
+        let vol = 0;
+        const fade = setInterval(() => {
+          vol = Math.min(1, vol + 0.04);
+          audio.volume = vol;
+          if (vol >= 1) clearInterval(fade);
+        }, 80);
+      }).catch(() => {
+        setPlaying(false);
+        document.addEventListener('click', function firstClick() {
+          audio.volume = 0;
+          audio.play().then(() => {
+            setPlaying(true);
+            let vol = 0;
+            const fade = setInterval(() => {
+              vol = Math.min(1, vol + 0.04);
+              audio.volume = vol;
+              if (vol >= 1) clearInterval(fade);
+            }, 80);
+          });
+          document.removeEventListener('click', firstClick);
+        }, { once: true });
+      });
+    }
+
+    // GSAP: reveal the mini player
+    gsap.set('#mini-player', { opacity: 0, y: 30 });
+    gsap.to('#mini-player', { opacity: 1, y: 0, duration: .6, delay: 1.3, ease: 'power3.out', onComplete: () => player.classList.add('visible') });
   </script>
 </body>
 </html>
