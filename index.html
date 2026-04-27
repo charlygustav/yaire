@@ -3045,10 +3045,6 @@
                     <span class="menu-link-icon bg-purple-50 dark:bg-purple-900/20">🎮</span>
                     <span data-i18n="menu_games">Minijuegos</span>
                     <span class="menu-new-badge menu-new-badge-inline" data-i18n="menu_new_badge">NUEVO</span>
-                    <span id="menu-games-lock-badge"
-                        class="ml-auto flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-zinc-200 dark:bg-zinc-700 text-[8px] font-bold text-zinc-500 dark:text-zinc-400">
-                        🔒 <span id="menu-games-lock-days">28 Abr</span>
-                    </span>
                 </a>
                 <a href="#colores-yaire" class="menu-link menu-link-item text-zinc-600 dark:text-zinc-400">
                     <span class="menu-link-icon bg-rose-50 dark:bg-rose-900/20">🎨</span>
@@ -3086,13 +3082,9 @@
                 <a href="#enigma-28" id="menu-song-link"
                     class="menu-link menu-link-item text-zinc-600 dark:text-zinc-400 relative">
                     <span class="menu-link-icon bg-zinc-100 dark:bg-zinc-800" id="menu-song-icon">❓</span>
-                    <span id="menu-song-label" data-i18n="menu_song" style="filter: blur(5px); user-select: none;">Tu
+                    <span id="menu-song-label" data-i18n="menu_song">Tu
                         Canción</span>
                     <span class="menu-new-badge menu-new-badge-inline" data-i18n="menu_new_badge">NUEVO</span>
-                    <span id="menu-song-lock-badge"
-                        class="ml-auto flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-zinc-200 dark:bg-zinc-700 text-[8px] font-bold text-zinc-500 dark:text-zinc-400">
-                        🔒 <span id="menu-song-lock-days">28 Abr</span>
-                    </span>
                 </a>
 
             </div>
@@ -3105,10 +3097,6 @@
                         class="menu-link-icon bg-white dark:bg-zinc-900 shadow-sm transition-transform duration-300 group-hover:scale-110">💌</span>
                     <span data-i18n="menu_secret">Bóveda Secreta</span>
                     <span class="menu-new-badge" data-i18n="menu_new_badge">NUEVO</span>
-                    <span id="menu-vault-lock-badge"
-                        class="ml-auto flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-zinc-200 dark:bg-zinc-700 text-[8px] font-bold text-zinc-500 dark:text-zinc-400">
-                        🔒 <span id="menu-vault-lock-days">28 Abr</span>
-                    </span>
                 </a>
             </div>
         </div>
@@ -9059,74 +9047,9 @@
         <section id="enigma-28"
             class="cv-section py-24 border-t border-zinc-200 dark:border-zinc-800 reveal-scale scroll-mt-20 relative overflow-hidden">
 
-            <!-- ═══ LOCK OVERLAY — Countdown to April 28 ═══ -->
-            <div id="song-lock-overlay" class="absolute inset-0 z-50"
-                style="background: rgba(0,0,0,0.55); backdrop-filter: blur(20px) saturate(0.6);">
-                <div class="text-center px-6 max-w-lg w-full mx-auto sticky top-[15vh] lg:top-[20vh] pt-[15vh] lg:pt-[20vh]">
-                    <!-- Lock Icon -->
-                    <div class="mb-6" style="animation: lock-pulse 2.5s ease-in-out infinite;">
-                        <div
-                            class="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-br from-tulip-500/30 to-purple-500/30 border border-tulip-500/40 flex items-center justify-center backdrop-blur-sm transform-gpu">
-                            <svg class="w-9 h-9 text-tulip-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                            </svg>
-                        </div>
-                    </div>
+            <!-- Lock overlay removed per user request -->
 
-                    <!-- Teaser Title -->
-                    <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-white/90 mb-3"
-                        data-i18n="lock_badge">🔒 Contenido Bloqueado</p>
-                    <h3 class="text-2xl md:text-3xl font-extrabold text-white mb-2"
-                        style="background: linear-gradient(90deg, #f59e0b, #ec4899, #8b5cf6, #f59e0b); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: lock-shimmer 3s linear infinite;"
-                        data-i18n="lock_title">Algo especial viene en camino...</h3>
-                    <p class="text-white/80 text-sm mb-8 leading-relaxed" data-i18n="lock_subtitle">Esta sorpresa se
-                        desbloquea cuando cumplamos <strong class="text-tulip-400">3 meses juntos</strong>. Paciencia,
-                        mi amor. 🌷</p>
-
-                    <!-- Countdown Timer -->
-                    <div class="flex justify-center gap-3 md:gap-4 mb-8">
-                        <div
-                            class="countdown-digit bg-zinc-800/80 dark:bg-zinc-900/80 border border-zinc-600/50 dark:border-zinc-700/50 rounded-2xl px-3 py-4 md:px-5 md:py-5 text-center backdrop-blur-sm transform-gpu">
-                            <span id="lock-days"
-                                class="text-3xl md:text-4xl font-black text-white block leading-none">--</span>
-                            <span class="text-[9px] font-bold uppercase tracking-widest text-white/70 mt-1 block"
-                                data-i18n="lock_days">Días</span>
-                        </div>
-                        <div
-                            class="countdown-digit bg-zinc-800/80 dark:bg-zinc-900/80 border border-zinc-600/50 dark:border-zinc-700/50 rounded-2xl px-3 py-4 md:px-5 md:py-5 text-center backdrop-blur-sm transform-gpu">
-                            <span id="lock-hours"
-                                class="text-3xl md:text-4xl font-black text-white block leading-none">--</span>
-                            <span class="text-[9px] font-bold uppercase tracking-widest text-white/70 mt-1 block"
-                                data-i18n="lock_hours">Horas</span>
-                        </div>
-                        <div
-                            class="countdown-digit bg-zinc-800/80 dark:bg-zinc-900/80 border border-zinc-600/50 dark:border-zinc-700/50 rounded-2xl px-3 py-4 md:px-5 md:py-5 text-center backdrop-blur-sm transform-gpu">
-                            <span id="lock-mins"
-                                class="text-3xl md:text-4xl font-black text-white block leading-none">--</span>
-                            <span class="text-[9px] font-bold uppercase tracking-widest text-white/70 mt-1 block"
-                                data-i18n="lock_mins">Min</span>
-                        </div>
-                        <div
-                            class="countdown-digit bg-zinc-800/80 dark:bg-zinc-900/80 border border-zinc-600/50 dark:border-zinc-700/50 rounded-2xl px-3 py-4 md:px-5 md:py-5 text-center backdrop-blur-sm transform-gpu">
-                            <span id="lock-secs"
-                                class="text-3xl md:text-4xl font-black text-white block leading-none">--</span>
-                            <span class="text-[9px] font-bold uppercase tracking-widest text-white/70 mt-1 block"
-                                data-i18n="lock_secs">Seg</span>
-                        </div>
-                    </div>
-
-                    <!-- Date Label -->
-                    <div
-                        class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-zinc-800/70 dark:bg-zinc-800/60 border border-zinc-600/40 dark:border-zinc-700/40 text-zinc-300 dark:text-zinc-400 text-xs font-medium backdrop-blur-sm transform-gpu">
-                        <span>📅</span>
-                        <span data-i18n="lock_date">28 de Abril, 2026 — 3 Meses Juntos</span>
-                    </div>
-                </div>
-            </div>
-
-                        <div id="song-content-wrapper" class="max-w-4xl mx-auto px-4 relative z-10 song-content-locked">
+                        <div id="song-content-wrapper" class="max-w-4xl mx-auto px-4 relative z-10">
 
 
                 <!-- Floating Notes -->
@@ -9447,7 +9370,7 @@ De película.
 
                 // ═══ COUNTDOWN LOCK SYSTEM ═══
                 (function initSongLock() {
-                    const UNLOCK_DATE = new Date('2026-04-28T00:00:00-04:00'); // April 28, 2026 midnight EST
+                    const UNLOCK_DATE = new Date('2020-04-28T00:00:00-04:00'); // Changed to past date so JS unlocks instantly
                     const overlay = document.getElementById('song-lock-overlay');
                     const content = document.getElementById('song-content-wrapper');
                     const daysEl = document.getElementById('lock-days');
@@ -11868,7 +11791,7 @@ De película.
                 if (link.classList.contains('injected-game-search')) return;
                 
                 let text = link.textContent.toLowerCase();
-                const isApril28 = Date.now() >= new Date('2026-04-28T00:00:00').getTime();
+                const isApril28 = true; // Unlocked logic
                 
                 // Hack anti-spoilers: Ocultar canción y bóveda del buscador hasta el 28 de Abril
                 if (!isApril28 && (link.id === 'menu-song-link' || link.id === 'menu-vault-link')) {
@@ -11893,7 +11816,7 @@ De película.
 
             if (q) {
                 const t = dictionary[currentLang] || dictionary.es;
-                const isUnlocked = new Date() >= new Date('2026-04-28T00:00:00-04:00');
+                const isUnlocked = true; // Unlocked logic
                 const searchItems = [
                     { id: 'game1', type: 'game', keys: ['jardin', 'jardín', 'girasol', 'garden', 'sunflower', 'tournesol', 'girassol', 'juego', 'juegos', 'minijuego', 'minijuegos', 'game', 'games', 'jeux', 'jogo', 'jogos'], emoji: '🌻', title: t.game1_title || 'El Jardín de Yaire' },
                     { id: 'game2', type: 'game', keys: ['vuelo', 'mariposa', 'tulipan', 'tulipán', 'hacia ti', 'flight', 'butterfly', 'tulip', 'vol', 'papillon', 'tulipe', 'voo', 'borboleta', 'juego', 'juegos', 'minijuego', 'minijuegos', 'game', 'games', 'jeux', 'jogo', 'jogos'], emoji: '🦋', title: t.game2_title || 'Vuelo Hacia Ti' },
