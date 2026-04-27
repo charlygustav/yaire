@@ -106,13 +106,13 @@
     .countdown-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: .75rem;
+      gap: 1.5rem;
     }
     .cd-box {
       background: rgba(255,255,255,.04);
       border: 1px solid var(--border);
-      border-radius: 1.25rem;
-      padding: 1.1rem .5rem .9rem;
+      border-radius: 1.5rem;
+      padding: 1.6rem .8rem 1.4rem;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -159,13 +159,13 @@
 
     /* Status cards bottom-left */
     .status-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: .75rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
     }
     .status-card {
       background: rgba(255,255,255,.03);
       border: 1px solid var(--border);
-      border-radius: 1rem;
-      padding: 1rem 1.1rem;
+      border-radius: 1.25rem;
+      padding: 1.5rem 1.4rem;
       transition: background .2s;
     }
     .status-card:hover { background: rgba(255,255,255,.06); }
@@ -291,7 +291,8 @@
       .col-left  { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem 1.5rem; }
       .col-right { padding: 2rem 1.5rem; }
       .clock-time { font-size: 3.5rem; }
-      .status-grid { grid-template-columns: 1fr 1fr; }
+      .countdown-grid { gap: .8rem; }
+      .status-grid { grid-template-columns: 1fr 1fr; gap: .8rem; }
       .footer-strip { padding: .6rem 1.5rem; }
     }
     /* ── Botón de música flotante ── */
