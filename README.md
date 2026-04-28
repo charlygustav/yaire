@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🌷 28E (El Refugio de Yaire)</h1>
+  <h1>🌷 28E </h1>
   <p><strong>Una experiencia web de alto rendimiento construida con Vanilla JS, GSAP y TailwindCSS.</strong></p>
   
   <p>
