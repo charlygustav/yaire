@@ -1,6 +1,6 @@
 <div align="center">
   <h1>🌷 28E (Yaire's Vault)</h1>
-  <p><strong>A high-performance, time-locked Progressive Web App (PWA) built with Vanilla JS, GSAP, and TailwindCSS.</strong></p>
+  <p><strong>A high-performance, time-locked web experience built with Vanilla JS, GSAP, and TailwindCSS.</strong></p>
   
   <p>
     <img src="https://img.shields.io/badge/Status-Locked_until_April_28_2026-red.svg" alt="Status" />
