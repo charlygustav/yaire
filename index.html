@@ -3097,9 +3097,11 @@
     <div id="loader"
         class="fixed inset-0 z-[200] flex flex-col items-center justify-center transition-opacity duration-700 bg-[#0c0a09] overflow-hidden">
 
-        <!-- Subtle Ambient Glow -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
-            <div class="w-[500px] h-[500px] bg-tulip-900/20 rounded-full blur-[100px] opacity-60"></div>
+        <!-- Animated Ambient Circles (FirstLogonAnim style) -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+            <div class="loader-circle loader-circle-1"></div>
+            <div class="loader-circle loader-circle-2"></div>
+            <div class="loader-circle loader-circle-3"></div>
         </div>
 
         <!-- Central content -->
@@ -3271,6 +3273,48 @@
             .loader-grads-exit .loader-grad-blob {
                 transform: scale(2.5) !important;
                 opacity: 0 !important;
+            }
+
+            /* ── FirstLogonAnim ambient circles ── */
+            @keyframes loaderCircle1Path {
+                0%   { transform: translate(0vw,   0vh); width: 30vw; height: 30vw; }
+                100% { transform: translate(0vw, -35vh); width: 80vw; height: 80vw; }
+            }
+            @keyframes loaderCircle2Path {
+                0%   { transform: translate(0vw,    0vh);  width: 20vw;  height: 20vw; }
+                100% { transform: translate(-45vw, -40vh); width: 80vw;  height: 80vw; }
+            }
+            @keyframes loaderCircle3Path {
+                0%   { transform: translate(0vw,    0vh);   width: 20vw;  height: 20vw; }
+                100% { transform: translate(-55vw, -80vh);  width: 120vw; height: 120vw; }
+            }
+            @keyframes loaderFadeCircleIn {
+                0%   { opacity: 0; }
+                100% { opacity: 1; }
+            }
+            .loader-circle {
+                position: absolute;
+                border-radius: 100vw;
+                animation-direction: alternate;
+                animation-timing-function: ease-in-out;
+            }
+            .loader-circle-1 {
+                left: 30vw; top: 25vh;
+                width: 30vw; height: 30vw;
+                background: radial-gradient(50% 50% at 50% 50%, rgba(236,72,153,0.28) 15.62%, rgba(236,72,153,0) 100%);
+                animation: loaderCircle1Path 12s infinite alternate, loaderFadeCircleIn 1332ms ease-out;
+            }
+            .loader-circle-2 {
+                left: 45vw; top: 30vh;
+                width: 20vw; height: 20vw;
+                background: radial-gradient(50% 50% at 50% 50%, rgba(245,158,11,0.22) 15.62%, rgba(245,158,11,0) 100%);
+                animation: loaderCircle2Path 11.5s infinite alternate, loaderFadeCircleIn 1332ms ease-out;
+            }
+            .loader-circle-3 {
+                left: 35vw; top: 30vh;
+                width: 20vw; height: 20vw;
+                background: radial-gradient(50% 50% at 50% 50%, rgba(219,39,119,0.4) 15.62%, rgba(219,39,119,0) 100%);
+                animation: loaderCircle3Path 15s infinite alternate, loaderFadeCircleIn 1332ms ease-out;
             }
         </style>
     </div>
