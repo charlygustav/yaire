@@ -808,8 +808,18 @@
     // Admin Panel: Detectar cuando se desactiva el mantenimiento
     let countdownInterval;
 
-    function checkMaintenanceStatus() {
+    async function checkMaintenanceStatus() {
         try {
+            // 1. Sincronizar desde la nube
+            try {
+                const res = await fetch('config.json?t=' + new Date().getTime());
+                if (res.ok) {
+                    const cloudCfg = await res.json();
+                    localStorage.setItem('yaire_config', JSON.stringify(cloudCfg));
+                }
+            } catch (e) {}
+
+            // 2. Leer estado actualizado
             const cfg = JSON.parse(localStorage.getItem('yaire_config') || '{}');
             if (!cfg.mantenimiento) {
                 // Mantenimiento desactivado → volver a la página principal
@@ -862,8 +872,9 @@
         } catch(e) {}
     }
 
-    // Call on load
+    // Call on load and set up polling for cloud updates
     checkMaintenanceStatus();
+    setInterval(checkMaintenanceStatus, 30000); // Check cloud every 30 seconds
 
     window.addEventListener('storage', (e) => {
         if (e.key === 'yaire_reload' || e.key === 'yaire_config') {

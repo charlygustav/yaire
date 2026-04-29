@@ -10,11 +10,23 @@
 
     <!-- Bloqueo temporal: Redirigir a mantenimiento antes del 28 de Abril -->
     <script>
-        (function () {
+        (async function () {
             // Fecha de desbloqueo: 28 de Abril de 2026 a las 00:00:00 (Mes 3 = Abril)
             const unlockDate = new Date(2026, 3, 28, 0, 0, 0);
             const urlParams = new URLSearchParams(window.location.search);
-            // Chequeo de mantenimiento desde el Admin Panel
+            
+            // 1. Intentar sincronizar config desde la nube (GitHub)
+            try {
+                const res = await fetch('config.json?t=' + new Date().getTime());
+                if (res.ok) {
+                    const cloudCfg = await res.json();
+                    localStorage.setItem('yaire_config', JSON.stringify(cloudCfg));
+                }
+            } catch (e) {
+                console.log("No se pudo cargar config.json desde la nube, usando caché local.");
+            }
+
+            // 2. Chequeo de mantenimiento desde el estado global
             const cfg = JSON.parse(localStorage.getItem('yaire_config') || '{}');
             if (cfg.mantenimiento) {
                 window.location.replace("mantenimiento.html");
