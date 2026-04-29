@@ -15983,28 +15983,19 @@
                     }
                 }
 
-                // Rastreador de IP (Guardado en localStorage por ser sitio estático)
+                // Rastreador de Visitas Globales
                 setTimeout(() => {
-                    fetch('https://ipapi.co/json/')
-                        .then(r => r.json())
-                        .then(data => {
-                            if (data.ip) {
-                                const logs = JSON.parse(localStorage.getItem('yaire_ips') || '[]');
-                                const todayDate = new Date().toLocaleString();
-                                // Evitamos saturar con la misma IP muchas veces seguidas
-                                if (logs.length === 0 || logs[logs.length - 1].ip !== data.ip) {
-                                    logs.push({
-                                        date: todayDate,
-                                        ip: data.ip,
-                                        loc: (data.city ? data.city + ', ' : '') + (data.country_name || 'Desconocido'),
-                                        dev: navigator.platform || 'Desconocido'
-                                    });
-                                    if (logs.length > 50) logs.shift(); // Max 50 registros
-                                    localStorage.setItem('yaire_ips', JSON.stringify(logs));
-                                }
-                            }
-                        }).catch(e => console.warn('IP Track Error:', e));
-                }, 2000); // Esperar 2 segundos para no bloquear la carga principal
+                    // Solo contamos una visita por sesión para no inflar los números
+                    if (!sessionStorage.getItem('yaire_visited')) {
+                        fetch('https://api.counterapi.dev/v1/charlygustav_yaire/visits/up')
+                            .then(r => r.json())
+                            .then(data => {
+                                sessionStorage.setItem('yaire_visited', 'true');
+                                console.log("Visita global registrada (#" + data.count + ")");
+                            })
+                            .catch(e => console.log("Error contando visita"));
+                    }
+                }, 2000);
 
             } catch (e) {
                 console.error("Admin Panel Error:", e);
