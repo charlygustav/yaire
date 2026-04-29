@@ -238,13 +238,19 @@
     .progress-track {
       background: rgba(255,255,255,.06);
       border-radius: 999px; height: 8px; overflow: hidden; margin-bottom: 2.5rem;
+      position: relative;
     }
     .progress-fill {
-      height: 100%; width: 0%; border-radius: 999px;
+      position: absolute; top: 0; left: 0;
+      height: 100%; width: 30%; border-radius: 999px;
       background: linear-gradient(90deg, var(--tulip-500), var(--amber-400), var(--tulip-400));
       background-size: 200% 100%;
-      animation: shimmerFill 2.6s linear infinite;
-      transition: width .8s cubic-bezier(.22,1,.36,1);
+      animation: indeterminateBar 2s cubic-bezier(0.4, 0, 0.2, 1) infinite, shimmerFill 2.6s linear infinite;
+    }
+    @keyframes indeterminateBar {
+      0% { left: -30%; width: 30%; }
+      50% { width: 40%; }
+      100% { left: 100%; width: 30%; }
     }
     @keyframes shimmerFill {
       0%   { background-position: 200% center; }
@@ -470,28 +476,21 @@
         <span class="logo-text">28E</span>
       </div>
 
-      <!-- Countdown al 28 de Enero -->
-      <div class="countdown-wrap">
-        <div class="countdown-title">⏳ Faltan para el 28 de Abril</div>
-        <div class="countdown-grid">
-          <div class="cd-box">
-            <span class="cd-num" id="cd-days">--</span>
-            <span class="cd-label">Días</span>
-          </div>
-          <div class="cd-box">
-            <span class="cd-num" id="cd-hours">--</span>
-            <span class="cd-label">Horas</span>
-          </div>
-          <div class="cd-box">
-            <span class="cd-num" id="cd-mins">--</span>
-            <span class="cd-label">Minutos</span>
-          </div>
-          <div class="cd-box">
-            <span class="cd-num" id="cd-secs">--</span>
-            <span class="cd-label">Segundos</span>
-          </div>
-        </div>
+      <!-- Centro visual (Reemplazo del contador) -->
+      <div id="visual-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; margin: 3rem 0;">
+        <div style="font-size: clamp(4rem, 8vw, 6.5rem); filter: drop-shadow(0 0 20px rgba(236,72,153,0.4)); animation: floatIcon 4s ease-in-out infinite;">🔮</div>
+        <div style="font-size: 0.7rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.2em; margin-top: 1.5rem;">Sistemas en Suspensión</div>
+      </div>
 
+      <!-- Contador (Cuenta regresiva) -->
+      <div id="visual-countdown" style="display: none; flex-direction: column; justify-content: center; flex: 1; margin: 3rem 0;" class="countdown-wrap">
+        <h2 class="countdown-title">Mantenimiento Programado Hasta:</h2>
+        <div class="countdown-grid">
+          <div class="cd-box"><span class="cd-num" id="cd-days">00</span><span class="cd-label">Días</span></div>
+          <div class="cd-box"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Horas</span></div>
+          <div class="cd-box"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">Mins</span></div>
+          <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">Segs</span></div>
+        </div>
       </div>
 
       <!-- Estado de sistemas -->
@@ -540,8 +539,8 @@
 
       <!-- Progreso -->
       <div class="progress-label">
-        <span>Progreso del mantenimiento</span>
-        <span id="pct">0%</span>
+        <span>Optimizando sistemas de Yaire...</span>
+        <span id="pct" style="color: var(--tulip-400); animation: dotBlink 1.4s ease-in-out infinite;">En proceso</span>
       </div>
       <div class="progress-track">
         <div class="progress-fill"></div>
@@ -566,7 +565,6 @@
   <!-- Footer strip -->
   <footer class="footer-strip">
     <span>&copy; <span id="yr"></span> Charles Gustav. Todos los derechos reservados.</span>
-    <span id="uptime-label">Tiempo en mantenimiento: <b id="uptime">00:00:00</b></span>
   </footer>
 
   <!-- Mini Player -->
@@ -609,71 +607,7 @@
     // ── Año ──
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    // ── Countdown al 28 de Abril ──
-    function pad(n){ return String(n).padStart(2,'0'); }
-    const daysEl  = document.getElementById('cd-days');
-    const hoursEl = document.getElementById('cd-hours');
-    const minsEl  = document.getElementById('cd-mins');
-    const secsEl  = document.getElementById('cd-secs');
-    const pctEl   = document.getElementById('pct');
-    const fillEl  = document.querySelector('.progress-fill');
 
-    // Inicio del mantenimiento (27 Abril 2026, 2:27 AM)
-    const MAINT_START = new Date(2026, 3, 27, 2, 27, 0);
-
-    // Fecha absoluta de desbloqueo: 28 de Abril de 2026 a las 00:00:00
-    const TARGET_DATE = new Date(2026, 3, 28, 0, 0, 0);
-
-    function animateNum(el, newVal) {
-      if (el.textContent === newVal) return;
-      el.style.animation = 'none';
-      el.offsetHeight;
-      el.style.animation = 'cdPulse .35s ease-out';
-      el.textContent = newVal;
-    }
-
-    function tickCountdown() {
-      const now    = new Date();
-      const diff   = TARGET_DATE - now;
-
-      // ── Progreso basado en el countdown ──
-      const total   = TARGET_DATE - MAINT_START;
-      const elapsed = now - MAINT_START;
-      const rawPct  = (elapsed / total) * 100;
-      const pct     = Math.min(100, Math.max(0, rawPct)).toFixed(4);
-      fillEl.style.width = pct + '%';
-      pctEl.textContent  = pct + '%';
-
-      if (diff <= 0) {
-        daysEl.textContent = hoursEl.textContent = minsEl.textContent = secsEl.textContent = '00';
-        window.location.href = 'index.html';
-        return;
-      }
-
-      const totalSecs = Math.floor(diff / 1000);
-      const d  = Math.floor(totalSecs / 86400);
-      const h  = Math.floor((totalSecs % 86400) / 3600);
-      const m  = Math.floor((totalSecs % 3600)  / 60);
-      const s  = totalSecs % 60;
-
-      animateNum(daysEl,  pad(d));
-      animateNum(hoursEl, pad(h));
-      animateNum(minsEl,  pad(m));
-      animateNum(secsEl,  pad(s));
-    }
-    tickCountdown();
-    setInterval(tickCountdown, 1000);
-
-    // ── Tiempo de mantenimiento ──
-    const start = MAINT_START.getTime();
-    const uptimeEl = document.getElementById('uptime');
-    function tickUptime() {
-      let s = Math.floor((Date.now() - start) / 1000);
-      const h = Math.floor(s / 3600); s %= 3600;
-      const m = Math.floor(s / 60);   s %= 60;
-      uptimeEl.textContent = pad(h)+':'+pad(m)+':'+pad(s);
-    }
-    setInterval(tickUptime, 1000);
 
 
 
@@ -682,8 +616,6 @@
     gsap.set('.col-left',      { opacity: 0, x: -60 });
     gsap.set('.col-right',     { opacity: 0, x:  60 });
     gsap.set('.logo-area',     { opacity: 0, y: -20 });
-    gsap.set('.countdown-title', { opacity: 0, y: 16 });
-    gsap.set('.cd-box',        { opacity: 0, y: 40, scale: 0.85 });
     gsap.set('.status-card',   { opacity: 0, y: 30 });
     gsap.set('.badge',         { opacity: 0, scale: 0.8 });
     gsap.set('h1',             { opacity: 0, y: 32 });
@@ -702,17 +634,6 @@
 
       // Logo
       .to('.logo-area', { opacity: 1, y: 0, duration: .5 }, 0.3)
-
-      // Título countdown
-      .to('.countdown-title', { opacity: 1, y: 0, duration: .5 }, 0.45)
-
-      // Cajas del countdown con elastic stagger
-      .to('.cd-box', {
-          opacity: 1, y: 0, scale: 1,
-          duration: .7,
-          ease: 'back.out(1.6)',
-          stagger: 0.1
-        }, 0.55)
 
       // Tarjetas de estado
       .to('.status-card', {
@@ -883,6 +804,72 @@
     // GSAP: reveal the mini player
     gsap.set('#mini-player', { opacity: 0, y: -20 });
     gsap.to('#mini-player', { opacity: 1, y: 0, duration: .6, delay: 1.3, ease: 'power3.out', onComplete: () => player.classList.add('visible') });
+
+    // Admin Panel: Detectar cuando se desactiva el mantenimiento
+    let countdownInterval;
+
+    function checkMaintenanceStatus() {
+        try {
+            const cfg = JSON.parse(localStorage.getItem('yaire_config') || '{}');
+            if (!cfg.mantenimiento) {
+                // Mantenimiento desactivado → volver a la página principal
+                window.location.href = 'index.html';
+                return;
+            }
+
+            if (cfg.maintType === 'scheduled' && cfg.maintDate) {
+                document.getElementById('visual-center').style.display = 'none';
+                document.getElementById('visual-countdown').style.display = 'flex';
+                
+                const targetDate = new Date(cfg.maintDate).getTime();
+                
+                if (countdownInterval) clearInterval(countdownInterval);
+                
+                // Función de actualización inmediata y repetida
+                const updateTimer = () => {
+                    const now = new Date().getTime();
+                    const distance = targetDate - now;
+
+                    if (distance <= 0) {
+                        clearInterval(countdownInterval);
+                        // Auto-disable maintenance
+                        cfg.mantenimiento = false;
+                        localStorage.setItem('yaire_config', JSON.stringify(cfg));
+                        localStorage.setItem('yaire_reload', Date.now().toString());
+                        window.location.href = 'index.html';
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+                    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+                    document.getElementById('cd-mins').textContent = String(minutes).padStart(2, '0');
+                    document.getElementById('cd-secs').textContent = String(seconds).padStart(2, '0');
+                };
+                
+                updateTimer();
+                countdownInterval = setInterval(updateTimer, 1000);
+            } else {
+                document.getElementById('visual-center').style.display = 'flex';
+                document.getElementById('visual-countdown').style.display = 'none';
+                if (countdownInterval) clearInterval(countdownInterval);
+            }
+
+        } catch(e) {}
+    }
+
+    // Call on load
+    checkMaintenanceStatus();
+
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'yaire_reload' || e.key === 'yaire_config') {
+            checkMaintenanceStatus();
+        }
+    });
   </script>
 </body>
 </html>

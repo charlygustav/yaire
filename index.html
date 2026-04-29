@@ -14,6 +14,13 @@
             // Fecha de desbloqueo: 28 de Abril de 2026 a las 00:00:00 (Mes 3 = Abril)
             const unlockDate = new Date(2026, 3, 28, 0, 0, 0);
             const urlParams = new URLSearchParams(window.location.search);
+            // Chequeo de mantenimiento desde el Admin Panel
+            const cfg = JSON.parse(localStorage.getItem('yaire_config') || '{}');
+            if (cfg.mantenimiento) {
+                window.location.replace("mantenimiento.html");
+                return;
+            }
+
             // Si no ha llegado la fecha Y NO tienes el pase secreto (?dev=1), te expulsa
             if (new Date() < unlockDate && urlParams.get('dev') !== '1') {
                 window.location.replace("mantenimiento.html");
@@ -2870,7 +2877,8 @@
             <div id="secret-lockout-timer"
                 class="hidden mb-4 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/30 text-center w-full animate-pulse">
                 <p class="text-red-400 text-sm font-bold"><span data-i18n="secret_lockout">Bóveda bloqueada</span>:
-                    <span id="lockout-seconds">30</span>s</p>
+                    <span id="lockout-seconds">30</span>s
+                </p>
             </div>
 
             <!-- Botones -->
@@ -3277,43 +3285,88 @@
 
             /* ── FirstLogonAnim ambient circles ── */
             @keyframes loaderCircle1Path {
-                0%   { transform: translate(0vw,   0vh); width: 30vw; height: 30vw; }
-                100% { transform: translate(0vw, -35vh); width: 80vw; height: 80vw; }
+                0% {
+                    transform: translate(0vw, 0vh);
+                    width: 30vw;
+                    height: 30vw;
+                }
+
+                100% {
+                    transform: translate(0vw, -35vh);
+                    width: 80vw;
+                    height: 80vw;
+                }
             }
+
             @keyframes loaderCircle2Path {
-                0%   { transform: translate(0vw,    0vh);  width: 20vw;  height: 20vw; }
-                100% { transform: translate(-45vw, -40vh); width: 80vw;  height: 80vw; }
+                0% {
+                    transform: translate(0vw, 0vh);
+                    width: 20vw;
+                    height: 20vw;
+                }
+
+                100% {
+                    transform: translate(-45vw, -40vh);
+                    width: 80vw;
+                    height: 80vw;
+                }
             }
+
             @keyframes loaderCircle3Path {
-                0%   { transform: translate(0vw,    0vh);   width: 20vw;  height: 20vw; }
-                100% { transform: translate(-55vw, -80vh);  width: 120vw; height: 120vw; }
+                0% {
+                    transform: translate(0vw, 0vh);
+                    width: 20vw;
+                    height: 20vw;
+                }
+
+                100% {
+                    transform: translate(-55vw, -80vh);
+                    width: 120vw;
+                    height: 120vw;
+                }
             }
+
             @keyframes loaderFadeCircleIn {
-                0%   { opacity: 0; }
-                100% { opacity: 1; }
+                0% {
+                    opacity: 0;
+                }
+
+                100% {
+                    opacity: 1;
+                }
             }
+
             .loader-circle {
                 position: absolute;
                 border-radius: 100vw;
                 animation-direction: alternate;
                 animation-timing-function: ease-in-out;
             }
+
             .loader-circle-1 {
-                left: 30vw; top: 25vh;
-                width: 30vw; height: 30vw;
-                background: radial-gradient(50% 50% at 50% 50%, rgba(236,72,153,0.28) 15.62%, rgba(236,72,153,0) 100%);
+                left: 30vw;
+                top: 25vh;
+                width: 30vw;
+                height: 30vw;
+                background: radial-gradient(50% 50% at 50% 50%, rgba(236, 72, 153, 0.28) 15.62%, rgba(236, 72, 153, 0) 100%);
                 animation: loaderCircle1Path 12s infinite alternate, loaderFadeCircleIn 1332ms ease-out;
             }
+
             .loader-circle-2 {
-                left: 45vw; top: 30vh;
-                width: 20vw; height: 20vw;
-                background: radial-gradient(50% 50% at 50% 50%, rgba(245,158,11,0.22) 15.62%, rgba(245,158,11,0) 100%);
+                left: 45vw;
+                top: 30vh;
+                width: 20vw;
+                height: 20vw;
+                background: radial-gradient(50% 50% at 50% 50%, rgba(245, 158, 11, 0.22) 15.62%, rgba(245, 158, 11, 0) 100%);
                 animation: loaderCircle2Path 11.5s infinite alternate, loaderFadeCircleIn 1332ms ease-out;
             }
+
             .loader-circle-3 {
-                left: 35vw; top: 30vh;
-                width: 20vw; height: 20vw;
-                background: radial-gradient(50% 50% at 50% 50%, rgba(219,39,119,0.4) 15.62%, rgba(219,39,119,0) 100%);
+                left: 35vw;
+                top: 30vh;
+                width: 20vw;
+                height: 20vw;
+                background: radial-gradient(50% 50% at 50% 50%, rgba(219, 39, 119, 0.4) 15.62%, rgba(219, 39, 119, 0) 100%);
                 animation: loaderCircle3Path 15s infinite alternate, loaderFadeCircleIn 1332ms ease-out;
             }
         </style>
@@ -3548,7 +3601,7 @@
 
 
             <script>
-                const spotlightTracks = [
+                let spotlightTracks = [
                     { title: "Bing Bong", artist: "Yailin la Mas Viral", src: "radio/Bing Bong - Yailin la Mas Viral - SpotubeDL.com.mp3" },
                     { title: "Brazilera - Remix", artist: "Chimbala", src: "radio/Brazilera - Remix - Chimbala - SpotubeDL.com.mp3" },
                     { title: "Como Panas", artist: "Bryant Myers", src: "radio/Como Panas - Bryant Myers - SpotubeDL.com.mp3" },
@@ -9946,7 +9999,8 @@
                                     El bajo retumba, no hay quién nos pare.
                                     Tulipanes, rosas, ritmo, Yaire.
                                     (¡Sube, sube, sube!)
-                                    Tulipanes rosas pa' Yaire.</p>
+                                    Tulipanes rosas pa' Yaire.
+                                </p>
                             </div>
                         </div>
 
@@ -12039,43 +12093,36 @@
 
                     if (typeof gsap !== 'undefined') {
                         const tl = gsap.timeline();
-                        if (grads) grads.classList.add('loader-grads-exit');
-
                         const typography = document.querySelector("#loader .flex-col.items-center.w-64, #loader .flex-col.items-center.sm\\:w-72") || document.getElementById('loader-percent').parentElement;
                         const tulip = document.querySelector("#loader svg");
 
-                        // 1. La Implosión: Textos y barras son absorbidos hacia el centro
+                        // Preparamos el Hero en el frame 0 para evitar cualquier parpadeo o corte CSS
+                        if (heroSection) {
+                            gsap.set(".hero-anim", { opacity: 0, y: 30, filter: "blur(10px)" });
+                            heroSection.classList.remove('hero-enter-ready');
+                        }
+
+                        // Sincronización absoluta para asegurar fluidez perfecta
+                        tl.addLabel("start");
+
+                        // 1. Elementos del loader se desvanecen suavemente
                         if (typography) {
-                            tl.to(typography, {
-                                scale: 0.8, y: -20, opacity: 0, duration: 0.6, ease: "power3.in"
-                            });
+                            tl.to(typography, { opacity: 0, y: -15, duration: 0.8, ease: "power2.inOut" }, "start");
                         }
-
-                        // 2. El Latido y la Singularidad: El tulipán brilla intensamente y colapsa
                         if (tulip) {
-                            tl.to(tulip, {
-                                scale: 1.3, filter: "brightness(2) drop-shadow(0px 0px 20px #db2777)", duration: 0.4, ease: "power2.out"
-                            }, "-=0.2")
-                                .to(tulip, {
-                                    scale: 0, rotation: 180, opacity: 0, duration: 0.5, ease: "back.in(2)"
-                                });
+                            tl.to(tulip, { opacity: 0, scale: 0.9, duration: 0.8, ease: "power2.inOut" }, "start");
                         }
 
-                        // 3. El Big Bang (El Portal): El fondo oscuro se traga a sí mismo creando un agujero
-                        tl.set(loaderEl, { clipPath: "circle(100% at 50% 50%)" })
-                            .to(loaderEl, {
-                                clipPath: "circle(0% at 50% 50%)", duration: 0.5, ease: "power4.inOut"
-                            })
+                        // 2. Fondo del loader desaparece de forma fluida
+                        tl.to(loaderEl, { opacity: 0, duration: 1.2, ease: "power2.inOut" }, "start+=0.5")
                             .set(loaderEl, { display: 'none' });
 
-                        // 4. Materialización Cósmica (Hero Section): Entran del desenfoque como polvo de estrellas
+                        // 3. La pantalla principal entra con muchísima elegancia mientras el loader termina de irse
                         if (heroSection) {
-                            heroSection.classList.remove('hero-enter-ready');
-                            tl.fromTo(".hero-anim",
-                                { opacity: 0, y: 80, scale: 1.1, filter: "blur(15px)" },
-                                { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 1.8, stagger: 0.2, ease: "power3.out" },
-                                "-=0.4" // Comienza a revelarse justo cuando el portal se cierra
-                            );
+                            tl.to(".hero-anim", {
+                                opacity: 1, y: 0, filter: "blur(0px)",
+                                duration: 1.5, stagger: 0.15, ease: "power2.out"
+                            }, "start+=0.8");
                         }
 
                         setTimeout(() => {
@@ -12352,7 +12399,81 @@
             if (il) il.innerHTML = dict.recipe_ing.map(i => `<div class="flex items-center gap-3 bg-zinc-50 dark:bg-zinc-800/50 p-3 rounded-xl border border-zinc-100 dark:border-zinc-700"><span class="w-2 h-2 rounded-full bg-brand-500 flex-shrink-0"></span><span class="font-medium text-sm md:text-base">${i}</span></div>`).join('');
 
             const rst = document.getElementById('recipe-sec-text'); if (rst) rst.innerText = dict.recipe_sec_text;
+
+            // Admin config overrides (always applied AFTER i18n so they are never overwritten)
+            applyAdminConfigOverrides();
         }
+
+        function applyAdminConfigOverrides() {
+            try {
+                const cfg = JSON.parse(localStorage.getItem('yaire_config') || '{}');
+
+                // Detectar idioma activo (es / en / pt / fr)
+                const lang = (typeof currentLang !== 'undefined' ? currentLang : 'es').toLowerCase().split('-')[0];
+                const isSpanish = (lang === 'es');
+                const suffix = isSpanish ? '' : `_${lang}`;
+
+                // Mapa de "veces" en cada idioma
+                const timesWord = { es: 'veces', en: 'times', pt: 'vezes', fr: 'fois' }[lang] || 'veces';
+
+                // Top 5 Palabras
+                for (let i = 1; i <= 5; i++) {
+                    const wBadge = cfg[`w${i}Badge`];
+                    const wWord = cfg[`w${i}Word`];
+                    const wDesc = isSpanish ? cfg[`w${i}Desc`] : cfg[`w${i}Desc${suffix}`];
+
+                    if (wBadge) {
+                        const badgeEl = document.querySelector(`[data-i18n="w${i}_badge"]`);
+                        if (badgeEl) {
+                            // Traducir "veces" al idioma activo en el badge (#1416 veces → #1416 times)
+                            badgeEl.innerHTML = wBadge.replace(/veces/i, timesWord);
+                            if (wWord && badgeEl.previousElementSibling) badgeEl.previousElementSibling.innerHTML = wWord;
+                        }
+                    }
+                    if (wDesc) {
+                        const descEl = document.querySelector(`[data-i18n="w${i}_desc"]`);
+                        if (descEl) descEl.innerHTML = wDesc;
+                    }
+                }
+
+                // Top 5 Frases
+                for (let i = 1; i <= 5; i++) {
+                    const pText = cfg[`p${i}Text`];
+                    const pDesc = isSpanish ? cfg[`p${i}Desc`] : cfg[`p${i}Desc${suffix}`];
+
+                    if (pText) {
+                        const pEl = document.querySelector(`[data-i18n="p${i}_text"]`);
+                        if (pEl) pEl.innerHTML = pText;
+                    }
+                    if (pDesc) {
+                        const dEl = document.querySelector(`[data-i18n="p${i}_desc"]`);
+                        if (dEl) dEl.innerHTML = pDesc;
+                    }
+                }
+
+                // Emoji card — plantilla por idioma
+                if (cfg.emojiTop) {
+                    const emojiTemplates = {
+                        es: (n) => `Su emoji más usado en el chat (${n} veces)`,
+                        en: (n) => `Her most used emoji in the chat (${n} times)`,
+                        pt: (n) => `O emoji mais usado no chat (${n} vezes)`,
+                        fr: (n) => `Son emoji le plus utilisé dans le chat (${n} fois)`
+                    };
+                    const emojiTpl = emojiTemplates[lang] || emojiTemplates.es;
+                    const emojiEl = document.querySelector('[data-i18n="emoji_card_desc"]');
+                    if (emojiEl) emojiEl.innerHTML = emojiTpl(cfg.emojiTopCount || '?');
+                    const emojiIcon = document.querySelector('.cv-section .text-2xl.drop-shadow-sm');
+                    if (emojiIcon) emojiIcon.textContent = cfg.emojiTop;
+                }
+            } catch (e) { }
+        }
+
+        // ═══ Admin Panel: Recarga automática cuando se guardan cambios ═══
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'yaire_reload') {
+                location.reload();
+            }
+        });
 
         // ═══ Performance: Page Visibility API ═══
         // Pause intensive operations when tab is hidden to save battery
@@ -12903,6 +13024,19 @@
             let charIdx = 0;
             let isSpDeleting = false;
 
+            // Inyectar tips del admin si existen
+            (function () {
+                try {
+                    const cfg = JSON.parse(localStorage.getItem('yaire_config') || '{}');
+                    if (cfg.spotlightTips && cfg.spotlightTips.es) {
+                        spotlightTips.es = cfg.spotlightTips.es;
+                        if (cfg.spotlightTips.en) spotlightTips.en = cfg.spotlightTips.en;
+                        if (cfg.spotlightTips.pt) spotlightTips.pt = cfg.spotlightTips.pt;
+                        if (cfg.spotlightTips.fr) spotlightTips.fr = cfg.spotlightTips.fr;
+                    }
+                } catch (e) { }
+            })();
+
             function animateSpotlightPlaceholder() {
                 const input = document.getElementById('menu-search');
                 if (!input) return setTimeout(animateSpotlightPlaceholder, 1000);
@@ -12957,8 +13091,7 @@
                     // Already past 3 months!
                     const badgeEl = document.querySelector('[data-i18n="hero_badge"]');
                     if (badgeEl) {
-                        const celebrationTexts = { es: '¡Felices 3 Meses!', en: 'Happy 3 Months!', fr: 'Joyeux 3 Mois !', pt: 'Felizes 3 Meses!' };
-                        badgeEl.textContent = celebrationTexts[currentLang] || celebrationTexts.es;
+                        badgeEl.innerHTML = t.hero_badge || '¡Felices 3 Meses!';
                     }
                     el.textContent = '🎉';
                     return;
@@ -13508,7 +13641,7 @@
             setTimeout(() => { m.classList.add('hidden'); m.style.opacity = ''; m.style.transition = ''; }, 450);
         }
 
-        const VAULT_HASH = '10c2f3ab8d6d9af72e5a63c161b2f079098e5511272e184262b579148202fcda';
+        let VAULT_HASH = '10c2f3ab8d6d9af72e5a63c161b2f079098e5511272e184262b579148202fcda';
 
         async function hashSHA256(text) {
             const data = new TextEncoder().encode(text);
@@ -13775,7 +13908,7 @@
             setTimeout(() => { m.classList.add('hidden'); m.style.opacity = ''; m.style.transition = ''; }, 450);
         }
 
-        const VAULT_HASH = '10c2f3ab8d6d9af72e5a63c161b2f079098e5511272e184262b579148202fcda';
+        let VAULT_HASH_V2 = '10c2f3ab8d6d9af72e5a63c161b2f079098e5511272e184262b579148202fcda';
 
         async function hashSHA256(text) {
             const data = new TextEncoder().encode(text);
@@ -13791,7 +13924,7 @@
 
             const inputHash = await hashSHA256(i.value.toLowerCase().trim());
 
-            if (inputHash === VAULT_HASH) {
+            if (inputHash === VAULT_HASH_V2 || (typeof VAULT_HASH !== 'undefined' && inputHash === VAULT_HASH)) {
                 AudioManager.play('correcto.wav', 0.6);
                 animateLockOpen();
                 const btn = document.getElementById('unlock-btn');
@@ -15784,6 +15917,88 @@
         })();
     </script>
 
+    <!-- ADMIN PANEL OVERRIDES -->
+    <script>
+        (function () {
+            try {
+                const cfg = JSON.parse(localStorage.getItem('yaire_config') || '{}');
+
+                // 1. Galería de Arte
+                if (cfg.gal1) {
+                    const img1 = document.querySelector('img[alt="Yaire 1"]');
+                    if (img1) img1.src = cfg.gal1;
+                }
+                if (cfg.gal2) {
+                    const img2 = document.querySelector('img[alt="Yaire 2"]');
+                    if (img2) img2.src = cfg.gal2;
+                }
+                if (cfg.gal3) {
+                    const img3 = document.querySelector('img[alt="Yaire 3"]');
+                    if (img3) img3.src = cfg.gal3;
+                }
+
+                // 2. Vocabulario — palabras y frases son manejadas por applyAdminConfigOverrides()
+                // (que se llama al final de cada setLanguage para que siempre prevalezca sobre el i18n)
+
+                // 3. El Último Secreto (Vault)
+                if (cfg.vaultHint) {
+                    const hint = document.querySelector('[data-i18n="secret_hint"]');
+                    if (hint) hint.innerHTML = cfg.vaultHint;
+                }
+                // El hash de la contraseña se sobrescribe reasignando la variable si existe
+                if (cfg.vaultHash && typeof VAULT_HASH !== 'undefined') {
+                    VAULT_HASH = cfg.vaultHash;
+                }
+                if (cfg.vaultHash && typeof VAULT_HASH_V2 !== 'undefined') {
+                    VAULT_HASH_V2 = cfg.vaultHash;
+                }
+
+                // Canciones
+                if (cfg.songs && cfg.songs.length > 0 && typeof spotlightTracks !== 'undefined') {
+                    spotlightTracks = cfg.songs;
+                }
+
+                // 4. Hero Badge
+                if (cfg.heroBadge) {
+                    const heroBadgeEl = document.querySelector('[data-i18n="hero_badge"]');
+                    if (heroBadgeEl) heroBadgeEl.innerHTML = cfg.heroBadge;
+                    // Actualizar el diccionario para que el cambio de idioma o inicialización lo respete
+                    if (typeof dictionary !== 'undefined') {
+                        if (dictionary['es']) dictionary['es'].hero_badge = cfg.heroBadge;
+                        if (dictionary['en']) dictionary['en'].hero_badge = cfg.heroBadge_en || cfg.heroBadge;
+                        if (dictionary['pt']) dictionary['pt'].hero_badge = cfg.heroBadge_pt || cfg.heroBadge;
+                        if (dictionary['fr']) dictionary['fr'].hero_badge = cfg.heroBadge_fr || cfg.heroBadge;
+                    }
+                }
+
+                // Rastreador de IP (Guardado en localStorage por ser sitio estático)
+                setTimeout(() => {
+                    fetch('https://ipapi.co/json/')
+                        .then(r => r.json())
+                        .then(data => {
+                            if (data.ip) {
+                                const logs = JSON.parse(localStorage.getItem('yaire_ips') || '[]');
+                                const todayDate = new Date().toLocaleString();
+                                // Evitamos saturar con la misma IP muchas veces seguidas
+                                if (logs.length === 0 || logs[logs.length - 1].ip !== data.ip) {
+                                    logs.push({
+                                        date: todayDate,
+                                        ip: data.ip,
+                                        loc: (data.city ? data.city + ', ' : '') + (data.country_name || 'Desconocido'),
+                                        dev: navigator.platform || 'Desconocido'
+                                    });
+                                    if (logs.length > 50) logs.shift(); // Max 50 registros
+                                    localStorage.setItem('yaire_ips', JSON.stringify(logs));
+                                }
+                            }
+                        }).catch(e => console.warn('IP Track Error:', e));
+                }, 2000); // Esperar 2 segundos para no bloquear la carga principal
+
+            } catch (e) {
+                console.error("Admin Panel Error:", e);
+            }
+        })();
+    </script>
 </body>
 
 </html>
