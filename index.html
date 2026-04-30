@@ -15,12 +15,19 @@
             const unlockDate = new Date(2026, 3, 28, 0, 0, 0);
             const urlParams = new URLSearchParams(window.location.search);
             
-            // 1. Intentar sincronizar config desde Vercel (espera a que el deploy termine)
+            // 1. Intentar sincronizar config INSTANTÁNEAMENTE desde GitHub API
             try {
-                const res = await fetch('config.json?t=' + new Date().getTime());
-                if (res.ok) {
-                    const cloudCfg = await res.json();
-                    localStorage.setItem('yaire_config', JSON.stringify(cloudCfg));
+                const apiRes = await fetch('https://api.github.com/repos/charlygustav/yaire/contents/config.json?t=' + new Date().getTime());
+                if (apiRes.ok) {
+                    const data = await apiRes.json();
+                    const contentStr = decodeURIComponent(atob(data.content.replace(/\n/g, '')).split('').map(c => 
+                        '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+                    ).join(''));
+                    localStorage.setItem('yaire_config', JSON.stringify(JSON.parse(contentStr)));
+                } else {
+                    // Fallback si se excede el límite de GitHub (60 peticiones/hora por IP)
+                    const res = await fetch('config.json?t=' + new Date().getTime());
+                    if (res.ok) localStorage.setItem('yaire_config', JSON.stringify(await res.json()));
                 }
             } catch (e) {
                 console.log("No se pudo cargar config desde la nube, usando caché local.");

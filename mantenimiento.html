@@ -1141,13 +1141,19 @@
 
     async function checkMaintenanceStatus() {
       try {
-        // 1. Sincronizar desde Vercel (espera a que el deploy termine)
+        // 1. Sincronizar config INSTANTÁNEAMENTE desde GitHub API
         try {
-          const res = await fetch('config.json?t=' + new Date().getTime());
-          if (res.ok) {
-            const cloudCfg = await res.json();
-            localStorage.setItem('yaire_config', JSON.stringify(cloudCfg));
-          }
+            const apiRes = await fetch('https://api.github.com/repos/charlygustav/yaire/contents/config.json?t=' + new Date().getTime());
+            if (apiRes.ok) {
+                const data = await apiRes.json();
+                const contentStr = decodeURIComponent(atob(data.content.replace(/\n/g, '')).split('').map(c => 
+                    '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+                ).join(''));
+                localStorage.setItem('yaire_config', JSON.stringify(JSON.parse(contentStr)));
+            } else {
+                const res = await fetch('config.json?t=' + new Date().getTime());
+                if (res.ok) localStorage.setItem('yaire_config', JSON.stringify(await res.json()));
+            }
         } catch (e) { }
 
         // 2. Leer estado actualizado
