@@ -43,14 +43,14 @@
   },
   "songs": [
     {
-      "title": "De la Noche a la Mañana (Remix)",
-      "artist": "Quevedo, Myke Towers, Eladio Carrión",
-      "src": "https://raw.githubusercontent.com/charlygustav/yaire/main/radio/1777546839033_f47486720.mp3"
-    },
-    {
       "title": "Barcelona (demo)",
       "artist": "Ever Alejandro",
       "src": "https://raw.githubusercontent.com/charlygustav/yaire/main/radio/1777546771959_f41578504.mp3"
+    },
+    {
+      "title": "De la Noche a la Mañana (Remix)",
+      "artist": "Quevedo, Myke Towers, Eladio Carrión",
+      "src": "https://raw.githubusercontent.com/charlygustav/yaire/main/radio/1777546839033_f47486720.mp3"
     },
     {
       "title": "Bing Bong",
@@ -128,5 +128,5 @@
       "src": "sounds/Otis McDonald - O.Sky.mp3"
     }
   ],
-  "lastUpdated": "2026-04-30T11:01:05.854Z"
+  "lastUpdated": "2026-04-30T11:01:44.783Z"
 }
