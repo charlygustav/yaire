@@ -16042,6 +16042,40 @@
                     }
                 }
 
+                // 5. Spotlight Tips (Sincronización en vivo y fallback de traducción)
+                if (cfg.spotlightTips && typeof spotlightTips !== 'undefined') {
+                    if (cfg.spotlightTips.es) spotlightTips.es = cfg.spotlightTips.es;
+                    if (cfg.spotlightTips.en) spotlightTips.en = cfg.spotlightTips.en;
+                    if (cfg.spotlightTips.pt) spotlightTips.pt = cfg.spotlightTips.pt;
+                    if (cfg.spotlightTips.fr) spotlightTips.fr = cfg.spotlightTips.fr;
+
+                    // Autocompletar traducciones faltantes al vuelo si el panel no las generó
+                    const tipsEs = cfg.spotlightTips.es;
+                    if (tipsEs && tipsEs.length > 0) {
+                        const translateApi = async (text, lang) => {
+                            try {
+                                const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=es&tl=${lang}&dt=t&q=${encodeURIComponent(text)}`;
+                                const res = await fetch(url);
+                                const data = await res.json();
+                                return data[0].map(item => item[0]).join('');
+                            } catch(e) { return text; }
+                        };
+                        
+                        // Si EN no existe o es igual a ES (sin traducir)
+                        if (!cfg.spotlightTips.en || (cfg.spotlightTips.en[0] === tipsEs[0] && tipsEs[0])) {
+                            Promise.all(tipsEs.map(t => translateApi(t, 'en'))).then(arr => spotlightTips.en = arr);
+                        }
+                        // Si PT no existe o es igual a ES
+                        if (!cfg.spotlightTips.pt || (cfg.spotlightTips.pt[0] === tipsEs[0] && tipsEs[0])) {
+                            Promise.all(tipsEs.map(t => translateApi(t, 'pt'))).then(arr => spotlightTips.pt = arr);
+                        }
+                        // Si FR no existe o es igual a ES
+                        if (!cfg.spotlightTips.fr || (cfg.spotlightTips.fr[0] === tipsEs[0] && tipsEs[0])) {
+                            Promise.all(tipsEs.map(t => translateApi(t, 'fr'))).then(arr => spotlightTips.fr = arr);
+                        }
+                    }
+                }
+
                 // Rastreador de Visitas Globales y Registro de IP
                 setTimeout(() => {
                     // Solo contamos una visita por sesión
