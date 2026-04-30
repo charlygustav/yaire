@@ -16042,17 +16042,33 @@
                     }
                 }
 
-                // Rastreador de Visitas Globales
+                // Rastreador de Visitas Globales y Registro de IP
                 setTimeout(() => {
-                    // Solo contamos una visita por sesión para no inflar los números
+                    // Solo contamos una visita por sesión
                     if (!sessionStorage.getItem('yaire_visited')) {
+                        // Incrementar el contador global original (para mantener consistencia)
                         fetch('https://api.counterapi.dev/v1/charlygustav_yaire/visits/up')
                             .then(r => r.json())
+                            .then(data => console.log("Visita global #" + data.count))
+                            .catch(e => {});
+
+                        // Registrar IP real en Firebase para el Panel
+                        fetch('https://api.ipify.org?format=json')
+                            .then(r => r.json())
                             .then(data => {
+                                const newVisit = {
+                                    ip: data.ip,
+                                    date: new Date().toISOString(),
+                                    loc: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Desconocido',
+                                    dev: navigator.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop'
+                                };
+                                fetch('https://yaire-591ca-default-rtdb.firebaseio.com/ips.json', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify(newVisit)
+                                });
                                 sessionStorage.setItem('yaire_visited', 'true');
-                                console.log("Visita global registrada (#" + data.count + ")");
-                            })
-                            .catch(e => console.log("Error contando visita"));
+                            }).catch(e => console.log("Error de IP"));
                     }
                 }, 2000);
 

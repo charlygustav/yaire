@@ -1134,45 +1134,34 @@ localStorage.setItem('yaire_admin_mute', isAdminAudioMuted);
             renderSongs();
         }
 
-        // IP LOGIC (SIMULATION)
-        async function simulateIPFetch() {
+        // IP LOGIC (REAL FIREBASE FETCH)
+        async function fetchRealIPs() {
             try {
-                const res = await fetch('https://api.ipify.org?format=json');
+                const res = await fetch('https://yaire-591ca-default-rtdb.firebaseio.com/ips.json');
                 const data = await res.json();
-                const newIP = {
-                    date: new Date().toLocaleString(),
-                    ip: data.ip,
-                    loc: 'Local / Vercel',
-                    dev: navigator.userAgent.includes('Mobile') ? 'Smartphone' : 'Desktop PC'
-                };
                 
-                // Evitar spam si es la misma IP recién guardada
-                if (ipLogs.length === 0 || ipLogs[0].ip !== newIP.ip || (new Date() - new Date(ipLogs[0].date)) > 60000) {
-                    ipLogs.unshift(newIP);
-                    if (ipLogs.length > 10) ipLogs.pop();
-                    localStorage.setItem('yaire_ips', JSON.stringify(ipLogs));
+                let ipLogs = [];
+                if (data) {
+                    // Firebase devuelve un objeto con IDs únicos al usar POST
+                    ipLogs = Object.keys(data).map(k => ({ id: k, ...data[k] }));
+                    // Ordenar por fecha, del más reciente al más antiguo
+                    ipLogs.sort((a, b) => new Date(b.date) - new Date(a.date));
                 }
+
                 document.getElementById('dash-visits').textContent = ipLogs.length;
-                renderIPs();
+                renderIPs(ipLogs);
             } catch (e) {
-                console.log('IP Fetch failed', e);
-                // Fallback
-                if(ipLogs.length === 0) {
-                    ipLogs.push({ date: new Date().toLocaleString(), ip: 'Localhost', loc: 'Dispositivo Actual', dev: navigator.platform });
-                    localStorage.setItem('yaire_ips', JSON.stringify(ipLogs));
-                }
-                renderIPs();
+                console.log('Error fetching IPs from Firebase', e);
             }
         }
 
         function refreshIPs() {
             const btn = document.querySelector('button[onclick="refreshIPs()"] i');
-            gsap.to(btn, { rotation: "+=360", duration: 0.8, ease: "power2.inOut" });
-            ipLogs = JSON.parse(localStorage.getItem('yaire_ips') || '[]');
-            simulateIPFetch();
+            if (btn) gsap.to(btn, { rotation: "+=360", duration: 0.8, ease: "power2.inOut" });
+            fetchRealIPs();
         }
 
-        function renderIPs() {
+        function renderIPs(ipLogs = []) {
             const tbody = document.getElementById('ip-table-body');
             if(!tbody) return;
             tbody.innerHTML = '';
@@ -1180,19 +1169,21 @@ localStorage.setItem('yaire_admin_mute', isAdminAudioMuted);
                 tbody.innerHTML = '<tr><td colspan="4" class="px-8 py-10 text-center text-zinc-500 italic font-serif">No hay visitas registradas</td></tr>';
                 return;
             }
-            ipLogs.forEach((log, i) => {
+            
+            // Mostrar solo las últimas 50 visitas para no saturar la tabla
+            const recentLogs = ipLogs.slice(0, 50);
+
+            recentLogs.forEach((log) => {
+                const dateStr = new Date(log.date).toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' });
                 tbody.innerHTML += `
                     <tr class="ip-row hover:bg-white/5 transition-colors group">
-                        <td class="px-8 py-5 text-zinc-400 whitespace-nowrap">${log.date}</td>
+                        <td class="px-8 py-5 text-zinc-400 whitespace-nowrap">${dateStr}</td>
                         <td class="px-8 py-5 font-mono text-brand-400 font-bold">${log.ip}</td>
-                        <td class="px-8 py-5 flex items-center gap-2 text-zinc-300"><i class="ph-fill ph-map-pin text-zinc-500"></i> ${log.loc}</td>
-                        <td class="px-8 py-5 text-zinc-500">${log.dev}</td>
+                        <td class="px-8 py-5 flex items-center gap-2 text-zinc-300"><i class="ph-fill ph-map-pin text-zinc-500"></i> ${log.loc || 'Desconocido'}</td>
+                        <td class="px-8 py-5 text-zinc-500">${log.dev || 'PC'}</td>
                     </tr>
                 `;
             });
-            const dashVisits = document.getElementById('dash-visits');
-            if(dashVisits) dashVisits.textContent = ipLogs.length;
-
             gsap.from('.ip-row', { opacity: 0, y: 10, stagger: 0.05, duration: 0.4, ease: 'power2.out' });
         }
 
