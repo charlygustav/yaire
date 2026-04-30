@@ -15,10 +15,9 @@
             const unlockDate = new Date(2026, 3, 28, 0, 0, 0);
             const urlParams = new URLSearchParams(window.location.search);
             
-            // 1. Intentar sincronizar config desde la nube (GitHub Raw - tiempo real)
+            // 1. Intentar sincronizar config desde Vercel (espera a que el deploy termine)
             try {
-                const _cfgUrl = 'https://raw.githubusercontent.com/charlygustav/yaire/main/config.json';
-                const res = await fetch(_cfgUrl + '?t=' + new Date().getTime());
+                const res = await fetch('config.json?t=' + new Date().getTime());
                 if (res.ok) {
                     const cloudCfg = await res.json();
                     localStorage.setItem('yaire_config', JSON.stringify(cloudCfg));

@@ -1141,10 +1141,9 @@
 
     async function checkMaintenanceStatus() {
       try {
-        // 1. Sincronizar desde la nube (GitHub Raw - tiempo real)
+        // 1. Sincronizar desde Vercel (espera a que el deploy termine)
         try {
-          const _cfgUrl = 'https://raw.githubusercontent.com/charlygustav/yaire/main/config.json';
-          const res = await fetch(_cfgUrl + '?t=' + new Date().getTime());
+          const res = await fetch('config.json?t=' + new Date().getTime());
           if (res.ok) {
             const cloudCfg = await res.json();
             localStorage.setItem('yaire_config', JSON.stringify(cloudCfg));
