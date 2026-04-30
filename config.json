@@ -80,8 +80,8 @@
       "src": "sounds/Otis McDonald - O.Sky.mp3"
     }
   ],
-  "maintType": "indefinite",
-  "maintDate": "",
+  "maintType": "scheduled",
+  "maintDate": "2026-08-01T01:20",
   "vaultHint": "Pista: La identidad que usaste cuando nuestra historia continuó entre píxeles.",
   "heroBadge": "¡Felices 3 Meses!",
   "spotlightTips": {
@@ -118,5 +118,5 @@
       "Essayez d'écrire 'yaire' et donnez-lui Enter..."
     ]
   },
-  "lastUpdated": "2026-04-30T09:08:11.849Z"
+  "lastUpdated": "2026-04-30T09:08:55.372Z"
 }
