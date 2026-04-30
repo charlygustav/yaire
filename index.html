@@ -1843,6 +1843,48 @@
     class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-500 overflow-x-hidden"
     id="top">
 
+    <!-- ═══ INITIAL PAGE LOADER ═══ -->
+    <div id="main-loader" class="fixed inset-0 z-[9999] bg-[#050505] flex flex-col items-center justify-center transition-opacity duration-1000">
+        <div class="relative flex flex-col items-center">
+            <!-- Pulsing Tulip -->
+            <div class="w-24 h-24 rounded-full bg-brand-500/10 flex items-center justify-center relative shadow-[0_0_50px_rgba(236,72,153,0.15)] mb-8">
+                <div class="absolute inset-0 rounded-full border border-brand-500/20 animate-ping opacity-50"></div>
+                <div class="absolute inset-2 rounded-full border border-brand-500/40 animate-[spin_4s_linear_infinite] border-t-transparent"></div>
+                <img src="tulip.ico" alt="Yaire Loader" class="w-10 h-10 animate-pulse relative z-10" style="filter: drop-shadow(0 0 10px rgba(236,72,153,0.8));">
+            </div>
+            
+            <!-- Progress text -->
+            <h2 class="text-white font-bold tracking-widest uppercase text-sm mb-2" style="font-family: 'Inter', sans-serif;">Cargando</h2>
+            
+            <!-- Loading Bar -->
+            <div class="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
+                <div class="w-1/2 h-full bg-gradient-to-r from-brand-600 to-brand-400 rounded-full animate-[progress_1.5s_ease-in-out_infinite_alternate]"></div>
+            </div>
+        </div>
+        <style>
+            @keyframes progress {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(100%); }
+            }
+        </style>
+    </div>
+    
+    <script>
+        // Ocultar el loader solo cuando toda la página (imágenes, fuentes, etc) haya cargado
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('main-loader');
+            if(loader) {
+                // Pequeño delay de 500ms para asegurar fluidez y que la UI esté asentada
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 1000); // 1s de transición (duration-1000)
+                }, 500);
+            }
+        });
+    </script>
+
     <!-- Universal Modals Container -->
 
     <!-- 0. Credits Modal -->
