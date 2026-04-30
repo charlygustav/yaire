@@ -14,41 +14,35 @@
             // Fecha de desbloqueo: 28 de Abril de 2026 a las 00:00:00 (Mes 3 = Abril)
             const unlockDate = new Date(2026, 3, 28, 0, 0, 0);
             const urlParams = new URLSearchParams(window.location.search);
-            
-            // 1. Cargar config desde Firebase (instantáneo)
             const _FB = 'https://yaire-591ca-default-rtdb.firebaseio.com/config.json';
-            try {
-                const res = await fetch(_FB);
-                if (res.ok) {
-                    const fbCfg = await res.json();
-                    if (fbCfg) localStorage.setItem('yaire_config', JSON.stringify(fbCfg));
-                }
-            } catch(e) {}
 
-            // 2. Chequeo de mantenimiento
-            const cfg = JSON.parse(localStorage.getItem('yaire_config') || '{}');
-            if (cfg.mantenimiento) {
-                window.location.replace("mantenimiento.html");
-                return;
-            }
-
-            // 3. Escuchar Firebase en TIEMPO REAL (SSE) — reacciona en < 1 segundo
-            try {
-                const fbStream = new EventSource(_FB.replace('.json', '.json'));
-                fbStream.addEventListener('put', (e) => {
-                    const update = JSON.parse(e.data);
-                    const newCfg = update?.data;
-                    if (newCfg && newCfg.mantenimiento) {
-                        fbStream.close();
-                        window.location.replace('mantenimiento.html');
+            // Función que lee Firebase y actúa según el estado
+            async function checkState() {
+                try {
+                    const res = await fetch(_FB + '?nocache=' + Date.now());
+                    if (res.ok) {
+                        const fbCfg = await res.json();
+                        if (fbCfg) {
+                            localStorage.setItem('yaire_config', JSON.stringify(fbCfg));
+                            if (fbCfg.mantenimiento) {
+                                window.location.replace('mantenimiento.html');
+                                return;
+                            }
+                        }
                     }
-                });
-            } catch(e) {}
+                } catch(e) {}
 
-            // Si no ha llegado la fecha Y NO tienes el pase secreto (?dev=1), te expulsa
-            if (new Date() < unlockDate && urlParams.get('dev') !== '1') {
-                window.location.replace("mantenimiento.html");
+                // Si no hay mantenimiento, verificar fecha de lanzamiento
+                if (new Date() < unlockDate && urlParams.get('dev') !== '1') {
+                    window.location.replace('mantenimiento.html');
+                }
             }
+
+            // Chequeo inmediato al cargar
+            await checkState();
+
+            // Polling cada 3 segundos para detectar cambios del admin en tiempo real
+            setInterval(checkState, 3000);
         })();
     </script>
 

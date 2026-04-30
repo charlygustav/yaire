@@ -1205,24 +1205,7 @@
 
     // Polling de respaldo + Firebase SSE para tiempo real
     checkMaintenanceStatus();
-    setInterval(checkMaintenanceStatus, 15000);
-
-    // Firebase SSE — reacciona en < 1 segundo cuando el admin desactiva mantenimiento
-    try {
-        const _fbStream = new EventSource('https://yaire-591ca-default-rtdb.firebaseio.com/config.json');
-        _fbStream.addEventListener('put', (e) => {
-            const update = JSON.parse(e.data);
-            const newCfg = update?.data;
-            if (newCfg && !newCfg.mantenimiento) {
-                _fbStream.close();
-                window.location.href = 'index.html';
-            } else if (newCfg) {
-                // Actualizar tipo de mantenimiento en tiempo real también
-                localStorage.setItem('yaire_config', JSON.stringify(newCfg));
-                checkMaintenanceStatus();
-            }
-        });
-    } catch(e) {}
+    setInterval(checkMaintenanceStatus, 3000);
 
     window.addEventListener('storage', (e) => {
       if (e.key === 'yaire_reload' || e.key === 'yaire_config') {
