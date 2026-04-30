@@ -43,6 +43,11 @@
   },
   "songs": [
     {
+      "title": "Barcelona (demo)",
+      "artist": "Ever Alejandro",
+      "src": "https://raw.githubusercontent.com/charlygustav/yaire/main/radio/1777546771959_f41578504.mp3"
+    },
+    {
       "title": "Bing Bong",
       "artist": "Yailin la Mas Viral",
       "src": "radio/Bing Bong - Yailin la Mas Viral - SpotubeDL.com.mp3"
@@ -118,5 +123,5 @@
       "src": "sounds/Otis McDonald - O.Sky.mp3"
     }
   ],
-  "lastUpdated": "2026-04-30T10:56:47.554Z"
+  "lastUpdated": "2026-04-30T10:59:48.120Z"
 }
