@@ -1144,7 +1144,7 @@
         // 1. Cargar config desde Firebase (instantáneo)
         const _FB = 'https://yaire-591ca-default-rtdb.firebaseio.com/config.json';
         try {
-            const res = await fetch(_FB);
+            const res = await fetch(_FB + '?nocache=' + Date.now());
             if (res.ok) {
                 const fbCfg = await res.json();
                 if (fbCfg) localStorage.setItem('yaire_config', JSON.stringify(fbCfg));
