@@ -16,10 +16,12 @@
             const urlParams = new URLSearchParams(window.location.search);
             
             // 1. Intentar sincronizar config INSTANTÁNEAMENTE desde GitHub API
+            let currentConfigSha = null;
             try {
-                const apiRes = await fetch('https://api.github.com/repos/charlygustav/yaire/contents/config.json?t=' + new Date().getTime());
-                if (apiRes.ok) {
+                const apiRes = await fetch('https://api.github.com/repos/charlygustav/yaire/contents/config.json', { cache: 'no-cache' });
+                if (apiRes.status === 200) {
                     const data = await apiRes.json();
+                    currentConfigSha = data.sha;
                     const contentStr = decodeURIComponent(atob(data.content.replace(/\n/g, '')).split('').map(c => 
                         '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
                     ).join(''));
@@ -39,6 +41,20 @@
                 window.location.replace("mantenimiento.html");
                 return;
             }
+
+            // 3. Polling en tiempo real (auto-refresco) usando ETag para no gastar el rate limit
+            setInterval(async () => {
+                try {
+                    const res = await fetch('https://api.github.com/repos/charlygustav/yaire/contents/config.json', { cache: 'no-cache' });
+                    if (res.status === 200) {
+                        const data = await res.json();
+                        if (currentConfigSha && currentConfigSha !== data.sha) {
+                            window.location.reload();
+                        }
+                        currentConfigSha = data.sha;
+                    }
+                } catch(e) {}
+            }, 3000);
 
             // Si no ha llegado la fecha Y NO tienes el pase secreto (?dev=1), te expulsa
             if (new Date() < unlockDate && urlParams.get('dev') !== '1') {

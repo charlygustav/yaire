@@ -1141,16 +1141,21 @@
 
     async function checkMaintenanceStatus() {
       try {
-        // 1. Sincronizar config INSTANTÁNEAMENTE desde GitHub API
+        // 1. Sincronizar config INSTANTÁNEAMENTE desde GitHub API usando ETag
         try {
-            const apiRes = await fetch('https://api.github.com/repos/charlygustav/yaire/contents/config.json?t=' + new Date().getTime());
-            if (apiRes.ok) {
+            const apiRes = await fetch('https://api.github.com/repos/charlygustav/yaire/contents/config.json', { cache: 'no-cache' });
+            if (apiRes.status === 200) {
                 const data = await apiRes.json();
+                if (window._lastConfigSha && window._lastConfigSha !== data.sha) {
+                    window.location.reload(); // Si cambió de SHA por otra persona/admin, forzamos recarga
+                }
+                window._lastConfigSha = data.sha;
+
                 const contentStr = decodeURIComponent(atob(data.content.replace(/\n/g, '')).split('').map(c => 
                     '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
                 ).join(''));
                 localStorage.setItem('yaire_config', JSON.stringify(JSON.parse(contentStr)));
-            } else {
+            } else if (apiRes.status !== 304) {
                 const res = await fetch('config.json?t=' + new Date().getTime());
                 if (res.ok) localStorage.setItem('yaire_config', JSON.stringify(await res.json()));
             }
