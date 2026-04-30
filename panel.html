@@ -1592,13 +1592,15 @@ localStorage.setItem('yaire_admin_mute', isAdminAudioMuted);
 
         // TRANSLATE
         async function translateText(text, targetLang) {
-            if (!text) return "";
+            if (!text || !text.trim()) return text;
             try {
-                const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=es|${targetLang}`);
+                const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=es&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+                const res = await fetch(url);
                 const data = await res.json();
-                return data.responseData.translatedText;
+                return data[0].map(item => item[0]).join('');
             } catch (e) {
-                return text;
+                console.error("Translation error:", e);
+                return text; // Fallback al texto original si falla
             }
         }
 
@@ -1684,8 +1686,6 @@ localStorage.setItem('yaire_admin_mute', isAdminAudioMuted);
             cfg.songs = currentSongs;
             cfg.lastUpdated = new Date().toISOString();
 
-            // vocab fields are updated via confirmVocabUpdate(), not here
-            
             // Check if admin password is being updated
             const newAdminPwd = document.getElementById('admin-new-pwd').value;
             if (newAdminPwd) {
@@ -1696,14 +1696,14 @@ localStorage.setItem('yaire_admin_mute', isAdminAudioMuted);
 
             // Check if vault password is being updated
             const newVaultPwd = document.getElementById('vault-pwd').value;
-            if (newVaultPwd) {
-                cfg.vaultHash = await hashSHA256(newVaultPwd);
+            if (newVaultPwd.trim() !== '') {
+                cfg.vaultHash = await hashSHA256(newVaultPwd.toLowerCase().trim());
                 document.getElementById('vault-pwd').value = '';
             }
+            
             const newHeroBadge = document.getElementById('hero-badge').value;
-            if (newHeroBadge !== cfg.heroBadge) {
+            if (newHeroBadge !== cfg.heroBadge || !cfg.heroBadge_en) {
                 cfg.heroBadge = newHeroBadge;
-                // Translate
                 cfg.heroBadge_en = await translateText(newHeroBadge, 'en');
                 cfg.heroBadge_pt = await translateText(newHeroBadge, 'pt');
                 cfg.heroBadge_fr = await translateText(newHeroBadge, 'fr');
@@ -1718,35 +1718,35 @@ localStorage.setItem('yaire_admin_mute', isAdminAudioMuted);
                 const tipsFr = await Promise.all(tipsEs.map(t => translateText(t, 'fr')));
                 cfg.spotlightTips = { es: tipsEs, en: tipsEn, pt: tipsPt, fr: tipsFr };
             }
-            
-            cfg.songs = currentSongs;
-
-            const pwd = document.getElementById('vault-pwd').value;
-            if (pwd.trim() !== '') {
-                cfg.vaultHash = await hashSHA256(pwd.toLowerCase().trim());
-                document.getElementById('vault-pwd').value = ''; 
-            }
 
             localStorage.setItem('yaire_config', JSON.stringify(cfg));
             localStorage.setItem('yaire_reload', Date.now().toString());
 
-            const token = cfg.ghToken?.trim();
-            if (!token) {
-                toast.querySelector('p.font-bold').textContent = "⚠️ Sin Token";
-                toast.querySelector('p.text-xs').textContent = "Ve a Seguridad & Servidor y pega tu Token de GitHub para sincronizar la web.";
-            } else {
-                toast.querySelector('p.font-bold').textContent = "Subiendo a la web...";
-                toast.querySelector('p.text-xs').textContent = "Sincronizando con GitHub...";
-                try {
-                    await uploadConfigToCloud(cfg);
-                    toast.querySelector('p.font-bold').textContent = "✅ ¡Listo! Web actualizada";
-                    toast.querySelector('p.text-xs').textContent = "Los cambios ya están activos en tu página pública.";
-                } catch (e) {
-                    toast.querySelector('p.font-bold').textContent = "❌ Error de Token";
-                    toast.querySelector('p.text-xs').textContent = e.message;
-                }
+            // 1. Escribir a Firebase PRIMERO (actualización instantánea en tiempo real)
+            const _FB = 'https://yaire-591ca-default-rtdb.firebaseio.com/config.json';
+            const safeForFB = { ...cfg };
+            delete safeForFB.ghToken;
+            delete safeForFB.ghRepo;
+            try {
+                await fetch(_FB, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(safeForFB)
+                });
+                toast.querySelector('p.font-bold').textContent = "✅ ¡Guardado!";
+                toast.querySelector('p.text-xs').textContent = "Los cambios están activos en tu página ahora mismo.";
+            } catch(fe) {
+                toast.querySelector('p.font-bold').textContent = "⚠️ Sin conexión";
+                toast.querySelector('p.text-xs').textContent = "No se pudo conectar a Firebase.";
             }
-            setTimeout(() => { gsap.to(toast, { y: 150, opacity: 0, duration: 0.5, ease: "power2.in" }); }, 4500);
+
+            // 2. Subir a GitHub en segundo plano (para persistencia del repo)
+            const token = cfg.ghToken?.trim();
+            if (token) {
+                uploadConfigToCloud(cfg).catch(() => {}); // silencioso, no bloqueante
+            }
+
+            setTimeout(() => { gsap.to(toast, { y: 150, opacity: 0, duration: 0.5, ease: "power2.in" }); }, 3500);
         }
         // Maintenance logic
         function toggleMaintOptions() {
